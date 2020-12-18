@@ -12,5 +12,11 @@ Plug 'tjdevries/colorbuddy.nvim'
 Plug 'maaslalani/nordbuddy'
 ```
 
+### Setup
+Then in your init.vim you can `use` nordbuddy.
+```
+lua require'nordbuddy'.use{}
+```
+
 ### Warning
 This is a work in progress 🚧
