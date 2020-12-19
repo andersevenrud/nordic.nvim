@@ -25,6 +25,7 @@ end
 function M:use()
   vim.cmd('set termguicolors')
   vim.cmd('hi! clear')
+
   M.setup(self)
 
   for _, group in ipairs(M:colors()) do
@@ -71,7 +72,7 @@ function M:colors()
     {'Function', c.cyan, c.none},
     {'Identifier', c.white, c.none},
     {'Include', c.blue, c.none},
-    {'Keyword', c.magenta, c.none},
+    {'Keyword', c.lightblue, c.none},
     {'Label', c.lightblue, c.none},
     {'LineNr', c.gray, c.none},
     {'Macro', c.lightblue, c.none},
@@ -176,7 +177,7 @@ function M:colors()
     {'TSFuncMacro', c.cyan, c.none},
     {'TSFunction', c.lightblue, c.none},
     {'TSInclude', c.blue, c.none},
-    {'TSKeyword', c.magenta, c.none},
+    {'TSKeyword', c.lightblue, c.none},
     {'TSKeywordFunction', c.lightblue, c.none},
     {'TSKeywordOperator', c.blue, c.none},
     {'TSLabel', c.cyan, c.none},
@@ -205,7 +206,7 @@ function M:colors()
     {'TSTypeBuiltin', c.lightblue, c.none},
     {'TSURI', c.yellow, c.none},
     {'TSUnderline', c.none, c.none, s.underline},
-    {'TSVariable', c.cyan, c.none},
+    {'TSVariable', c.fg, c.none},
     {'TSVariableBuiltin', c.yellow, c.none},
 
     -- HTML
