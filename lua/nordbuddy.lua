@@ -1,7 +1,23 @@
--- Colorscheme
-local Color, c, Group = require'colorbuddy'.setup()
-local s = require'colorbuddy.style'.styles
+local vim = vim
+local Color, c, Group = require"colorbuddy".setup()
+local s = require"colorbuddy.style".styles
 local M = {}
+
+local merge = function(list)
+  local acc = {}
+  for _, result in ipairs(list) do vim.list_extend(acc, result) end
+  return acc
+end
+
+local highlight_to_groups = function(highlight)
+  return function(groups)
+    local acc = {}
+    for _, name in ipairs(groups) do
+      table.insert(acc, {name, highlight[1], highlight[2], highlight[3]})
+    end
+    return acc
+  end
+end
 
 function M:setup()
   Color.new('fg',          '#D8DEE9')
@@ -23,9 +39,8 @@ function M:setup()
 end
 
 function M:use()
-  vim.cmd('set termguicolors')
-  vim.cmd('hi! clear')
-
+  vim.cmd("set termguicolors")
+  vim.cmd("hi! clear")
   M.setup(self)
 
   for _, group in ipairs(M:colors()) do
@@ -43,242 +58,226 @@ function M:use()
 end
 
 function M:colors()
-  return {
+  local vim_groups = {
+    {"Normal", c.fg:dark(.01), c.bg:light(.01)},
+    {"NormalFloat", c.fg:dark(.01), c.bg:light(.01)},
 
-    -- Vim Groups
-    {"IncSearch",c.brightwhite,c.blue,s.underline},
-    {"Search",c.black,c.cyan},
-    {"TermCursorNC",c.black,c.black},
-    {'Boolean', c.lightblue, c.none},
-    {'Character', c.green, c.none},
-    {'ColorColumn', c.none, c.black},
-    {'Comment', c.gray, c.none},
-    {'Conditional', c.blue, c.none},
-    {'Constant', c.cyan, c.none},
-    {'Cursor', c.bg, c.white},
-    {'CursorColumn', c.none, c.black},
-    {'CursorLine', c.none, c.black},
-    {'CursorLineNr', c.white, c.none},
-    {'Define', c.lightblue, c.none},
-    {'Delimeter', c.brightwhite, c.none},
-    {'Directory', c.cyan, c.none},
-    {'EndOfBuffer', c.black, c.none},
-    {'Error', c.red, c.none},
-    {'ErrorMsg', c.red, c.none},
-    {'Exception', c.lightblue, c.none},
-    {'Float', c.magenta, c.none},
-    {'FoldColumn', c.gray, c.bg},
-    {'Folded', c.gray, c.bg},
-    {'Function', c.cyan, c.none},
-    {'Identifier', c.white, c.none},
-    {'Include', c.blue, c.none},
-    {'Keyword', c.lightblue, c.none},
-    {'Label', c.lightblue, c.none},
-    {'LineNr', c.gray, c.none},
-    {'Macro', c.lightblue, c.none},
-    {'MatchParen', c.cyan, c.gray},
-    {'ModeMsg', c.white, c.none},
-    {'MoreMsg', c.cyan, c.none},
-    {'NonText', c.brightblack, c.none},
-    {'Normal', c.white, c.bg},
-    {'NormalFloat', c.white, c.black},
-    {'Number', c.magenta, c.none},
-    {'Operator', c.lightblue, c.none},
-    {'Pmenu', c.white, c.brightblack},
-    {'PmenuSbar', c.white, c.brightblack},
-    {'PmenuSel', c.cyan, c.gray},
-    {'PmenuThumb', c.cyan, c.gray},
-    {'PreCondit', c.lightblue, c.none},
-    {'PreProc', c.lightblue, c.none},
-    {'Question', c.white, c.none},
-    {'QuickFixLine', c.bg, c.yellow},
-    {'RedrawDebugClear', c.fg, c.yellow},
-    {'RedrawDebugComposed', c.fg, c.green},
-    {'RedrawDebugNormal', c.bg, c.white},
-    {'RedrawDebugRecompose', c.fg, c.red},
-    {'Repeat', c.lightblue, c.none},
-    {'SignColumn', c.black, c.bg},
-    {'SignatureMarkText', c.cyan, c.bg},
-    {'SignatureMarkerText', c.yellow, c.bg},
-    {'Special', c.blue, c.none},
-    {'SpecialChar', c.yellow, c.none},
-    {'SpecialComment', c.cyan, c.none},
-    {'SpecialKey', c.gray, c.none},
-    {'SpellBad', c.red, c.bg},
-    {'SpellCap', c.yellow, c.cyan},
-    {'SpellLocal', c.white, c.bg},
-    {'SpellRare', c.brightwhite, c.bg},
-    {'Statement', c.blue, c.none},
-    {'StatusLine', c.brightwhite, c.gray},
-    {'StatusLineNC', c.white, c.gray},
-    {'StatusLineTerm', c.cyan, c.gray},
-    {'StatusLineTermNC', c.white, c.gray},
-    {'StorageClass', c.lightblue, c.none},
-    {'String', c.green, c.none},
-    {'Structure', c.yellow, c.none},
-    {'TabLine', c.white, c.bg},
-    {'TabLineFill', c.white, c.bg},
-    {'TabLineSel', c.cyan, c.gray},
-    {'Tag', c.white, c.none},
-    {'Terminal', c.brightwhite, c.bg},
-    {'Title', c.white, c.none},
-    {'Todo', c.yellow, c.none},
-    {'Type', c.lightblue, c.none},
-    {'Typedef', c.lightblue, c.none},
-    {'Underlined', c.cyan, c.none, s.underline},
-    {'VertSplit', c.brightblack, c.bg},
-    {'Visual', c.none, c.brightblack},
-    {'VisualNOS', c.none, c.brightblack},
-    {'WarningMsg', c.bg, c.yellow},
-    {'WarningMsg',c.white,c.orange,s.NONE},
-    {'WildMenu', c.cyan, c.black},
+    -- Conceal
+    {"Conceal", c.black:light()},
+    {"VertSplit", c.black:light(.04)},
 
-    -- Neovim Groups
-    {'NvimInternalError', c.fg, c.red},
+    {"ErrorMsg", c.fg, c.red},
+    {"WarningMsg", c.bg, c.yellow},
+    {"Exception", c.red, c.none, s.NONE},
 
-    -- Health Checks
-    {'healthError', c.red, c.black},
-    {'healthSuccess', c.green, c.black},
-    {'healthWarning', c.yellow, c.black},
+    {"Character", c.green, c.none, s.NONE},
+    {"Comment", c.gray:light(.1), c.bg:light(.02), s.NONE},
 
+    -- Search
+    {"IncSearch", c.magenta, c.gray},
+    {"Search", c.cyan, c.gray},
 
-    -- Diffs
-    {'DiffAdd', c.green, c.black},
-    {'DiffChange', c.yellow, c.black},
-    {'DiffDelete', c.red, c.black},
-    {'DiffText', c.lightblue, c.black},
-    {'debugBreakpoint', c.red, c.none},
-    {'debugPc', c.none, c.lightcyan},
-    {'diffAdded', c.green, c.black},
-    {'diffChanged', c.yellow, c.black},
-    {'diffFile', c.black, c.none},
-    {'diffFileId', c.blue, c.none},
-    {'diffNewFile', c.green, c.none},
-    {'diffOldFile', c.red, c.none},
-    {'diffRemoved', c.red, c.black},
-    {'gitconfigVariable', c.lightcyan, c.none},
+    {"Define", c.lightcyan:saturate(), c.none, s.NONE},
+    {"PreProc", c.lightcyan:saturate(), c.none, s.NONE},
 
-    -- Treesitter
-    {'TSAnnotation', c.orange, c.none},
-    {'TSAttribute', c.lightcyan, c.none},
-    {'TSBoolean', c.lightblue, c.none},
-    {'TSCharacter', c.green, c.none},
-    {'TSConditional', c.blue, c.none},
-    {'TSConstBuiltin', c.lightblue, c.none},
-    {'TSConstMacro', c.lightcyan, c.none},
-    {'TSConstant', c.cyan, c.none},
-    {'TSConstructor', c.white, c.none},
-    {'TSEmphasis', c.yellow, c.none},
-    {'TSError', c.red, c.none},
-    {'TSException', c.lightblue, c.none},
-    {'TSField', c.cyan, c.none},
-    {'TSFloat', c.magenta, c.none},
-    {'TSFuncBuiltin', c.cyan, c.none},
-    {'TSFuncMacro', c.cyan, c.none},
-    {'TSFunction', c.lightblue, c.none},
-    {'TSInclude', c.blue, c.none},
-    {'TSKeyword', c.lightblue, c.none},
-    {'TSKeywordFunction', c.lightblue, c.none},
-    {'TSKeywordOperator', c.blue, c.none},
-    {'TSLabel', c.cyan, c.none},
-    {'TSLiteral', c.yellow, c.none},
-    {'TSMethod', c.cyan, c.none},
-    {'TSNamespace', c.blue, c.none},
-    {'TSNumber', c.magenta, c.none},
-    {'TSOperator', c.lightblue, c.none},
-    {'TSParameter', c.white, c.none},
-    {'TSParameterReference', c.lightblue, c.none},
-    {'TSProperty', c.lightblue, c.none},
-    {'TSPunctBracket', c.brightwhite, c.none},
-    {'TSPunctDelimiter', c.lightblue, c.none},
-    {'TSPunctSpecial', c.magenta, c.none},
-    {'TSRepeat', c.blue, c.none},
-    {'TSString', c.green, c.none},
-    {'TSStringEscape', c.cyan, c.none},
-    {'TSStringRegex', c.green, c.none},
-    {'TSStrong', c.yellow, c.none},
-    {'TSStructure', c.blue, c.none},
-    {'TSTag', c.lightblue, c.none},
-    {'TSTagDelimiter', c.gray, c.none},
-    {'TSText', c.yellow, c.none},
-    {'TSTitle', c.yellow, c.none},
-    {'TSType', c.lightcyan, c.none},
-    {'TSTypeBuiltin', c.lightblue, c.none},
-    {'TSURI', c.yellow, c.none},
-    {'TSUnderline', c.none, c.none, s.underline},
-    {'TSVariable', c.fg, c.none},
-    {'TSVariableBuiltin', c.yellow, c.none},
+    {"Delimiter", c.cyan, c.none, s.NONE},
 
-    -- HTML
-    {'htmlArg', c.cyan, c.none},
-    {'htmlBold', c.cyan, c.none},
-    {'htmlEndTag', c.brightwhite, c.none},
-    {'htmlH1', c.blue, c.none},
-    {'htmlH2', c.blue, c.none},
-    {'htmlH3', c.blue, c.none},
-    {'htmlH4', c.blue, c.none},
-    {'htmlH5', c.blue, c.none},
-    {'htmlH6', c.blue, c.none},
-    {'htmlItalic', c.magenta, c.none},
-    {'htmlLink', c.lightcyan, c.none},
-    {'htmlSpecialChar', c.cyan, c.none},
-    {'htmlSpecialTagName', c.blue, c.none},
-    {'htmlTag', c.brightwhite, c.none},
-    {'htmlTagN', c.blue, c.none},
-    {'htmlTagName', c.blue, c.none},
-    {'htmlTitle', c.brightwhite, c.none},
+    {"Directory", c.cyan},
 
-    -- Markdown
-    {'markdownBlockquote', c.gray, c.none},
-    {'markdownBold', c.cyan, c.none, s.bold},
-    {'markdownCode', c.cyan, c.none},
-    {'markdownCodeBlock', c.cyan, c.none},
-    {'markdownCodeDelimiter', c.cyan, c.none},
-    {'markdownH1', c.cyan, c.none},
-    {'markdownH2', c.cyan, c.none},
-    {'markdownH3', c.cyan, c.none},
-    {'markdownH4', c.cyan, c.none},
-    {'markdownH5', c.cyan, c.none},
-    {'markdownH6', c.cyan, c.none},
-    {'markdownHeadingDelimiter', c.cyan, c.none},
-    {'markdownHeadingRule', c.gray, c.none},
-    {'markdownId', c.magenta, c.none},
-    {'markdownIdDeclaration', c.blue, c.none},
-    {'markdownIdDelimiter', c.magenta, c.none},
-    {'markdownItalic', c.magenta, c.none, s.italic},
-    {'markdownLinkDelimiter', c.magenta, c.none},
-    {'markdownLinkText', c.blue, c.none},
-    {'markdownListMarker', c.blue, c.none},
-    {'markdownOrdenord11ListMarker', c.red, c.none},
-    {'markdownRule', c.gray, c.none},
-    {'markdownUrl', c.lightcyan, c.none},
+    -- Diff
+    {"DiffAdd", c.none, c.green},
+    {"DiffChange", c.none, c.yellow},
+    {"DiffDelete", c.none, c.red},
+    {"DiffText", c.none, c.fg},
 
-    -- Git
-    {'GitGutterAdd', c.green, c.none},
-    {'GitGutterChange', c.yellow, c.none},
-    {'GitGutterChangeDelete', c.red, c.none},
-    {'GitGutterDelete', c.red, c.none},
-    {'gitcommitDiscardedFile', c.red, c.none},
-    {'gitcommitSelectedFile', c.green, c.none},
-    {'gitcommitUntrackedFile', c.red, c.none},
+    {"Identifier", c.fg, c.none, s.NONE},
+    {"Include", c.lightcyan:saturate(), c.none, s.NONE},
 
-    -- LSP
-    {'LSPDiagnosticsDefaultWarning', c.yellow, c.none},
-    {'LspDiagnosticsDefaultError', c.red, c.none},
-    {'LspDiagnosticsDefaultHint', c.lightblue, c.none},
-    {'LspDiagnosticsDefaultInformation', c.cyan, c.none},
-    {'LspDiagnosticsUnderlineError', c.none, c.none, s.underline},
-    {'LspDiagnosticsUnderlineHint', c.none, c.none, s.underline},
-    {'LspDiagnosticsUnderlineInformation', c.none, c.none, s.underline},
-    {'LspDiagnosticsUnderlineWarning', c.none, c.none, s.underline},
+    {"Statement", c.lightcyan, c.none, s.NONE},
+    {"StorageClass", c.cyan, c.none, s.NONE},
+    {"Structure", c.cyan, c.none, s.NONE},
 
-    -- Telescope
-    {'TelescopeBorder', c.gray},
-    {'TelescopeMatching', c.magenta},
-    {'TelescopeNormal', c.fg, c.bg},
-    {'TelescopePromptPrefix', c.fg:dark(.2)},
-    {'TelescopeSelection', c.magenta, c.brightblack, s.NONE},
+    {"Title", c.cyan, c.none},
+    {"Todo", c.yellow, c.none, s.NONE},
+    {"TypeDef", c.magenta, c.none, s.NONE},
+
+    -- Side Column
+    {"CursorColumn", c.gray, c.none, s.NONE},
+    {"LineNr", c.gray, c.none, s.NONE},
+    {"CursorLineNr", c.fg:dark(.1), c.none, s.NONE},
+    {"Line", c.none, c.none, s.bold},
+    {"SignColumn", c.none, c.none, s.NONE},
+
+    {"ColorColumn", c.none, c.gray},
+    {"Cursor", c.gray, c.gray},
+    {"CursorLine", c.none, c.bg:light(.05)},
+    {"lCursor", c.cyan, c.cyan},
+
+    -- Folds
+    {"Folded", c.gray, c.bg},
+    {"FoldColumn", c.gray, c.none},
+
+    {"EndOfBuffer", c.gray, c.none},
+
+    {"MatchParen", c.none, c.gray},
+    {"NonText", c.bg:light(), c.none},
+
+    -- Popup Menu
+    {"PMenu", c.fg, c.gray},
+    {"PmenuSbar", c.black, c.brightblack},
+    {"PMenuSel", c.magenta:light(.1), c.gray:light()},
+    {"PmenuThumb", c.none, c.gray:light()},
+
+    -- Special
+    {"Special", c.magenta, c.none, s.NONE},
+    {"SpecialChar", c.magenta, c.none, s.NONE},
+    {"SpecialKey", c.magenta},
+    {"SpecialComment", c.yellow:light(), c.none, s.NONE},
+
+    -- Spell
+    {"SpellBad", c.red, c.none},
+    {"SpellCap", c.red, c.none},
+    {"SpellLocal", c.red, c.none},
+    {"SpellRare", c.red, c.none},
+
+    -- Statusline
+    {"StatusLine", c.fg, c.bg},
+    {"StatusLineNC", c.fg:dark(.2), c.bg},
+
+    -- Tabline
+    {"TabLine", c.fg, c.bg},
+    {"TabLineSel", c.cyan, c.bg:light()},
+    {"TabLineFill", c.fg, c.bg},
+
+    {"Question", c.cyan, c.none, s.bold},
+
+    -- Visual
+    {"Visual", c.cyan:light(), c.bg:light()},
+    {"VisualNOS", c.magenta, c.bg:light()},
   }
+
+  return merge({
+    vim_groups,
+    M:lsp(),
+    M:syntax(),
+    M:markdown(),
+    M:telescope(),
+  })
+end
+
+function M:lsp()
+  return {
+    {"LspDiagnosticsDefaultHint", c.blue:light()},
+    {"LspDiagnosticsDefaultError", c.red},
+    {"LspDiagnosticsDefaultWarning", c.yellow},
+    {"LspDiagnosticsDefaultInformation", c.fg},
+  }
+end
+
+function M:telescope()
+  return {
+    {"TelescopeBorder", c.gray:light(.05)},
+    {"TelescopeNormal", c.fg:light(.3)},
+    {"TelescopePromptPrefix", c.fg},
+    {"TelescopeSelection", c.magenta, c.black, s.bold},
+    {"TelescopeMatching", c.magenta},
+  }
+end
+
+function M:markdown()
+
+  local to_groups = highlight_to_groups({c.cyan, c.none})
+  local delimiters = to_groups({
+    "markdownH1Delimiter",
+    "markdownH2Delimiter",
+    "markdownH3Delimiter",
+    "markdownH4Delimiter",
+    "markdownH5Delimiter",
+    "markdownH6Delimiter",
+  })
+
+  return merge({
+    delimiters,
+    {
+      {"markdownh1", c.cyan, c.none, s.bold},
+      {"markdownh2", c.cyan, c.none, s.bold},
+      {"markdownh3", c.cyan, c.none, s.bold},
+      {"markdownh4", c.cyan, c.none, s.bold},
+      {"markdownh5", c.cyan, c.none, s.bold},
+
+      {"markdownCodeDelimiter", c.magenta, c.none},
+      {"markdownCode", c.blue:light(), c.none},
+      {"markdownUrl", c.blue:light(.1)},
+      {"markdownLinkText", c.magenta},
+
+      {"markdownLinkTextDelimiter", c.gray:light()},
+      {"markdownLinkDelimiter", c.gray:light()},
+    },
+  })
+end
+
+function M:syntax()
+  local error = {"TSError", "Error"}
+  local punctuation = {"TSPunctDelimiter", "TSPunctBracket", "TSPunctSpecial"}
+  local constants = {"TSConstant", "TsConstBuiltin", "TSConstMacro", "Constant"}
+  local constructors = {"TSConstructor"}
+  local string = {"TSStringRegex", "TSString", "TSStringEscape", "String"}
+  local boolean = {"TSBoolean", "Boolean"}
+  local functions = {"TSFunction", "TSFuncBuiltin", "TSFuncMacro", "Function"}
+  local methods = {"TSMethod"}
+  local fields = {"TSField", "TSProperty"}
+  local number = {"TSNumber", "TSFloat", "Float", "Number"}
+  local parameters = {"TSParameter", "TSParameterReference", "Parameter"}
+  local operators = {"TSOperator"}
+  local forwords = {"TSConditional", "TSRepeat", "Conditional", "Repeat"}
+  local keyword = {"TSKeyword", "TSKeywordOperator", "Keyword", "Operator"}
+  local types = {"TSType", "TSTypeBuiltin", "Type"}
+  local labels = {"TSLabel", "Label"}
+  local namespaces = {"TSNamespace"}
+  local includes = {"TSInclude"}
+  local variables = {"TSVariable", "TSVariableBuiltin"}
+  local tags = {"TSTag", "TSTagDelimiter", "Tag"}
+  local text = {"TSText", "TSStrong", "TSEmphasis", "TSUnderline", "TSTitle", "TSLiteral", "TSURI"}
+
+  local groups = {
+    {error, c.white, c.red, s.none},
+    {punctuation, c.fg:dark(.25)},
+    {constants, c.cyan:light()},
+    {string, c.green:light():saturate(.1)},
+    {boolean, c.magenta},
+    {functions, c.blue:light():saturate()},
+    {methods, c.blue:saturate(.3):light(), c.none, s.italic},
+    {fields, c.cyan:light()},
+    {number, c.magenta:light()},
+    {parameters, c.cyan},
+    {operators, c.blue},
+    {forwords, c.blue:saturate(.1):light(), c.none},
+    {keyword, c.magenta, c.none, s.italic},
+    {constructors, c.gray:light(.2)},
+    {types, c.blue:light(.1)},
+    {includes, c.cyan},
+    {labels, c.blue:saturate(.1):light()},
+    {namespaces, c.blue:light()},
+    {variables, c.cyan:light(.1)},
+    {tags, c.blue:light()},
+    {text, c.fg},
+  }
+
+  local highlights = {}
+
+  -- Apply grouping to each color group
+  for _, group in ipairs(groups) do
+    highlights = merge({highlights, highlight_to_groups({group[2], group[3], group[4]})(group[1])})
+  end
+
+  return merge({
+    highlights,
+    {
+      {"TSField", c.cyan:saturate(.04):dark(.04)},
+      {"TSTypeBuiltin", c.yellow},
+      {"TSVariableBuiltin", c.yellow},
+    },
+  })
 end
 
 return M
