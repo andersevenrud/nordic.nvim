@@ -84,12 +84,6 @@ function M:colors()
 
     {"Directory", c.cyan},
 
-    -- Diff
-    {"DiffAdd", c.none, c.green},
-    {"DiffChange", c.none, c.yellow},
-    {"DiffDelete", c.none, c.red},
-    {"DiffText", c.none, c.fg},
-
     {"Identifier", c.fg, c.none, s.NONE},
     {"Include", c.lightcyan:saturate(), c.none, s.NONE},
 
@@ -161,6 +155,7 @@ function M:colors()
     M:lsp(),
     M:syntax(),
     M:markdown(),
+    M:diff(),
     M:telescope(),
   })
 end
@@ -181,6 +176,19 @@ function M:telescope()
     {"TelescopePromptPrefix", c.fg},
     {"TelescopeSelection", c.magenta, c.black, s.bold},
     {"TelescopeMatching", c.magenta},
+  }
+end
+
+function M:diff()
+  return {
+    {"DiffAdd", c.none, c.green},
+    {"DiffChange", c.none, c.yellow},
+    {"DiffDelete", c.none, c.red},
+    {"DiffText", c.none, c.fg},
+
+    {"GitGutterAdd", c.green, c.bg},
+    {"GitGutterChange", c.yellow, c.bg},
+    {"GitGutterDelete", c.red, c.bg},
   }
 end
 
@@ -225,7 +233,7 @@ function M:syntax()
   local boolean = {"TSBoolean", "Boolean"}
   local functions = {"TSFunction", "TSFuncBuiltin", "TSFuncMacro", "Function"}
   local methods = {"TSMethod"}
-  local fields = {"TSField", "TSProperty"}
+  local fields = {"TSField", "TSProperty", "Property"}
   local number = {"TSNumber", "TSFloat", "Float", "Number"}
   local parameters = {"TSParameter", "TSParameterReference", "Parameter"}
   local operators = {"TSOperator"}
@@ -243,22 +251,22 @@ function M:syntax()
     {error, c.white, c.red, s.none},
     {punctuation, c.fg:dark(.25)},
     {constants, c.cyan:light()},
-    {string, c.green:light():saturate(.1)},
-    {boolean, c.magenta},
-    {functions, c.blue:light():saturate()},
-    {methods, c.blue:saturate(.3):light(), c.none, s.italic},
-    {fields, c.cyan:light()},
-    {number, c.magenta:light()},
+    {string, c.green},
+    {boolean, c.blue:light()},
+    {functions, c.blue:light()},
+    {methods, c.lightcyan, c.none},
+    {fields, c.cyan},
+    {number, c.magenta},
     {parameters, c.cyan},
     {operators, c.blue},
     {forwords, c.blue:saturate(.1):light(), c.none},
-    {keyword, c.magenta, c.none, s.italic},
+    {keyword, c.cyan, c.none, s.italic},
     {constructors, c.gray:light(.2)},
     {types, c.blue:light(.1)},
     {includes, c.cyan},
     {labels, c.blue:saturate(.1):light()},
     {namespaces, c.blue:light()},
-    {variables, c.cyan:light(.1)},
+    {variables, c.fg},
     {tags, c.blue:light()},
     {text, c.fg},
   }
@@ -273,9 +281,9 @@ function M:syntax()
   return merge({
     highlights,
     {
-      {"TSField", c.cyan:saturate(.04):dark(.04)},
+      {"TSField", c.cyan},
       {"TSTypeBuiltin", c.yellow},
-      {"TSVariableBuiltin", c.yellow},
+      {"TSVariableBuiltin", c.yellow:light(.03)},
     },
   })
 end
