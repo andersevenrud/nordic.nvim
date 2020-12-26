@@ -248,7 +248,9 @@ function M:syntax()
   local text = {"TSText", "TSStrong", "TSEmphasis", "TSUnderline", "TSTitle", "TSLiteral", "TSURI"}
 
   local groups = {
-    {error, c.white, c.red, s.none},
+    -- Highlighting errors looks really messy, so don't
+    {error, c.none, c.none, s.none},
+
     {punctuation, c.fg:dark(.25)},
     {constants, c.cyan:light()},
     {string, c.green},
