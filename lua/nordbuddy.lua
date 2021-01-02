@@ -254,7 +254,7 @@ function M:syntax()
     {punctuation, c.fg:dark(.25)},
     {constants, c.cyan:light()},
     {string, c.green},
-    {boolean, c.blue:light()},
+    {boolean, c.magenta},
     {functions, c.blue:light()},
     {methods, c.lightcyan, c.none},
     {fields, c.cyan},
@@ -283,7 +283,7 @@ function M:syntax()
   return merge({
     highlights,
     {
-      {"TSField", c.cyan},
+      {"TSField", c.lightblue},
       {"TSTypeBuiltin", c.yellow},
       {"TSVariableBuiltin", c.yellow:light(.03)},
     },
