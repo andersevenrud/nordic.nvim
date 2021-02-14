@@ -60,7 +60,7 @@ end
 function M:colors()
   local vim_groups = {
     {"Normal", c.fg:dark(.01), c.bg},
-    {"NormalFloat", c.fg:dark(.01), c.bg:light(.01)},
+    {"NormalFloat", c.fg:dark(.01), c.bg:light(.05)},
 
     -- Conceal
     {"Conceal", c.black:light()},
