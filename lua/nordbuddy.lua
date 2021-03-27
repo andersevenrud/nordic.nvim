@@ -181,14 +181,20 @@ end
 
 function M:diff()
   return {
-    {"DiffAdd", c.none, c.green},
-    {"DiffChange", c.none, c.yellow},
-    {"DiffDelete", c.none, c.red},
-    {"DiffText", c.none, c.fg},
+    {"DiffAdd", c.green, c.bg},
+    {"DiffChange", c.yellow, c.bg},
+    {"DiffDelete", c.red, c.bg},
+    {"DiffText", c.fg, c.bg},
 
     {"GitGutterAdd", c.green, c.bg},
     {"GitGutterChange", c.yellow, c.bg},
     {"GitGutterDelete", c.red, c.bg},
+
+    {"NeogitDiffAddHighlight", c.green, c.bg:light(.02)},
+    {"NeogitDiffDeleteHighlight", c.red, c.bg:light(.02)},
+    {"NeogitDiffContextHighlight", c.fg, c.bg:light(.02)},
+    {"NeogitHunkHeaderHighlight", c.fg:dark(.2), c.bg:light(.05)},
+    {"NeogitHunkHeader", c.fg:dark(.05), c.bg},
   }
 end
 
