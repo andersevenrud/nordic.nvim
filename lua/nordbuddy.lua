@@ -135,8 +135,8 @@ function M:colors()
     {"SpellRare", c.red, c.none},
 
     -- Statusline
-    {"StatusLine", c.fg, c.bg},
-    {"StatusLineNC", c.fg:dark(.2), c.bg},
+    {"StatusLine", c.fg:dark(.2), c.bg},
+    {"StatusLineNC", c.gray, c.bg},
 
     -- Tabline
     {"TabLine", c.fg, c.bg},
