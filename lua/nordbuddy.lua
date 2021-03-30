@@ -19,28 +19,69 @@ local highlight_to_groups = function(highlight)
   end
 end
 
+local nord = {
+    -- Polar Night
+    [0] = '#2e3440',
+    [1] = '#3b4252',
+    [2] = '#434c5e',
+    [3] = '#4c566a',
+    -- ['3_bright'] = '#616e88'
+    -- Snow Storm
+    [4] = '#d8dee9',
+    [5] = '#e5e9f0',
+    [6] = '#eceff4',
+    -- Frost
+    [7] = '#8fbcbb',
+    [8] = '#88c0d0',
+    [9] = '#81a1c1',
+    -- Aurora
+    [10] = '#5e81ac',
+    [11] = '#bf616a',
+    [12] = '#d08770',
+    [13] = '#ebcb8b',
+    [14] = '#a3be8c',
+    [15] = '#b48ead',
+}
+
 function M:setup()
-  Color.new('fg',          '#D8DEE9')
-  Color.new('bg',          '#2E3440')
-  Color.new('black',       '#3B4252')
-  Color.new('brightblack', '#434C5E')
-  Color.new('gray',        '#4C566A')
-  Color.new('white',       '#E5E9F0')
-  Color.new('brightwhite', '#ECEFF4')
-  Color.new('lightcyan',   '#8FBCBB')
-  Color.new('cyan',        '#88C0D0')
-  Color.new('lightblue',   '#81A1C1')
-  Color.new('blue',        '#5E81AC')
-  Color.new('red',         '#BF616A')
-  Color.new('orange',      '#D08770')
-  Color.new('yellow',      '#EBCB8B')
-  Color.new('green',       '#A3BE8C')
-  Color.new('magenta',     '#B48EAD')
+  vim.g.terminal_color_0 = nord[1]
+  vim.g.terminal_color_1 = nord[11]
+  vim.g.terminal_color_2 = nord[14]
+  vim.g.terminal_color_3 = nord[13]
+  vim.g.terminal_color_4 = nord[9]
+  vim.g.terminal_color_5 = nord[15]
+  vim.g.terminal_color_6 = nord[8]
+  vim.g.terminal_color_7 = nord[5]
+  vim.g.terminal_color_8 = nord[3]
+  vim.g.terminal_color_9 = nord[11]
+  vim.g.terminal_color_10 = nord[14]
+  vim.g.terminal_color_11 = nord[13]
+  vim.g.terminal_color_12 = nord[9]
+  vim.g.terminal_color_13 = nord[15]
+  vim.g.terminal_color_14 = nord[7]
+  vim.g.terminal_color_15 = nord[6]
+
+
+  Color.new('fg',          nord[4])
+  Color.new('bg',          nord[0])
+  Color.new('black',       nord[1])
+  Color.new('brightblack', nord[2])
+  Color.new('gray',        nord[3])
+  Color.new('white',       nord[5])
+  Color.new('brightwhite', nord[6])
+  Color.new('lightcyan',   nord[7])
+  Color.new('cyan',        nord[8])
+  Color.new('lightblue',   nord[9])
+  Color.new('blue',        nord[10])
+  Color.new('red',         nord[11])
+  Color.new('orange',      nord[12])
+  Color.new('yellow',      nord[13])
+  Color.new('green',       nord[14])
+  Color.new('magenta',     nord[15])
 end
 
 function M:use()
   vim.cmd("set termguicolors")
-  vim.cmd("hi! clear")
   M.setup(self)
 
   for _, group in ipairs(M:colors()) do
@@ -231,7 +272,7 @@ function M:markdown()
 end
 
 function M:syntax()
-  local error = {"TSError", "Error"}
+  local errors = {"TSError", "Error"}
   local punctuation = {"TSPunctDelimiter", "TSPunctBracket", "TSPunctSpecial"}
   local constants = {"TSConstant", "TsConstBuiltin", "TSConstMacro", "Constant"}
   local constructors = {"TSConstructor"}
@@ -255,7 +296,7 @@ function M:syntax()
 
   local groups = {
     -- Highlighting errors looks really messy, so don't
-    {error, c.none, c.none, s.none},
+    {errors, c.none, c.none, s.none},
 
     {punctuation, c.fg:dark(.25)},
     {constants, c.cyan:light()},
