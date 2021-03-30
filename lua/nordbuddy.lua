@@ -209,8 +209,8 @@ end
 
 function M:diff()
     return {
-        {"DiffAdd", c.green, c.bg}, {"DiffChange", c.yellow, c.bg},
-        {"DiffDelete", c.red, c.bg}, {"DiffText", c.fg, c.bg},
+        {"DiffAdd", c.green, c.brightblack}, {"DiffChange", c.yellow, c.brightblack},
+        {"DiffDelete", c.red, c.brightblack}, {"DiffText", c.fg, c.brightblack},
 
         {"GitGutterAdd", c.green, c.bg}, {"GitGutterChange", c.yellow, c.bg},
         {"GitGutterDelete", c.red, c.bg},
