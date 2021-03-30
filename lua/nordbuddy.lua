@@ -82,6 +82,7 @@ end
 
 function M:use()
   vim.cmd("set termguicolors")
+  vim.g.colors_name = 'nordbuddy'
   M.setup(self)
 
   for _, group in ipairs(M:colors()) do
