@@ -1,6 +1,6 @@
 local vim = vim
-local Color, c, Group = require"colorbuddy".setup()
-local s = require"colorbuddy.style".styles
+local Color, c, Group = require'colorbuddy'.setup()
+local s = require'colorbuddy.style'.styles
 local M = {}
 
 local merge = function(list)
@@ -21,26 +21,26 @@ end
 
 local nord = {
     -- Polar Night
-    [0] = '#2e3440',
-    [1] = '#3b4252',
-    [2] = '#434c5e',
-    [3] = '#4c566a',
+    [0] = '#2e3440', -- dark black: bg
+    [1] = '#3b4252', -- black
+    [2] = '#434c5e', -- bright black
+    [3] = '#4c566a', -- gray
     -- ['3_bright'] = '#616e88'
     -- Snow Storm
-    [4] = '#d8dee9',
-    [5] = '#e5e9f0',
-    [6] = '#eceff4',
+    [4] = '#d8dee9', -- dark white: fg
+    [5] = '#e5e9f0', -- white
+    [6] = '#eceff4', -- bright white
     -- Frost
-    [7] = '#8fbcbb',
-    [8] = '#88c0d0',
-    [9] = '#81a1c1',
+    [7] = '#8fbcbb', -- cyan: classes, types and primitives.
+    [8] = '#88c0d0', -- bright cyan: declarations, calls and execution statements of functions, methods and routines.
+    [9] = '#81a1c1', -- blue: keywords, support characters, operators, tags, units, punctuations
+    [10] = '#5e81ac', -- intense blue: pragmas, comment keywords and pre-processor statements.
     -- Aurora
-    [10] = '#5e81ac',
-    [11] = '#bf616a',
-    [12] = '#d08770',
-    [13] = '#ebcb8b',
-    [14] = '#a3be8c',
-    [15] = '#b48ead'
+    [11] = '#bf616a', -- red: deletions and errors
+    [12] = '#d08770', -- orange: annotations and decorators
+    [13] = '#ebcb8b', -- yellow: modifications, warning and escape characters
+    [14] = '#a3be8c', -- green: additions and string
+    [15] = '#b48ead' -- purple: integers and floating point numbers
 }
 
 function M:setup()
@@ -80,7 +80,7 @@ function M:setup()
 end
 
 function M:use()
-    vim.cmd("set termguicolors")
+    vim.o.termguicolors = true
     vim.g.colors_name = 'nordbuddy'
     M.setup(self)
 
@@ -98,128 +98,119 @@ end
 
 function M:colors()
     local vim_groups = {
-        {"Normal", c.fg:dark(.01), c.bg},
-        {"NormalFloat", c.fg:dark(.01), c.bg:light(.05)},
-
+        {'Normal', c.fg:dark(.01), c.bg}, --
+        {'NormalFloat', c.fg:dark(.01), c.bg:light(.05)}, --
         -- Conceal
-        {"Conceal", c.black:light()},
-        {"VertSplit", c.black:light(.04)},
-
-        {"ErrorMsg", c.fg, c.red},
-        {"WarningMsg", c.bg, c.yellow},
-        {"Exception", c.red, c.none, s.NONE},
-
-        {"Character", c.green, c.none, s.NONE},
-        {"Comment", c.gray:light(.1), c.bg:light(.02), s.NONE},
-
+        {'Conceal', c.black:light()}, --
+        {'VertSplit', c.black:light(.04)}, --
+        {'ErrorMsg', c.fg, c.red}, --
+        {'WarningMsg', c.bg, c.yellow}, --
+        {'Exception', c.red, c.none, s.NONE}, --
+        {'Character', c.green, c.none, s.NONE}, --
+        {'Comment', c.gray:light(.1), c.bg:light(.02), s.NONE}, --
         -- Search
-        {"IncSearch", c.magenta, c.gray},
-        {"Search", c.cyan, c.gray},
-
-        {"Define", c.lightcyan:saturate(), c.none, s.NONE},
-        {"PreProc", c.lightcyan:saturate(), c.none, s.NONE},
-
-        {"Delimiter", c.cyan, c.none, s.NONE},
-        {"Directory", c.cyan},
-
-        {"Identifier", c.fg, c.none, s.NONE},
-        {"Include", c.lightcyan:saturate(), c.none, s.NONE},
-
-        {"Statement", c.lightcyan, c.none, s.NONE},
-        {"StorageClass", c.cyan, c.none, s.NONE},
-        {"Structure", c.cyan, c.none, s.NONE}, 
-        {"Title", c.cyan, c.none},
-        {"Todo", c.yellow, c.none, s.NONE},
-        {"TypeDef", c.magenta, c.none, s.NONE},
-
+        {'IncSearch', c.magenta, c.gray}, --
+        {'Search', c.cyan, c.gray}, --
+        {'Define', c.lightcyan:saturate(), c.none, s.NONE}, --
+        {'PreProc', c.lightcyan:saturate(), c.none, s.NONE}, --
+        {'Delimiter', c.cyan, c.none, s.NONE}, --
+        {'Directory', c.cyan}, --
+        {'Identifier', c.fg, c.none, s.NONE}, --
+        {'Include', c.lightcyan:saturate(), c.none, s.NONE}, --
+        {'Statement', c.lightcyan, c.none, s.NONE}, --
+        {'StorageClass', c.cyan, c.none, s.NONE}, --
+        {'Structure', c.cyan, c.none, s.NONE}, --
+        {'Title', c.cyan, c.none}, --
+        {'Todo', c.yellow, c.none, s.NONE}, --
+        {'TypeDef', c.magenta, c.none, s.NONE}, --
         -- Side Column
-        {"CursorColumn", c.gray, c.none, s.NONE},
-        {"LineNr", c.gray, c.none, s.NONE},
-        {"CursorLineNr", c.fg:dark(.1), c.none, s.NONE},
-        {"Line", c.none, c.none, s.bold},
-        {"SignColumn", c.none, c.none, s.NONE},
-        {"ColorColumn", c.none, c.gray},
-        {"Cursor", c.gray, c.gray},
-        {"CursorLine", c.none, c.bg:light(.05)},
-        {"lCursor", c.cyan, c.cyan},
-
+        {'CursorColumn', c.gray, c.none, s.NONE}, --
+        {'LineNr', c.gray, c.none, s.NONE}, --
+        {'CursorLineNr', c.fg:dark(.1), c.none, s.NONE}, --
+        {'Line', c.none, c.none, s.bold}, --
+        {'SignColumn', c.none, c.none, s.NONE}, --
+        {'ColorColumn', c.none, c.gray}, --
+        {'Cursor', c.gray, c.gray}, --
+        {'CursorLine', c.none, c.bg:light(.05)}, --
+        {'lCursor', c.cyan, c.cyan}, --
         -- Folds
-        {"Folded", c.gray, c.bg},
-        {"FoldColumn", c.gray, c.none},
-
-        {"EndOfBuffer", c.gray, c.none},
-        {"MatchParen", c.none, c.gray},
-        {"NonText", c.bg:light(), c.none},
-
+        {'Folded', c.gray, c.bg}, --
+        {'FoldColumn', c.gray, c.none}, --
+        {'EndOfBuffer', c.gray, c.none}, --
+        {'MatchParen', c.none, c.gray}, --
+        {'NonText', c.bg:light(), c.none}, --
         -- Popup Menu
-        {"PMenu", c.fg, c.gray},
-        {"PmenuSbar", c.black, c.brightblack},
-        {"PMenuSel", c.magenta:light(.1), c.gray:light()},
-        {"PmenuThumb", c.none, c.gray:light()},
-
+        {'PMenu', c.fg, c.gray}, --
+        {'PmenuSbar', c.black, c.brightblack}, --
+        {'PMenuSel', c.magenta:light(.1), c.gray:light()}, --
+        {'PmenuThumb', c.none, c.gray:light()}, --
         -- Special
-        {"Special", c.magenta, c.none, s.NONE},
-        {"SpecialChar", c.magenta, c.none, s.NONE},
-        {"SpecialKey", c.magenta},
-        {"SpecialComment", c.yellow:light(), c.none, s.NONE},
-
+        {'Special', c.magenta, c.none, s.NONE}, --
+        {'SpecialChar', c.magenta, c.none, s.NONE}, --
+        {'SpecialKey', c.magenta}, --
+        {'SpecialComment', c.yellow:light(), c.none, s.NONE}, --
         -- Spell
-        {"SpellBad", c.red, c.none},
-        {"SpellCap", c.red, c.none},
-        {"SpellLocal", c.red, c.none},
-        {"SpellRare", c.red, c.none},
-
+        {'SpellBad', c.red, c.none}, --
+        {'SpellCap', c.red, c.none}, --
+        {'SpellLocal', c.red, c.none}, --
+        {'SpellRare', c.red, c.none}, --
         -- Statusline
-        {"StatusLine", c.fg:dark(.2), c.bg},
-        {"StatusLineNC", c.gray, c.bg},
-
+        {'StatusLine', c.fg:dark(.2), c.bg}, --
+        {'StatusLineNC', c.gray, c.bg}, --
         -- Tabline
-        {"TabLine", c.fg, c.bg},
-        {"TabLineSel", c.cyan, c.bg:light()},
-        {"TabLineFill", c.fg, c.bg},
-        {"Question", c.cyan, c.none, s.bold},
-
+        {'TabLine', c.fg, c.bg}, --
+        {'TabLineSel', c.cyan, c.bg:light()}, --
+        {'TabLineFill', c.fg, c.bg}, --
+        {'Question', c.cyan, c.none, s.bold}, --
         -- Visual
-        {"Visual", c.cyan:light(), c.bg:light()},
-        {"VisualNOS", c.magenta, c.bg:light()}
+        {'Visual', c.cyan:light(), c.bg:light()}, --
+        {'VisualNOS', c.magenta, c.bg:light()} --
     }
 
     return merge({
-        vim_groups, M:lsp(), M:syntax(), M:markdown(), M:diff(), M:telescope(), M:plugins()
+        vim_groups, --
+        M:lsp(), --
+        M:syntax(), --
+        M:markdown(), --
+        M:diff(), --
+        M:telescope(), --
+        M:plugins() --
     })
 end
 
 function M:lsp()
     return {
-        {"LspDiagnosticsDefaultHint", c.blue:light()},
-        {"LspDiagnosticsDefaultError", c.red},
-        {"LspDiagnosticsDefaultWarning", c.yellow},
-        {"LspDiagnosticsDefaultInformation", c.fg}
+        {'LspDiagnosticsDefaultHint', c.blue:light()}, --
+        {'LspDiagnosticsDefaultError', c.red}, --
+        {'LspDiagnosticsDefaultWarning', c.yellow}, --
+        {'LspDiagnosticsDefaultInformation', c.fg} --
     }
 end
 
 function M:telescope()
     return {
-        {"TelescopeBorder", c.gray:light(.05)},
-        {"TelescopeNormal", c.fg:light(.3)}, {"TelescopePromptPrefix", c.fg},
-        {"TelescopeSelection", c.magenta, c.black, s.bold},
-        {"TelescopeMatching", c.magenta}
+        {'TelescopeBorder', c.gray:light(.05)}, --
+        {'TelescopeNormal', c.fg:light(.3)}, --
+        {'TelescopePromptPrefix', c.fg}, --
+        {'TelescopeSelection', c.magenta, c.black, s.bold}, --
+        {'TelescopeMatching', c.magenta} --
     }
 end
 
 function M:diff()
     return {
-        {"DiffAdd", c.green, c.brightblack}, {"DiffChange", c.yellow, c.brightblack},
-        {"DiffDelete", c.red, c.brightblack}, {"DiffText", c.fg, c.brightblack},
-
-        {"GitGutterAdd", c.green, c.bg}, {"GitGutterChange", c.yellow, c.bg},
-        {"GitGutterDelete", c.red, c.bg},
-
-        {"NeogitDiffAddHighlight", c.green, c.bg:light(.02)},
-        {"NeogitDiffDeleteHighlight", c.red, c.bg:light(.02)},
-        {"NeogitDiffContextHighlight", c.fg, c.bg:light(.02)},
-        {"NeogitHunkHeaderHighlight", c.fg:dark(.2), c.bg:light(.05)},
-        {"NeogitHunkHeader", c.fg:dark(.05), c.bg}
+        {'DiffAdd', c.green, c.brightblack}, --
+        {'DiffChange', c.yellow, c.brightblack}, --
+        {'DiffDelete', c.red, c.brightblack}, --
+        {'DiffText', c.fg, c.brightblack}, --
+        {'GitGutterAdd', c.green, c.bg}, --
+        {'GitGutterChange', c.yellow, c.bg}, --
+        {'GitGutterDelete', c.red, c.bg}, --
+        {'NeogitDiffAddHighlight', c.green, c.bg:light(.02)}, --
+        {'NeogitDiffDeleteHighlight', c.red, c.bg:light(.02)}, --
+        {'NeogitDiffContextHighlight', c.fg, c.bg:light(.02)}, --
+        {'NeogitHunkHeaderHighlight', c.fg:dark(.2), c.bg:light(.05)}, --
+        {'NeogitHunkHeader', c.fg:dark(.05), c.bg} --
     }
 end
 
@@ -227,67 +218,134 @@ function M:markdown()
 
     local to_groups = highlight_to_groups({c.cyan, c.none})
     local delimiters = to_groups({
-        "markdownH1Delimiter", "markdownH2Delimiter", "markdownH3Delimiter",
-        "markdownH4Delimiter", "markdownH5Delimiter", "markdownH6Delimiter"
+        'markdownH1Delimiter', --
+        'markdownH2Delimiter', --
+        'markdownH3Delimiter', --
+        'markdownH4Delimiter', --
+        'markdownH5Delimiter', --
+        'markdownH6Delimiter' --
     })
 
     return merge({
-        delimiters, {
-            {"markdownh1", c.cyan, c.none, s.bold},
-            {"markdownh2", c.cyan, c.none, s.bold},
-            {"markdownh3", c.cyan, c.none, s.bold},
-            {"markdownh4", c.cyan, c.none, s.bold},
-            {"markdownh5", c.cyan, c.none, s.bold},
-
-            {"markdownCodeDelimiter", c.magenta, c.none},
-            {"markdownCode", c.blue:light(), c.none},
-            {"markdownUrl", c.blue:light(.1)}, {"markdownLinkText", c.magenta},
-
-            {"markdownLinkTextDelimiter", c.gray:light()},
-            {"markdownLinkDelimiter", c.gray:light()}
+        delimiters, --
+        {
+            {'markdownh1', c.cyan, c.none, s.bold}, --
+            {'markdownh2', c.cyan, c.none, s.bold}, --
+            {'markdownh3', c.cyan, c.none, s.bold}, --
+            {'markdownh4', c.cyan, c.none, s.bold}, --
+            {'markdownh5', c.cyan, c.none, s.bold}, --
+            {'markdownCodeDelimiter', c.magenta, c.none}, --
+            {'markdownCode', c.blue:light(), c.none}, --
+            {'markdownUrl', c.blue:light(.1)}, --
+            {'markdownLinkText', c.magenta}, --
+            {'markdownLinkTextDelimiter', c.gray:light()}, --
+            {'markdownLinkDelimiter', c.gray:light()} --
         }
     })
 end
 
 function M:syntax()
-    local errors = {"TSError", "Error"}
-    local punctuation = {"TSPunctDelimiter", "TSPunctBracket", "TSPunctSpecial"}
-    local constants = {
-        "TSConstant", "TsConstBuiltin", "TSConstMacro", "Constant"
+    local errors = {
+        'TSError', -- TS
+        'Error' -- LBG
     }
-    local constructors = {"TSConstructor"}
-    local string = {"TSStringRegex", "TSString", "TSStringEscape", "String"}
-    local boolean = {"TSBoolean", "Boolean"}
-    local functions = {"TSFunction", "TSFuncBuiltin", "TSFuncMacro", "Function"}
-    local methods = {"TSMethod"}
-    local fields = {"TSField", "TSProperty", "Property"}
-    local number = {"TSNumber", "TSFloat", "Float", "Number"}
-    local parameters = {"TSParameter", "TSParameterReference", "Parameter"}
-    local operators = {"TSOperator"}
-    local forwords = {"TSConditional", "TSRepeat", "Conditional", "Repeat"}
-    local keyword = {"TSKeyword", "TSKeywordOperator", "Keyword", "Operator"}
-    local types = {"TSType", "TSTypeBuiltin", "Type"}
-    local labels = {"TSLabel", "Label"}
-    local namespaces = {"TSNamespace"}
-    local includes = {"TSInclude"}
-    local variables = {"TSVariable", "TSVariableBuiltin"}
-    local tags = {"TSTag", "TSTagDelimiter", "Tag"}
+    local punctuation = {
+        'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial' -- TS
+    }
+    local constants = {
+        'TSConstant', 'TsConstBuiltin', 'TSConstMacro', -- TS
+        'Constant' -- LBG
+    }
+    local constructors = {
+        'TSConstructor' -- TS
+    }
+    local string = {
+        'TSStringRegex', 'TSString', 'TSStringEscape', -- TS
+        'String' -- LBG
+    }
+    local boolean = {
+        'TSBoolean', -- TS
+        'Boolean' -- LBG
+    }
+    local functions = {
+        'TSFunction', 'TSFuncBuiltin', 'TSFuncMacro', -- TS
+        'Function' -- LBG
+    }
+    local methods = {
+        'TSMethod' -- TS
+    }
+    local fields = {
+        'TSField', 'TSProperty', -- TS
+        'Property' -- LBG
+    }
+    local number = {
+        'TSNumber', 'TSFloat', -- TS
+        'Float', 'Number' -- LBG
+    }
+    local parameters = {
+        'TSParameter', 'TSParameterReference', -- TS
+        'Parameter' -- LBG
+    }
+    local operators = {
+        'TSOperator' -- TS
+    }
+    local forwords = {
+        'TSConditional', 'TSRepeat', -- TS
+        'Conditional', 'Repeat' -- LBG
+    }
+    local keyword = {
+        'TSKeyword', 'TSKeywordOperator', -- TS
+        'Keyword', 'Operator' -- LBG
+    }
+    local types = {
+        'TSType', 'TSTypeBuiltin', -- TS
+        'Type' -- LBG
+    }
+    local labels = {
+        'TSLabel', -- TS
+        'Label' -- LBG
+    }
+    local namespaces = {
+        'TSNamespace' -- TS
+    }
+    local includes = {
+        'TSInclude', -- TS
+        'Include' --LBG
+    }
+    local variables = {
+        'TSVariable', 'TSVariableBuiltin' -- TS
+    }
+    local tags = {
+        'TSTag', 'TSTagDelimiter', 'Tag' -- TS
+    }
     local text = {
-        "TSText", "TSStrong", "TSEmphasis", "TSUnderline", "TSTitle",
-        "TSLiteral", "TSURI"
+        'TSText', 'TSStrong', 'TSEmphasis', 'TSUnderline', 'TSTitle',
+        'TSLiteral', 'TSURI' -- TS
     }
 
     local groups = {
         -- Highlighting errors looks really messy, so don't
-        {errors, c.none, c.none, s.none}, {punctuation, c.fg:dark(.25)},
-        {constants, c.cyan:light()}, {string, c.green}, {boolean, c.magenta},
-        {functions, c.blue:light()}, {methods, c.lightcyan, c.none},
-        {fields, c.cyan}, {number, c.magenta}, {parameters, c.cyan},
-        {operators, c.blue}, {forwords, c.blue:saturate(.1):light(), c.none},
-        {keyword, c.cyan, c.none, s.italic}, {constructors, c.gray:light(.2)},
-        {types, c.blue:light(.1)}, {includes, c.cyan},
-        {labels, c.blue:saturate(.1):light()}, {namespaces, c.blue:light()},
-        {variables, c.fg}, {tags, c.blue:light()}, {text, c.fg}
+        {errors, c.red, c.none, s.bold}, --
+        {punctuation, c.fg:dark(.25)}, --
+        {constants, c.cyan:light()}, --
+        {string, c.green}, --
+        {boolean, c.magenta}, --
+        {functions, c.blue:light()}, --
+        {methods, c.lightcyan, c.none}, --
+        {fields, c.cyan}, --
+        {number, c.magenta}, --
+        {parameters, c.cyan}, --
+        {operators, c.blue}, --
+        {forwords, c.blue:saturate(.1):light(), c.none}, --
+        {keyword, c.cyan, c.none, s.italic}, --
+        {constructors, c.gray:light(.2)}, --
+        {types, c.blue:light(.1)}, --
+        {includes, c.cyan}, --
+        {labels, c.blue:saturate(.1):light()}, --
+        {namespaces, c.blue:light()}, --
+        {variables, c.fg}, --
+        {tags, c.blue:light()}, --
+        {text, c.fg} --
     }
 
     local highlights = {}
@@ -295,26 +353,41 @@ function M:syntax()
     -- Apply grouping to each color group
     for _, group in ipairs(groups) do
         highlights = merge({
-            highlights,
-            highlight_to_groups({group[2], group[3], group[4]})(group[1])
+            highlights, --
+            highlight_to_groups({group[2], group[3], group[4]})(group[1]) --
         })
     end
 
     return merge({
         highlights, {
-            {"TSField", c.lightblue}, {"TSTypeBuiltin", c.yellow},
-            {"TSVariableBuiltin", c.yellow:light(.03)}
+            {'TSField', c.lightblue}, --
+            {'TSTypeBuiltin', c.yellow}, --
+            {'TSVariableBuiltin', c.yellow:light(.03)} --
         }
     })
 end
 
 function M:plugins()
     -- lukas-reineke/indent-blankline.nvim
-    return { {'IndentBlanklineChar', c.gray},
-        {'IndentBlanklineSpaceChar', c.gray},
-        {'IndentBlanklineSpaceCharBlankline', c.gray},
-        {'IndentBlanklineContextChar', c.black}
+    local indent_blankline = {
+        {'IndentBlanklineChar', c.gray}, --
+        {'IndentBlanklineSpaceChar', c.gray}, --
+        {'IndentBlanklineSpaceCharBlankline', c.gray}, --
+        {'IndentBlanklineContextChar', c.black} --
     }
+
+    -- tpope/vim-fugitive
+    local fugitive = {
+        {'gitcommitDiscardedFile', c.red}, --
+        {'gitcommitUntrackedFile', c.red}, --
+        {'gitcommitSelectedFile', c.green} --
+    }
+
+    return merge({
+        indent_blankline, --
+        fugitive --
+    })
+
 end
 
 return M
