@@ -1,7 +1,14 @@
 local vim = vim
-local Color, c, Group = require'colorbuddy'.setup()
-local s = require'colorbuddy.style'.styles
+local Color, c, Group = require('colorbuddy').setup()
+local s = require('colorbuddy.style').styles
 local M = {}
+
+local b = s.bold
+local i = s.italic
+local ul = s.underline
+local cno = c.none
+local sno = s.none
+local uc = sno
 
 local merge = function(list)
     local acc = {}
@@ -19,31 +26,34 @@ local highlight_to_groups = function(highlight)
     end
 end
 
-local nord = {
-    -- Polar Night
-    [0] = '#2e3440', -- dark black: bg
-    [1] = '#3b4252', -- black
-    [2] = '#434c5e', -- bright black
-    [3] = '#4c566a', -- gray
-    -- ['3_bright'] = '#616e88'
-    -- Snow Storm
-    [4] = '#d8dee9', -- dark white: fg
-    [5] = '#e5e9f0', -- white
-    [6] = '#eceff4', -- bright white
-    -- Frost
-    [7] = '#8fbcbb', -- cyan: classes, types and primitives.
-    [8] = '#88c0d0', -- bright cyan: declarations, calls and execution statements of functions, methods and routines.
-    [9] = '#81a1c1', -- blue: keywords, support characters, operators, tags, units, punctuations
-    [10] = '#5e81ac', -- intense blue: pragmas, comment keywords and pre-processor statements.
-    -- Aurora
-    [11] = '#bf616a', -- red: deletions and errors
-    [12] = '#d08770', -- orange: annotations and decorators
-    [13] = '#ebcb8b', -- yellow: modifications, warning and escape characters
-    [14] = '#a3be8c', -- green: additions and string
-    [15] = '#b48ead' -- purple: integers and floating point numbers
-}
-
 function M:setup()
+
+    local nord = {
+        -- Polar Night
+        [0] = '#2e3440', -- dark black: bg
+        [1] = '#3b4252', -- black
+        [2] = '#434c5e', -- bright black
+        [3] = '#4c566a', -- gray
+        -- ['3_bright'] = '#616e88'
+        -- Snow Storm
+        [4] = '#d8dee9', -- dark white: fg
+        [5] = '#e5e9f0', -- white
+        [6] = '#eceff4', -- bright white
+        -- Frost
+        [7] = '#8fbcbb', -- cyan: classes, types and primitives.
+        [8] = '#88c0d0', -- bright cyan: declarations, calls and execution statements of functions, methods and routines.
+        [9] = '#81a1c1', -- blue: keywords, support characters, operators, tags, units, punctuations
+        [10] = '#5e81ac', -- intense blue: pragmas, comment keywords and pre-processor statements.
+        -- Aurora
+        [11] = '#bf616a', -- red: deletions and errors
+        [12] = '#d08770', -- orange: annotations and decorators
+        [13] = '#ebcb8b', -- yellow: modifications, warning and escape characters
+        [14] = '#a3be8c', -- green: additions and string
+        [15] = '#b48ead' -- purple: integers and floating point numbers
+    }
+
+    for _k, _v in pairs(nord) do Color.new('nord' .. _k, _v) end
+
     vim.g.terminal_color_0 = nord[1]
     vim.g.terminal_color_1 = nord[11]
     vim.g.terminal_color_2 = nord[14]
@@ -60,28 +70,17 @@ function M:setup()
     vim.g.terminal_color_13 = nord[15]
     vim.g.terminal_color_14 = nord[7]
     vim.g.terminal_color_15 = nord[6]
-
-    Color.new('fg', nord[4])
-    Color.new('bg', nord[0])
-    Color.new('black', nord[1])
-    Color.new('brightblack', nord[2])
-    Color.new('gray', nord[3])
-    Color.new('white', nord[5])
-    Color.new('brightwhite', nord[6])
-    Color.new('lightcyan', nord[7])
-    Color.new('cyan', nord[8])
-    Color.new('lightblue', nord[9])
-    Color.new('blue', nord[10])
-    Color.new('red', nord[11])
-    Color.new('orange', nord[12])
-    Color.new('yellow', nord[13])
-    Color.new('green', nord[14])
-    Color.new('magenta', nord[15])
 end
 
 function M:use()
-    vim.o.termguicolors = true
     vim.g.colors_name = 'nordbuddy'
+
+    if vim.g.nord_spell == 'underline' then
+        uc = ul
+    elseif vim.g.nord_spell == 'undercurl' then
+        uc = s.undercurl
+    end
+
     M.setup(self)
 
     for _, group in ipairs(M:colors()) do
@@ -89,86 +88,16 @@ function M:use()
             return function(x) return not x and none_resp or x end
         end
 
-        local cNone = check_none(c.none)
-        local sNone = check_none(s.none)
-
+        local cNone = check_none(cno)
+        local sNone = check_none(sno)
         Group.new(group[1], cNone(group[2]), cNone(group[3]), sNone(group[4]))
+
     end
 end
 
 function M:colors()
-    local vim_groups = {
-        {'Normal', c.fg:dark(.01), c.bg}, --
-        {'NormalFloat', c.fg:dark(.01), c.bg:light(.05)}, --
-        -- Conceal
-        {'Conceal', c.black:light()}, --
-        {'VertSplit', c.black:light(.04)}, --
-        {'ErrorMsg', c.fg, c.red}, --
-        {'WarningMsg', c.bg, c.yellow}, --
-        {'Exception', c.red, c.none, s.NONE}, --
-        {'Character', c.green, c.none, s.NONE}, --
-        {'Comment', c.gray:light(.1), c.bg:light(.02), s.NONE}, --
-        -- Search
-        {'IncSearch', c.magenta, c.gray}, --
-        {'Search', c.cyan, c.gray}, --
-        {'Define', c.lightcyan:saturate(), c.none, s.NONE}, --
-        {'PreProc', c.lightcyan:saturate(), c.none, s.NONE}, --
-        {'Delimiter', c.cyan, c.none, s.NONE}, --
-        {'Directory', c.cyan}, --
-        {'Identifier', c.fg, c.none, s.NONE}, --
-        {'Include', c.lightcyan:saturate(), c.none, s.NONE}, --
-        {'Statement', c.lightcyan, c.none, s.NONE}, --
-        {'StorageClass', c.cyan, c.none, s.NONE}, --
-        {'Structure', c.cyan, c.none, s.NONE}, --
-        {'Title', c.cyan, c.none}, --
-        {'Todo', c.yellow, c.none, s.NONE}, --
-        {'TypeDef', c.magenta, c.none, s.NONE}, --
-        -- Side Column
-        {'CursorColumn', c.gray, c.none, s.NONE}, --
-        {'LineNr', c.gray, c.none, s.NONE}, --
-        {'CursorLineNr', c.fg:dark(.1), c.none, s.NONE}, --
-        {'Line', c.none, c.none, s.bold}, --
-        {'SignColumn', c.none, c.none, s.NONE}, --
-        {'ColorColumn', c.none, c.gray}, --
-        {'Cursor', c.gray, c.gray}, --
-        {'CursorLine', c.none, c.bg:light(.05)}, --
-        {'lCursor', c.cyan, c.cyan}, --
-        -- Folds
-        {'Folded', c.gray, c.bg}, --
-        {'FoldColumn', c.gray, c.none}, --
-        {'EndOfBuffer', c.gray, c.none}, --
-        {'MatchParen', c.none, c.gray}, --
-        {'NonText', c.bg:light(), c.none}, --
-        -- Popup Menu
-        {'PMenu', c.fg, c.gray}, --
-        {'PmenuSbar', c.black, c.brightblack}, --
-        {'PMenuSel', c.magenta:light(.1), c.gray:light()}, --
-        {'PmenuThumb', c.none, c.gray:light()}, --
-        -- Special
-        {'Special', c.magenta, c.none, s.NONE}, --
-        {'SpecialChar', c.magenta, c.none, s.NONE}, --
-        {'SpecialKey', c.magenta}, --
-        {'SpecialComment', c.yellow:light(), c.none, s.NONE}, --
-        -- Spell
-        {'SpellBad', c.red, c.none}, --
-        {'SpellCap', c.red, c.none}, --
-        {'SpellLocal', c.red, c.none}, --
-        {'SpellRare', c.red, c.none}, --
-        -- Statusline
-        {'StatusLine', c.fg:dark(.2), c.bg}, --
-        {'StatusLineNC', c.gray, c.bg}, --
-        -- Tabline
-        {'TabLine', c.fg, c.bg}, --
-        {'TabLineSel', c.cyan, c.bg:light()}, --
-        {'TabLineFill', c.fg, c.bg}, --
-        {'Question', c.cyan, c.none, s.bold}, --
-        -- Visual
-        {'Visual', c.cyan:light(), c.bg:light()}, --
-        {'VisualNOS', c.magenta, c.bg:light()} --
-    }
-
     return merge({
-        vim_groups, --
+        M:UIcomponents(), --
         M:lsp(), --
         M:syntax(), --
         M:markdown(), --
@@ -178,174 +107,356 @@ function M:colors()
     })
 end
 
+function M:UIcomponents()
+    return {
+        --- Editor---
+        {'ColorColumn', cno, c.nord1}, --
+        {'Cursor', c.nord0, c.nord4}, --
+        {'CursorLine', cno, c.nord1}, --
+        {'Error', c.nord4, c.nord11}, --
+        {'iCursor', c.nord0, c.nord4}, --
+        {'LineNr', c.nord3}, --
+        {'MatchParen', c.nord8, c.nord3}, --
+        {'NonText', c.nord2}, --
+        {'Normal', c.nord4, c.nord0}, --
+        {'PMenu', c.nord4, c.nord2}, --
+        {'PmenuSbar', c.nord4, c.nord2}, --
+        {'PMenuSel', c.nord8, c.nord3, b}, --
+        {'PmenuThumb', c.nord8, c.nord3}, --
+        {'SpecialKey', c.nord3}, --
+        {'SpellBad', c.nord11, cno, uc}, --
+        {'SpellCap', c.nord13, cno, uc}, --
+        {'SpellLocal', c.nord5, cno, uc}, --
+        {'SpellRare', c.nord6, cno, uc}, --
+        {'Visual', cno, c.nord2}, --
+        {'VisualNOS', cno, c.nord2}, --
+        {'VertSplit', c.nord1, c.nord5}, --
+        {'VisualNC', cno, c.nord2}, --
+        {'NormalNC', c.nord4, cno}, --
+        {'NormalFloat', c.nord5, c.nord1}, --
+        {'RedrawDebugNormal', c.nord0, c.nord4}, --
+        {'RedrawDebugClear', c.nord4, c.nord13}, --
+        {'RedrawDebugComposed', c.nord4, c.nord14}, --
+        {'RedrawDebugRecompose', c.nord4, c.nord11}, --
+        --- Neovim ---
+        {'healthError', c.nord11, c.nord1}, --
+        {'healthSuccess', c.nord14, c.nord1}, --
+        {'healthWarning', c.nord13, c.nord1}, --
+        {'TermCursorNC', cno, c.nord1}, --
+        {'NvimInternalError', c.nord11, c.nord11}, --
+        --- Gutter ---
+        {'CursorColumn', cno, c.nord1}, --
+        {'CursorLineNr', c.nord4, c.nord1}, --
+        {'Folded', c.nord3, c.nord1, b}, --
+        {'FoldColumn', c.nord3, c.nord0}, --
+        {'SignColumn', c.nord1, c.nord0}, --
+        -- Navigation ---
+        {'Directory', c.nord8}, --
+        --- Prompt/Status ---
+        {'EndOfBuffer', c.nord1}, --
+        {'ErrorMsg', c.nord4, c.nord11}, --
+        {'ModeMsg', c.nord4}, --
+        {'MoreMsg', c.nord8}, --
+        {'Question', c.nord4}, --
+        {'StatusLine', c.nord8, c.nord3}, --
+        {'StatusLineNC', c.nord4, c.nord1}, --
+        {'StatusLineTerm', c.nord8, c.nord3}, --
+        {'StatusLineTermNC', c.nord4, c.nord1}, --
+        {'WarningMsg', c.nord0, c.nord13}, --
+        {'WildMenu', c.nord8, c.nord1}, --
+        --- Search ---
+        {'IncSearch', c.nord6, c.nord10, ul}, --
+        {'Search', c.nord1, c.nord8}, --
+        --- Tabs ---
+        {'TabLine', c.nord4, c.nord1}, --
+        {'TabLineFill', c.nord4, c.nord1}, --
+        {'TabLineSel', c.nord8, c.nord3}, --
+        --- Window ---
+        {'Title', c.nord4, cno, b} --
+    }
+end
+
 function M:lsp()
     return {
-        {'LspDiagnosticsDefaultHint', c.blue:light()}, --
-        {'LspDiagnosticsDefaultError', c.red}, --
-        {'LspDiagnosticsDefaultWarning', c.yellow}, --
-        {'LspDiagnosticsDefaultInformation', c.fg} --
+        {'LspReferenceText', c.nord4}, --
+        {'LspReferenceRead', c.nord5}, --
+        {'LspReferenceWrite', c.nord6}, --
+        {'LspDiagnosticsDefaultHint', c.nord10}, --
+        {'LspDiagnosticsDefaultError', c.nord11}, --
+        {'LspDiagnosticsDefaultWarning', c.nord13}, --
+        {'LspDiagnosticsDefaultInformation', c.nord8} --
     }
 end
 
 function M:telescope()
     return {
-        {'TelescopeBorder', c.gray:light(.05)}, --
-        {'TelescopeNormal', c.fg:light(.3)}, --
-        {'TelescopePromptPrefix', c.fg}, --
-        {'TelescopeSelection', c.magenta, c.black, s.bold}, --
-        {'TelescopeMatching', c.magenta} --
+        {'TelescopeBorder', c.nord3}, --
+        {'TelescopeNormal', c.nord4}, --
+        {'TelescopePromptPrefix', c.nord4}, --
+        {'TelescopeSelection', c.nord8, c.nord3, b}, --
+        {'TelescopeMatching', c.nord8, c.nord3} --
     }
 end
 
 function M:diff()
     return {
-        {'DiffAdd', c.green, c.brightblack}, --
-        {'DiffChange', c.yellow, c.brightblack}, --
-        {'DiffDelete', c.red, c.brightblack}, --
-        {'DiffText', c.fg, c.brightblack}, --
-        {'GitGutterAdd', c.green, c.bg}, --
-        {'GitGutterChange', c.yellow, c.bg}, --
-        {'GitGutterDelete', c.red, c.bg}, --
-        {'NeogitDiffAddHighlight', c.green, c.bg:light(.02)}, --
-        {'NeogitDiffDeleteHighlight', c.red, c.bg:light(.02)}, --
-        {'NeogitDiffContextHighlight', c.fg, c.bg:light(.02)}, --
-        {'NeogitHunkHeaderHighlight', c.fg:dark(.2), c.bg:light(.05)}, --
-        {'NeogitHunkHeader', c.fg:dark(.05), c.bg} --
+        {'DiffAdd', c.nord14, c.nord1}, --
+        {'DiffChange', c.nord13, c.nord1}, --
+        {'DiffDelete', c.nord11, c.nord1}, --
+        {'DiffText', c.nord11, c.nord1}, --
+        {'GitGutterAdd', c.nord14, c.nord1}, --
+        {'GitGutterChange', c.nord13, c.nord1}, --
+        {'GitGutterDelete', c.nord11, c.nord1}, --
+        {'NeogitDiffAddHighlight', c.nord14, c.nord1}, --
+        {'NeogitDiffDeleteHighlight', c.nord11, c.nord1}, --
+        {'NeogitDiffContextHighlight', c.nord13, c.nord1}, --
+        {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0}, --
+        {'NeogitHunkHeader', c.nord3:light(), c.nord0} --
     }
 end
 
 function M:markdown()
+    local to_groups = highlight_to_groups({c.nord8, cno})
+    local markdownHdelimiters = to_groups(
+                                    {
+            'markdownH1Delimiter', --
+            'markdownH2Delimiter', --
+            'markdownH3Delimiter', --
+            'markdownH4Delimiter', --
+            'markdownH5Delimiter', --
+            'markdownH6Delimiter' --
+        })
 
-    local to_groups = highlight_to_groups({c.cyan, c.none})
-    local delimiters = to_groups({
-        'markdownH1Delimiter', --
-        'markdownH2Delimiter', --
-        'markdownH3Delimiter', --
-        'markdownH4Delimiter', --
-        'markdownH5Delimiter', --
-        'markdownH6Delimiter' --
+    to_groups = highlight_to_groups({c.nord8, cno, b})
+    local markdownH = to_groups({
+        'markdownH1', --
+        'markdownH2', --
+        'markdownH3', --
+        'markdownH4', --
+        'markdownH5', --
+        'markdownH6' --
     })
 
     return merge({
-        delimiters, --
+        markdownHdelimiters, --
+        markdownH, --
         {
-            {'markdownh1', c.cyan, c.none, s.bold}, --
-            {'markdownh2', c.cyan, c.none, s.bold}, --
-            {'markdownh3', c.cyan, c.none, s.bold}, --
-            {'markdownh4', c.cyan, c.none, s.bold}, --
-            {'markdownh5', c.cyan, c.none, s.bold}, --
-            {'markdownCodeDelimiter', c.magenta, c.none}, --
-            {'markdownCode', c.blue:light(), c.none}, --
-            {'markdownUrl', c.blue:light(.1)}, --
-            {'markdownLinkText', c.magenta}, --
-            {'markdownLinkTextDelimiter', c.gray:light()}, --
-            {'markdownLinkDelimiter', c.gray:light()} --
+            {'markdownCode', c.nord7}, --
+            {'markdownCodeDelimiter', c.nord7}, --
+            {'markdownBlockquote', c.nord7}, --
+            {'markdownFootnote', c.nord7}, --
+            {'markdownFootnoteDefinition', c.nord7}, --
+            {'markdownId', c.nord7}, --
+            {'markdownIdDeclaration', c.nord7}, --
+            {'markdownIdDelimiter', c.nord9}, --
+            {'markdownUrl', c.nord4}, --
+            {'markdownLinkText', c.nord8}, --
+            {'markdownLinkTextDelimiter', c.nord9}, --
+            {'markdownLinkDelimiter', c.nord9} --
         }
     })
 end
 
 function M:syntax()
-    local errors = {
-        'TSError', -- TS
-        'Error' -- LBG
+    local attributes = {
+        'TSAnnotation', 'TSAttribute', -- TS
+        'luametatableevents', 'luametatablearithmetic',
+        'luametatableequivalence' -- lua
     }
-    local punctuation = {
-        'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial' -- TS
+    local numbers = {
+        'TSBoolean', 'TSFloat', 'TSNumber', -- TS
+        'Boolean', 'Float', 'Number' -- VL
     }
-    local constants = {
-        'TSConstant', 'TsConstBuiltin', 'TSConstMacro', -- TS
-        'Constant' -- LBG
+    local comments = {
+        'TSComment', -- TS
+        'Comment', -- VL
+        'manFooter', -- man
+        'vimCommentTitle', 'vimCommentLine', -- vim
+        'rustCommentLine', 'rustCommentBlock' -- rust
     }
     local constructors = {
-        'TSConstructor' -- TS
+        'TSConstructor', -- TS
+        'vimFunction', 'vimUserFunc', 'vimCommand' -- vim
     }
-    local string = {
-        'TSStringRegex', 'TSString', 'TSStringEscape', -- TS
-        'String' -- LBG
+    local conditionals = {
+        'TSConditional', -- TS
+        'Conditional', 'PreCondit', -- VL
+        'cPreCondit', 'cPreConditMatch' -- C/C++
     }
-    local boolean = {
-        'TSBoolean', -- TS
-        'Boolean' -- LBG
+    local constants = {
+        'TSConstant', -- TS
+        'Constant', -- VL
+        'cConstant', 'cppConstant' -- C/C++
     }
-    local functions = {
-        'TSFunction', 'TSFuncBuiltin', 'TSFuncMacro', -- TS
-        'Function' -- LBG
+    local defines = {
+        'TSConstMacro', -- TS
+        'Define', 'Macro' -- VL
     }
-    local methods = {
-        'TSMethod' -- TS
+    local exceptions = {
+        'TSException', -- TS
+        'Exception' -- VL
     }
     local fields = {
-        'TSField', 'TSProperty', -- TS
-        'Property' -- LBG
+        'TSField', 'TSProperty', 'TSTag', -- TS
+        'Tag' -- VL
     }
-    local number = {
-        'TSNumber', 'TSFloat', -- TS
-        'Float', 'Number' -- LBG
-    }
-    local parameters = {
-        'TSParameter', 'TSParameterReference', -- TS
-        'Parameter' -- LBG
-    }
-    local operators = {
-        'TSOperator' -- TS
-    }
-    local forwords = {
-        'TSConditional', 'TSRepeat', -- TS
-        'Conditional', 'Repeat' -- LBG
-    }
-    local keyword = {
-        'TSKeyword', 'TSKeywordOperator', -- TS
-        'Keyword', 'Operator' -- LBG
-    }
-    local types = {
-        'TSType', 'TSTypeBuiltin', -- TS
-        'Type' -- LBG
-    }
-    local labels = {
-        'TSLabel', -- TS
-        'Label' -- LBG
-    }
-    local namespaces = {
-        'TSNamespace' -- TS
+    local functions = {
+        'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
+        'Function', -- VL
+        'pythonfunction', -- python
+        'vimFuncName' -- vim
     }
     local includes = {
         'TSInclude', -- TS
-        'Include' --LBG
+        'Include', 'PreProc', -- VL
+        'cInclude', -- C/C++
+        'pythonimport', -- python
+        'rustExternCrate' -- rust
+    }
+    local keywords = {
+        'TSKeyword', 'TSKeywordFunction', -- TS
+        'Keyword', 'Statement', -- VL
+        'cStatement', 'cppStatement', 'cppModifier', 'cppAccess', -- C/C++
+        'pythonstatement', 'pythonkeyword', -- python
+        'rustDeriveTrait', -- rust
+        'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall',
+        'luaspecialfunction' -- lua
+    }
+    local labels = {
+        'TSLabel', -- TS
+        'Label' -- VL
+    }
+    local namespaces = {
+        'TSNamespace', -- TS
+        'pythonModule' -- python
+    }
+    local nones = {
+        'TSNone', -- VL
+        'pythonnone' -- python
+    }
+    local operators = {
+        'TSOperator', -- TS
+        'Operator', -- VL
+        'cOperator', 'cppOperator', -- C/C++
+        'pythonoperator' -- python
+    }
+    local parameters = {
+        'TSParameter', 'TSParameterReference', -- TS
+        'pythonparam' -- python
+    }
+    local properties = {
+        'TSProperty' -- TS
+    }
+    local punctuations = {
+        'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial',
+        'TSTagDelimiter', -- TS
+        'Delimiter', -- VL
+        'vimParenSep', 'vimSep', -- vim
+        'shCmdParenRegion', 'shCmdSubRegion' -- sh
+    }
+    local repeats = {
+        'TSRepeat', -- TS
+        'Repeat' -- VL
+    }
+    local strings = {
+        'TSCharacter', 'TSString', -- TS
+        'Character', 'String', -- VL
+        'cString', 'cCppString', -- C/C++
+        'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes',
+        'pythonbytescontent' -- python
+    }
+    local strings_specials = {
+        'TSStringRegex', 'TSStriingEscape', -- TS
+        'SpecialChar', -- VL
+        'cSpecialCharacter', -- C/C++
+        'pythonescape' -- python
+    }
+    local symbols = {
+        'TSSymbol', -- TS
+        'Special', 'SpecialComment', -- VL
+        'cSpecial', -- C/C++
+        'pythonsymbol', -- python
+        'rustCommentLineDoc', 'rustCommentBlockDoc' -- rust
+    }
+    local texts = {
+        'TSText', 'TSStrong', 'TSEmphais', 'TSUnderline', 'TSStrike', 'TSTitle',
+        'TSLiteral', -- TS
+        'Text', -- VL
+        'manTitle' -- man
+    }
+    local uris = {
+        'TSURI' -- TS
+    }
+    local types = {
+        'TSType', 'TSTypeBuildin', -- TS
+        'Type', 'StorageClass', 'Structure', 'Typedef', -- VL
+        'cType', 'cStorageClass', 'cStructure', 'cppType', 'cppStorageClass',
+        'cppStructure', -- C/C++
+        'pythonclass', -- python
+        'vimVar' -- vim
     }
     local variables = {
-        'TSVariable', 'TSVariableBuiltin' -- TS
+        'TSVariable', -- TS
+        'Identifier', -- VL
+        'pythonselfarg', -- python
+        'rustIdentifier', -- rust
+        'shDerefSimple', 'shDerefVar' -- sh
     }
-    local tags = {
-        'TSTag', 'TSTagDelimiter', 'Tag' -- TS
+    local builtins = { -- such as self. in python
+        'TSConstBuiltin', 'TSFuncBuiltin', 'TSVariableBuiltin', -- TS
+        'pythonbuiltin', 'pythonself' -- python
     }
-    local text = {
-        'TSText', 'TSStrong', 'TSEmphasis', 'TSUnderline', 'TSTitle',
-        'TSLiteral', 'TSURI' -- TS
+    local notes = {
+        'TSNote', -- TS
+        'Todo', -- VL
+        'cTODO' -- C/C++
     }
-
+    local warnings = {
+        'TSWarning', -- TS
+        'Debug' -- VL
+    }
+    local dangers = {
+        'TSDanger' -- TS
+    }
+    local errors = {
+        'TSError', -- TS
+        'Error', -- VL
+        'rustCommentLineDocError', 'rustCommentBlockDocError' -- rust
+    }
     local groups = {
-        -- Highlighting errors looks really messy, so don't
-        {errors, c.red, c.none, s.bold}, --
-        {punctuation, c.fg:dark(.25)}, --
-        {constants, c.cyan:light()}, --
-        {string, c.green}, --
-        {boolean, c.magenta}, --
-        {functions, c.blue:light()}, --
-        {methods, c.lightcyan, c.none}, --
-        {fields, c.cyan}, --
-        {number, c.magenta}, --
-        {parameters, c.cyan}, --
-        {operators, c.blue}, --
-        {forwords, c.blue:saturate(.1):light(), c.none}, --
-        {keyword, c.cyan, c.none, s.italic}, --
-        {constructors, c.gray:light(.2)}, --
-        {types, c.blue:light(.1)}, --
-        {includes, c.cyan}, --
-        {labels, c.blue:saturate(.1):light()}, --
-        {namespaces, c.blue:light()}, --
-        {variables, c.fg}, --
-        {tags, c.blue:light()}, --
-        {text, c.fg} --
+        {attributes, c.nord9}, --
+        {numbers, c.nord15}, --
+        {comments, c.nord3:light()}, --
+        {constructors, c.nord3:light()}, --
+        {conditionals, c.nord10, cno, i}, --
+        {constants, c.nord4}, --
+        {defines, c.nord10}, --
+        {exceptions, c.nord9}, --
+        {fields, c.nord9, cno, i}, --
+        {functions, c.nord4, cno, i}, --
+        {includes, c.nord10}, --
+        {keywords, c.nord9, cno, sno}, --
+        {labels, c.nord10, cno, i}, --
+        {namespaces, c.nord4, cno, i}, --
+        {nones, c.nord4}, --
+        {operators, c.nord9}, --
+        {parameters, c.nord4, cno, i}, --
+        {properties, c.nord10}, --
+        {punctuations, c.nord9}, --
+        {repeats, c.nord10, cno, i}, --
+        {strings, c.nord14}, --
+        {strings_specials, c.nord13}, --
+        {symbols, c.nord13}, --
+        {texts, c.nord4}, --
+        {uris, c.nord15}, --
+        {types, c.nord7}, --
+        {variables, c.nord4}, --
+        {builtins, c.nord9, cno, i}, --
+        {notes, c.nord12}, --
+        {warnings, c.nord13}, --
+        {dangers, c.nord13}, --
+        {errors, c.nord11} --
+
     }
 
     local highlights = {}
@@ -358,29 +469,23 @@ function M:syntax()
         })
     end
 
-    return merge({
-        highlights, {
-            {'TSField', c.lightblue}, --
-            {'TSTypeBuiltin', c.yellow}, --
-            {'TSVariableBuiltin', c.yellow:light(.03)} --
-        }
-    })
+    return highlights
 end
 
 function M:plugins()
     -- lukas-reineke/indent-blankline.nvim
     local indent_blankline = {
-        {'IndentBlanklineChar', c.gray}, --
-        {'IndentBlanklineSpaceChar', c.gray}, --
-        {'IndentBlanklineSpaceCharBlankline', c.gray}, --
-        {'IndentBlanklineContextChar', c.black} --
+        {'IndentBlanklineChar', c.nord3}, --
+        {'IndentBlanklineSpaceChar', c.nord3}, --
+        {'IndentBlanklineSpaceCharBlankline', c.nord4}, --
+        {'IndentBlanklineContextChar', c.nord1} --
     }
 
     -- tpope/vim-fugitive
     local fugitive = {
-        {'gitcommitDiscardedFile', c.red}, --
-        {'gitcommitUntrackedFile', c.red}, --
-        {'gitcommitSelectedFile', c.green} --
+        {'gitcommitDiscardedFile', c.nord11}, --
+        {'gitcommitUntrackedFile', c.nord11}, --
+        {'gitcommitSelectedFile', c.nord15} --
     }
 
     return merge({
