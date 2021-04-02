@@ -441,7 +441,7 @@ function M:syntax()
         {nones, c.nord4}, --
         {operators, c.nord9}, --
         {parameters, c.nord4, cno, i}, --
-        {properties, c.nord10}, --
+        {properties, c.nord9}, --
         {punctuations, c.nord9}, --
         {repeats, c.nord9, cno, i}, --
         {strings, c.nord14}, --
