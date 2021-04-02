@@ -220,18 +220,17 @@ end
 
 function M:markdown()
     local to_groups = highlight_to_groups({c.nord8, cno})
-    local markdownHdelimiters = to_groups(
-                                    {
-            'markdownH1Delimiter', --
-            'markdownH2Delimiter', --
-            'markdownH3Delimiter', --
-            'markdownH4Delimiter', --
-            'markdownH5Delimiter', --
-            'markdownH6Delimiter' --
-        })
+    local delimiters = to_groups({
+        'markdownH1Delimiter', --
+        'markdownH2Delimiter', --
+        'markdownH3Delimiter', --
+        'markdownH4Delimiter', --
+        'markdownH5Delimiter', --
+        'markdownH6Delimiter' --
+    })
 
     to_groups = highlight_to_groups({c.nord8, cno, b})
-    local markdownH = to_groups({
+    local headers = to_groups({
         'markdownH1', --
         'markdownH2', --
         'markdownH3', --
@@ -241,8 +240,8 @@ function M:markdown()
     })
 
     return merge({
-        markdownHdelimiters, --
-        markdownH, --
+        delimiters, --
+        headers, --
         {
             {'markdownCode', c.nord7}, --
             {'markdownCodeDelimiter', c.nord7}, --
