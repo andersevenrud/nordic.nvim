@@ -172,7 +172,10 @@ function M:UIcomponents()
         {'TabLineFill', c.nord4, c.nord1}, --
         {'TabLineSel', c.nord8, c.nord3}, --
         --- Window ---
-        {'Title', c.nord4, cno, b} --
+        {'Title', c.nord4, cno, b}, --
+        --- Others ---
+        {'qffilename', c.nord13, cno, sno}, --
+        {'Whitespace', c.nord4} -- idk
     }
 end
 
@@ -271,12 +274,11 @@ function M:syntax()
         'TSComment', -- TS
         'Comment', -- VL
         'manFooter', -- man
-        'vimCommentTitle', 'vimCommentLine', -- vim
-        'rustCommentLine', 'rustCommentBlock' -- rust
+        'rustCommentLine', 'rustCommentBlock', -- rust
+        'vimCommentTitle', 'vimCommentLine' -- vim
     }
     local constructors = {
-        'TSConstructor', -- TS
-        'vimFunction', 'vimUserFunc', 'vimCommand' -- vim
+        'TSConstructor' -- TS
     }
     local conditionals = {
         'TSConditional', -- TS
@@ -304,7 +306,7 @@ function M:syntax()
         'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
         'Function', -- VL
         'pythonfunction', -- python
-        'vimFuncName' -- vim
+        'uncName', 'vimFunction', 'vimUserFunc'-- vim
     }
     local includes = {
         'TSInclude', -- TS
@@ -320,7 +322,8 @@ function M:syntax()
         'pythonstatement', 'pythonkeyword', -- python
         'rustDeriveTrait', -- rust
         'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall',
-        'luaspecialfunction' -- lua
+        'luaspecialfunction', -- lua
+        'vimCommand', 'vimnotfunc' -- vim
     }
     local labels = {
         'TSLabel', -- TS
@@ -351,7 +354,7 @@ function M:syntax()
         'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial',
         'TSTagDelimiter', -- TS
         'Delimiter', -- VL
-        'vimParenSep', 'vimSep', -- vim
+        'vimparensep', 'vimsep', 'vimbracket', -- vim
         'shCmdParenRegion', 'shCmdSubRegion' -- sh
     }
     local repeats = {
@@ -393,18 +396,20 @@ function M:syntax()
         'cType', 'cStorageClass', 'cStructure', 'cppType', 'cppStorageClass',
         'cppStructure', -- C/C++
         'pythonclass', -- python
-        'vimVar' -- vim
+        'vimlet' -- vim
     }
     local variables = {
         'TSVariable', -- TS
         'Identifier', -- VL
         'pythonselfarg', -- python
         'rustIdentifier', -- rust
+        'vimmapmodkey', 'vimnotation', 'vimfuncvar', 'vimvar', -- vim
         'shDerefSimple', 'shDerefVar' -- sh
     }
     local builtins = { -- such as self. in python
         'TSConstBuiltin', 'TSFuncBuiltin', 'TSVariableBuiltin', -- TS
-        'pythonbuiltin', 'pythonself' -- python
+        'pythonbuiltin', 'pythonself', -- python
+        'vimmap' -- vim
     }
     local notes = {
         'TSNote', -- TS
@@ -427,7 +432,7 @@ function M:syntax()
         {attributes, c.nord9}, --
         {numbers, c.nord15}, --
         {comments, c.nord3:light()}, --
-        {constructors, c.nord3:light()}, --
+        {constructors, c.nord4, cno, i}, -- in C++ variable->constructors() \\ TS docs unclear
         {conditionals, c.nord10, cno, i}, --
         {constants, c.nord4}, --
         {defines, c.nord10}, --
