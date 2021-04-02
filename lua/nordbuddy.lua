@@ -443,7 +443,7 @@ function M:syntax()
         {parameters, c.nord4, cno, i}, --
         {properties, c.nord10}, --
         {punctuations, c.nord9}, --
-        {repeats, c.nord10, cno, i}, --
+        {repeats, c.nord9, cno, i}, --
         {strings, c.nord14}, --
         {strings_specials, c.nord13}, --
         {symbols, c.nord13}, --
