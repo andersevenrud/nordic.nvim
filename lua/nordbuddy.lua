@@ -172,7 +172,9 @@ function M:UIcomponents()
         {'TabLineFill', c.nord4, c.nord1}, --
         {'TabLineSel', c.nord8, c.nord3}, --
         --- Window ---
-        {'Title', c.nord4, cno, b} --
+        {'Title', c.nord4, cno, b}, --
+        --- Others ---
+        {'qffilename', c.nord13, cno, sno} ---
     }
 end
 
@@ -427,7 +429,7 @@ function M:syntax()
         {attributes, c.nord9}, --
         {numbers, c.nord15}, --
         {comments, c.nord3:light()}, --
-        {constructors, c.nord3:light()}, --
+        {constructors, c.nord4, cno, i}, -- in C++ variable->constructors() \\ TS docs unclear
         {conditionals, c.nord10, cno, i}, --
         {constants, c.nord4}, --
         {defines, c.nord10}, --
