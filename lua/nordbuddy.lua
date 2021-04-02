@@ -130,7 +130,7 @@ function M:UIcomponents()
         {'SpellRare', c.nord6, cno, uc}, --
         {'Visual', cno, c.nord2}, --
         {'VisualNOS', cno, c.nord2}, --
-        {'VertSplit', c.nord1, c.nord5}, --
+        {'VertSplit', c.nord1}, --
         {'VisualNC', cno, c.nord2}, --
         {'NormalNC', c.nord4, cno}, --
         {'NormalFloat', c.nord5, c.nord1}, --
@@ -432,7 +432,7 @@ function M:syntax()
         {constants, c.nord4}, --
         {defines, c.nord10}, --
         {exceptions, c.nord9}, --
-        {fields, c.nord9, cno, i}, --
+        {fields, c.nord9, cno}, --
         {functions, c.nord4, cno, i}, --
         {includes, c.nord10}, --
         {keywords, c.nord9, cno, sno}, --
