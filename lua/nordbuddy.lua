@@ -97,7 +97,7 @@ end
 
 function M:colors()
     return merge({
-        M:UIcomponents(), --
+        M:standard(), --
         M:lsp(), --
         M:syntax(), --
         M:markdown(), --
@@ -107,7 +107,7 @@ function M:colors()
     })
 end
 
-function M:UIcomponents()
+function M:standard()
     return {
         --- Editor---
         {'ColorColumn', cno, c.nord1}, --
