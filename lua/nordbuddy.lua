@@ -210,6 +210,9 @@ function M:diff()
         {'GitGutterAdd', c.nord14, c.nord1}, --
         {'GitGutterChange', c.nord13, c.nord1}, --
         {'GitGutterDelete', c.nord11, c.nord1}, --
+        {'GitSignsAdd', c.nord14, c.nord0}, --
+        {'GitSignsChange', c.nord13, c.nord0}, --
+        {'GitSignsDelete', c.nord11, c.nord0}, --
         {'NeogitDiffAddHighlight', c.nord14, c.nord1}, --
         {'NeogitDiffDeleteHighlight', c.nord11, c.nord1}, --
         {'NeogitDiffContextHighlight', c.nord13, c.nord0}, --
