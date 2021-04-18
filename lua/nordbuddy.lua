@@ -81,6 +81,10 @@ function M:use()
         uc = s.undercurl
     end
 
+    if vim.g.nord_italic ~= nil and not vim.g.nord_italic then
+        i = sno
+    end
+
     M.setup(self)
 
     for _, group in ipairs(M:colors()) do
