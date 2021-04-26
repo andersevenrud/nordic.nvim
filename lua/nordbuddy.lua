@@ -97,167 +97,175 @@ end
 
 function M:colors()
    return merge({
-      M:standard(), --
-      M:lsp(), --
-      M:syntax(), --
-      M:markdown(), --
-      M:diff(), --
-      M:telescope(), --
-      M:plugins() --
+      M:standard(),
+      M:lsp(),
+      M:telescope(),
+      M:diff(),
+      M:markdown(),
+      M:syntax(),
+      M:plugins(),
    })
 end
 
 function M:standard()
    return {
+      --- Attributes ---
+      {"Bold", cno, cno, b},
+      {"Italic", cno, cno, i},
+      {"Underline", cno, cno, ul},
       --- Editor---
-      {'ColorColumn', cno, c.nord1}, --
-      {'Cursor', c.nord0, c.nord4}, --
-      {'CursorLine', cno, c.nord1}, --
-      {'Error', c.nord4, c.nord11}, --
-      {'iCursor', c.nord0, c.nord4}, --
-      {'LineNr', c.nord3}, --
-      {'MatchParen', c.nord8, c.nord3}, --
-      {'NonText', c.nord2}, --
-      {'Normal', c.nord4, c.nord0}, --
-      {'PMenu', c.nord4, c.nord2}, --
-      {'PmenuSbar', c.nord4, c.nord2}, --
-      {'PMenuSel', c.nord8, c.nord3, b}, --
-      {'PmenuThumb', c.nord8, c.nord3}, --
-      {'SpecialKey', c.nord3}, --
-      {'SpellBad', c.nord11, cno, uc}, --
-      {'SpellCap', c.nord13, cno, uc}, --
-      {'SpellLocal', c.nord5, cno, uc}, --
-      {'SpellRare', c.nord6, cno, uc}, --
-      {'Visual', cno, c.nord2}, --
-      {'VisualNOS', cno, c.nord2}, --
-      {'VertSplit', c.nord1}, --
-      {'VisualNC', cno, c.nord2}, --
-      {'NormalNC', c.nord4, cno}, --
-      {'NormalFloat', c.nord5, c.nord1}, --
-      {'RedrawDebugNormal', c.nord0, c.nord4}, --
-      {'RedrawDebugClear', c.nord4, c.nord13}, --
-      {'RedrawDebugComposed', c.nord4, c.nord14}, --
-      {'RedrawDebugRecompose', c.nord4, c.nord11}, --
+      {'ColorColumn', cno, c.nord1},
+      {'Cursor', c.nord0, c.nord4},
+      {'CursorLine', cno, c.nord1},
+      {'Error', c.nord4, c.nord11},
+      {'LineNr', c.nord3},
+      {'MatchParen', c.nord8, c.nord3},
+      {'NonText', c.nord2},
+      {'Normal', c.nord4, c.nord0},
+      {'NormalFloat', c.nord5, c.nord1},
+      {'NormalNC', c.nord4, cno},
+      {'Pmenu', c.nord4, c.nord2},
+      {'PmenuSbar', c.nord4, c.nord2},
+      {'PmenuSel', c.nord8, c.nord3, b},
+      {'PmenuThumb', c.nord8, c.nord3},
+      {'RedrawDebugClear', c.nord4, c.nord13},
+      {'RedrawDebugComposed', c.nord4, c.nord14},
+      {'RedrawDebugNormal', c.nord0, c.nord4},
+      {'RedrawDebugRecompose', c.nord4, c.nord11},
+      {'SpecialKey', c.nord3},
+      {'SpellBad', c.nord11, c.nord0, uc},
+      {'SpellCap', c.nord13, c.nord0, uc},
+      {'SpellLocal', c.nord5, c.nord0, uc},
+      {'SpellRare', c.nord6, c.nord0, uc},
+      {'VertSplit', c.nord1},
+      {'Visual', cno, c.nord2},
+      {'VisualNC', cno, c.nord2},
+      {'VisualNOS', cno, c.nord2},
+      {'iCursor', c.nord0, c.nord4},
       --- Neovim ---
-      {'healthError', c.nord11, c.nord1}, --
-      {'healthSuccess', c.nord14, c.nord1}, --
-      {'healthWarning', c.nord13, c.nord1}, --
-      {'TermCursorNC', cno, c.nord1}, --
-      {'NvimInternalError', c.nord11, c.nord11}, --
+      {'NvimInternalError', c.nord11, c.nord11},
+      {'TermCursorNC', cno, c.nord1},
+      {'healthError', c.nord11, c.nord1},
+      {'healthSuccess', c.nord14, c.nord1},
+      {'healthWarning', c.nord13, c.nord1},
       --- Gutter ---
-      {'CursorColumn', cno, c.nord1}, --
-      {'CursorLineNr', c.nord4, c.nord1}, --
-      {'Folded', c.nord3, c.nord1, b}, --
-      {'FoldColumn', c.nord3, c.nord0}, --
-      {'SignColumn', c.nord1, c.nord0}, --
+      {'CursorColumn', cno, c.nord1},
+      {'CursorLineNr', c.nord4, c.nord1},
+      {'FoldColumn', c.nord3, c.nord0},
+      {'Folded', c.nord3, c.nord1, b},
+      {'SignColumn', c.nord1, c.nord0},
       -- Navigation ---
-      {'Directory', c.nord8}, --
+      {'Directory', c.nord8},
       --- Prompt/Status ---
-      {'EndOfBuffer', c.nord1}, --
-      {'ErrorMsg', c.nord4, c.nord11}, --
-      {'ModeMsg', c.nord4}, --
-      {'MoreMsg', c.nord8}, --
-      {'Question', c.nord4}, --
-      {'StatusLine', c.nord8, c.nord3}, --
-      {'StatusLineNC', c.nord4, c.nord1}, --
-      {'StatusLineTerm', c.nord8, c.nord3}, --
-      {'StatusLineTermNC', c.nord4, c.nord1}, --
-      {'WarningMsg', c.nord0, c.nord13}, --
-      {'WildMenu', c.nord8, c.nord1}, --
+      {'EndOfBuffer', c.nord1},
+      {'ErrorMsg', c.nord4, c.nord11},
+      {'ModeMsg', c.nord4},
+      {'MoreMsg', c.nord8},
+      {'Question', c.nord4},
+      {'StatusLine', c.nord8, c.nord3},
+      {'StatusLineNC', c.nord4, c.nord1},
+      {'StatusLineTerm', c.nord8, c.nord3},
+      {'StatusLineTermNC', c.nord4, c.nord1},
+      {'WarningMsg', c.nord0, c.nord13},
+      {'WildMenu', c.nord8, c.nord1},
       --- Search ---
-      {'IncSearch', c.nord6, c.nord10, ul}, --
-      {'Search', c.nord1, c.nord8}, --
+      {'IncSearch', c.nord6, c.nord10, ul},
+      {'Search', c.nord1, c.nord8},
       --- Tabs ---
-      {'TabLine', c.nord4, c.nord1}, --
-      {'TabLineFill', c.nord4, c.nord1}, --
-      {'TabLineSel', c.nord8, c.nord3}, --
+      {'TabLine', c.nord4, c.nord1},
+      {'TabLineFill', c.nord4, c.nord1},
+      {'TabLineSel', c.nord8, c.nord3},
       --- Window ---
-      {'Title', c.nord4, cno, b}, --
+      {'Title', c.nord4, cno, b},
       --- Others ---
-      {'qffilename', c.nord13, cno, sno}, --
-      {'Whitespace', c.nord4} -- idk
+      {'qffilename', c.nord13, cno, sno},
+      {'Whitespace', c.nord4},
    }
 end
 
 function M:lsp()
    return {
-      {'LspReferenceText', c.nord4}, --
-      {'LspReferenceRead', c.nord5}, --
-      {'LspReferenceWrite', c.nord6}, --
-      {'LspDiagnosticsDefaultHint', c.nord10}, --
-      {'LspDiagnosticsDefaultError', c.nord11}, --
-      {'LspDiagnosticsDefaultWarning', c.nord13}, --
-      {'LspDiagnosticsDefaultInformation', c.nord8} --
+      {'LspDiagnosticsDefaultError', c.nord11},
+      {'LspDiagnosticsDefaultHint', c.nord10},
+      {'LspDiagnosticsDefaultInformation', c.nord8},
+      {'LspDiagnosticsDefaultWarning', c.nord13},
+      {'LspDiagnosticsUnderlineError', c.nord11, cno, uc},
+      {'LspDiagnosticsUnderlineHint', c.nord10, cno, uc},
+      {'LspDiagnosticsUnderlineInformation', c.nord8, cno, uc},
+      {'LspDiagnosticsUnderlineWarning', c.nord13, cno, uc},
+      {'LspReferenceRead', c.nord5},
+      {'LspReferenceText', c.nord4},
+      {'LspReferenceWrite', c.nord6},
    }
 end
 
 function M:telescope()
    return {
-      {'TelescopeBorder', c.nord3}, --
-      {'TelescopeNormal', c.nord4}, --
-      {'TelescopePromptPrefix', c.nord4}, --
-      {'TelescopeSelection', c.nord8, c.nord3, b}, --
-      {'TelescopeMatching', c.nord8, c.nord3} --
+      {'TelescopeBorder', c.nord3},
+      {'TelescopeMatching', c.nord8, c.nord3},
+      {'TelescopeNormal', c.nord4},
+      {'TelescopePromptPrefix', c.nord4},
+      {'TelescopeSelection', c.nord8, c.nord3, b},
    }
 end
 
 function M:diff()
    return {
-      {'DiffAdd', c.nord14, c.nord1}, --
-      {'DiffChange', c.nord13, c.nord1}, --
-      {'DiffDelete', c.nord11, c.nord1}, --
-      {'DiffText', c.nord11, c.nord1}, --
-      {'GitGutterAdd', c.nord14, c.nord1}, --
-      {'GitGutterChange', c.nord13, c.nord1}, --
-      {'GitGutterDelete', c.nord11, c.nord1}, --
-      {'GitSignsAdd', c.nord14, c.nord0}, --
-      {'GitSignsChange', c.nord13, c.nord0}, --
-      {'GitSignsDelete', c.nord11, c.nord0}, --
-      {'NeogitDiffAddHighlight', c.nord14, c.nord1}, --
-      {'NeogitDiffDeleteHighlight', c.nord11, c.nord1}, --
-      {'NeogitDiffContextHighlight', c.nord13, c.nord0}, --
-      {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0}, --
-      {'NeogitHunkHeader', c.nord3:light(), c.nord0} --
+      {'DiffAdd', c.nord14, c.nord1},
+      {'DiffChange', c.nord13, c.nord1},
+      {'DiffDelete', c.nord11, c.nord1},
+      {'DiffText', c.nord11, c.nord1},
+      {'GitGutterAdd', c.nord14, c.nord1},
+      {'GitGutterChange', c.nord13, c.nord1},
+      {'GitGutterDelete', c.nord11, c.nord1},
+      {'GitSignsAdd', c.nord14, c.nord0},
+      {'GitSignsChange', c.nord13, c.nord0},
+      {'GitSignsDelete', c.nord11, c.nord0},
+      {'NeogitDiffAddHighlight', c.nord14, c.nord1},
+      {'NeogitDiffContextHighlight', c.nord13, c.nord0},
+      {'NeogitDiffDeleteHighlight', c.nord11, c.nord1},
+      {'NeogitHunkHeader', c.nord3:light(), c.nord0},
+      {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0},
    }
 end
 
 function M:markdown()
    local to_groups = highlight_to_groups({c.nord8, cno})
    local delimiters = to_groups({
-      'markdownH1Delimiter', --
-      'markdownH2Delimiter', --
-      'markdownH3Delimiter', --
-      'markdownH4Delimiter', --
-      'markdownH5Delimiter', --
-      'markdownH6Delimiter' --
+      'markdownH1Delimiter',
+      'markdownH2Delimiter',
+      'markdownH3Delimiter',
+      'markdownH4Delimiter',
+      'markdownH5Delimiter',
+      'markdownH6Delimiter',
    })
 
    to_groups = highlight_to_groups({c.nord8, cno, b})
    local headers = to_groups({
-      'markdownH1', --
-      'markdownH2', --
-      'markdownH3', --
-      'markdownH4', --
-      'markdownH5', --
-      'markdownH6' --
+      'markdownH1',
+      'markdownH2',
+      'markdownH3',
+      'markdownH4',
+      'markdownH5',
+      'markdownH6',
    })
 
    return merge({
-      delimiters, --
-      headers, --
+      delimiters,
+      headers,
       {
-         {'markdownCode', c.nord7}, --
-         {'markdownCodeDelimiter', c.nord7}, --
-         {'markdownBlockquote', c.nord7}, --
-         {'markdownFootnote', c.nord7}, --
-         {'markdownFootnoteDefinition', c.nord7}, --
-         {'markdownId', c.nord7}, --
-         {'markdownIdDeclaration', c.nord7}, --
-         {'markdownIdDelimiter', c.nord9}, --
-         {'markdownUrl', c.nord4}, --
-         {'markdownLinkText', c.nord8}, --
-         {'markdownLinkTextDelimiter', c.nord9}, --
-         {'markdownLinkDelimiter', c.nord9} --
+         {'markdownBlockquote', c.nord7},
+         {'markdownCode', c.nord7},
+         {'markdownCodeDelimiter', c.nord7},
+         {'markdownFootnote', c.nord7},
+         {'markdownFootnoteDefinition', c.nord7},
+         {'markdownId', c.nord7},
+         {'markdownIdDeclaration', c.nord7},
+         {'markdownIdDelimiter', c.nord9},
+         {'markdownLinkDelimiter', c.nord9},
+         {'markdownLinkText', c.nord8},
+         {'markdownLinkTextDelimiter', c.nord9},
+         {'markdownUrl', c.nord4},
       }
    })
 end
@@ -265,205 +273,178 @@ end
 function M:syntax()
    local attributes = {
       'TSAnnotation', 'TSAttribute', -- TS
-      'luametatableevents', 'luametatablearithmetic',
-      'luametatableequivalence' -- lua
-   }
-   local numbers = {
-      'TSBoolean', 'TSFloat', 'TSNumber', -- TS
-      'Boolean', 'Float', 'Number' -- VL
+      'luametatableevents', 'luametatablearithmetic', 'luametatableequivalence', -- lua
    }
    local comments = {
       'TSComment', -- TS
       'Comment', -- VL
       'manFooter', -- man
-      'rustCommentLine', 'rustCommentBlock', -- rust
-      'vimCommentTitle', 'vimCommentLine' -- vim
-   }
-   local constructors = {
-      'TSConstructor' -- TS
+      'vimCommentTitle', 'vimCommentLine', -- vim
    }
    local conditionals = {
       'TSConditional', -- TS
       'Conditional', 'PreCondit', -- VL
-      'cPreCondit', 'cPreConditMatch' -- C/C++
    }
    local constants = {
       'TSConstant', -- TS
       'Constant', -- VL
-      'cConstant', 'cppConstant' -- C/C++
+   }
+   local constructors = {
+      'TSConstructor', -- TS
+   }
+   local dangers = {
+      'TSDanger', -- TS
    }
    local defines = {
       'TSConstMacro', -- TS
-      'Define', 'Macro' -- VL
+      'Define', 'Macro', -- VL
+   }
+   local errors = {
+      'TSError', -- TS
+      'Error', -- VL
    }
    local exceptions = {
       'TSException', -- TS
-      'Exception' -- VL
+      'Exception', -- VL
    }
    local fields = {
       'TSField', 'TSProperty', 'TSTag', -- TS
-      'Tag' -- VL
+      'Tag', -- VL
    }
    local functions = {
       'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
       'Function', -- VL
       'pythonfunction', -- python
-      'uncName', 'vimFunction', 'vimUserFunc'-- vim
+      'uncName', 'vimFunction', 'vimUserFunc',-- vim
    }
    local includes = {
       'TSInclude', -- TS
       'Include', 'PreProc', -- VL
-      'cInclude', -- C/C++
       'pythonimport', -- python
-      'rustExternCrate' -- rust
    }
    local keywords = {
       'TSKeyword', 'TSKeywordFunction', -- TS
       'Keyword', 'Statement', -- VL
-      'cStatement', 'cppStatement', 'cppModifier', 'cppAccess', -- C/C++
-      'pythonstatement', 'pythonkeyword', -- python
-      'rustDeriveTrait', -- rust
-      'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall',
-      'luaspecialfunction', -- lua
-      'vimCommand', 'vimnotfunc' -- vim
+      'pythonstatement', 'pythonkeyword', 'pythonself', -- python
+      'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall', 'luaspecialfunction', -- lua
+      'vimCommand', 'vimnotfunc', -- vim
    }
    local labels = {
       'TSLabel', -- TS
-      'Label' -- VL
+      'Label', -- VL
    }
    local namespaces = {
       'TSNamespace', -- TS
-      'pythonModule' -- python
+      'pythonModule', -- python
    }
    local nones = {
       'TSNone', -- VL
-      'pythonnone' -- python
+      'pythonnone', -- python
+   }
+   local notes = {
+      'TSNote', -- TS
+      'Todo', -- VL
+   }
+   local numbers = {
+      'TSBoolean', 'TSFloat', 'TSNumber', -- TS
+      'Boolean', 'Float', 'Number', -- VL
    }
    local operators = {
       'TSOperator', -- TS
       'Operator', -- VL
-      'cOperator', 'cppOperator', -- C/C++
-      'pythonoperator' -- python
+      'pythonoperator', -- python
    }
    local parameters = {
       'TSParameter', 'TSParameterReference', -- TS
-      'pythonparam' -- python
-   }
-   local properties = {
-      'TSProperty' -- TS
+      'pythonparam', -- python
    }
    local punctuations = {
-      'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial',
-      'TSTagDelimiter', -- TS
+      'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial', 'TSTagDelimiter', -- TS
       'Delimiter', -- VL
       'vimparensep', 'vimsep', 'vimbracket', -- vim
-      'shCmdParenRegion', 'shCmdSubRegion' -- sh
+      'shCmdParenRegion', 'shCmdSubRegion', -- sh
    }
    local repeats = {
       'TSRepeat', -- TS
-      'Repeat' -- VL
+      'Repeat', -- VL
    }
    local strings = {
       'TSCharacter', 'TSString', -- TS
       'Character', 'String', -- VL
-      'cString', 'cCppString', -- C/C++
-      'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes',
-      'pythonbytescontent' -- python
+      'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes', 'pythonbytescontent', -- python
    }
    local strings_specials = {
       'TSStringRegex', 'TSStriingEscape', -- TS
       'SpecialChar', -- VL
-      'cSpecialCharacter', -- C/C++
-      'pythonescape' -- python
+      'pythonescape', -- python
    }
    local symbols = {
       'TSSymbol', -- TS
       'Special', 'SpecialComment', -- VL
-      'cSpecial', -- C/C++
       'pythonsymbol', -- python
-      'rustCommentLineDoc', 'rustCommentBlockDoc' -- rust
    }
    local texts = {
-      'TSText', 'TSStrong', 'TSEmphais', 'TSUnderline', 'TSStrike', 'TSTitle',
-      'TSLiteral', -- TS
+      'TSText', 'TSStrong', 'TSEmphasis', 'TSUnderline', 'TSStrike', 'TSTitle', 'TSLiteral', -- TS
       'Text', -- VL
-      'manTitle' -- man
-   }
-   local uris = {
-      'TSURI' -- TS
+      'manTitle', -- man
    }
    local types = {
-      'TSType', 'TSTypeBuildin', -- TS
+      'TSType', -- TS
       'Type', 'StorageClass', 'Structure', 'Typedef', -- VL
-      'cType', 'cStorageClass', 'cStructure', 'cppType', 'cppStorageClass',
-      'cppStructure', -- C/C++
       'pythonclass', -- python
-      'vimlet' -- vim
+      'vimlet', -- vim
+   }
+   local uris = {
+      'TSURI', -- TS
    }
    local variables = {
       'TSVariable', -- TS
       'Identifier', -- VL
       'pythonselfarg', -- python
-      'rustIdentifier', -- rust
       'vimmapmodkey', 'vimnotation', 'vimfuncvar', 'vimvar', -- vim
-      'shDerefSimple', 'shDerefVar' -- sh
+      'shDerefSimple', 'shDerefVar', -- sh
    }
-   local builtins = { -- such as self. in python
-      'TSConstBuiltin', 'TSFuncBuiltin', 'TSVariableBuiltin', -- TS
-      'pythonbuiltin', 'pythonself', -- python
-      'vimmap' -- vim
-   }
-   local notes = {
-      'TSNote', -- TS
-      'Todo', -- VL
-      'cTODO' -- C/C++
+   local builtins = {
+      'TSVariableBuiltin', 'TSTypeBuiltin', 'TSConstBuiltin', 'TSFuncBuiltin', -- TS,
+      'pythonbuiltin', -- python
+      'vimmap', -- vim
    }
    local warnings = {
       'TSWarning', -- TS
-      'Debug' -- VL
-   }
-   local dangers = {
-      'TSDanger' -- TS
-   }
-   local errors = {
-      'TSError', -- TS
-      'Error', -- VL
-      'rustCommentLineDocError', 'rustCommentBlockDocError' -- rust
+      'Debug', -- VL
    }
    local groups = {
-      {attributes, c.nord12}, --
-      {numbers, c.nord15}, --
-      {comments, c.nord3:light(), cno, i}, --
-      {constructors, c.nord4, cno, i}, -- in C++ variable->constructors() \\ TS docs unclear
-      {conditionals, c.nord9}, --
-      {constants, c.nord4, cno, i}, --
-      {defines, c.nord9}, --
-      {exceptions, c.nord9}, --
-      {fields, c.nord9}, --
-      {functions, c.nord8}, --
-      {includes, c.nord9}, --
-      {keywords, c.nord9, cno, b}, --
-      {labels, c.nord9}, --
-      {namespaces, c.nord7, cno, i}, --
-      {nones, c.nord4}, --
-      {operators, c.nord9, cno, b}, --
-      {parameters, c.nord4, cno, b}, --
-      {properties, c.nord9}, --
-      {punctuations, c.nord6}, --
-      {repeats, c.nord9}, --
-      {strings, c.nord14}, --
-      {strings_specials, c.nord13}, --
-      {symbols, c.nord13, cno, i}, --
-      {texts, c.nord4}, --
-      {uris, c.nord15}, --
-      {types, c.nord7}, --
-      {variables, c.nord5}, --
-      {builtins, c.nord9, cno, i}, --
-      {notes, c.nord13}, --
-      {warnings, c.nord13}, --
-      {dangers, c.nord13}, --
-      {errors, c.nord11} --
-
+      {attributes, c.nord12},
+      {builtins, cno, cno, b},
+      {comments, c.nord3:light(), cno, i},
+      {conditionals, c.nord9},
+      {constants, c.nord5},
+      {constructors, c.nord7},
+      {dangers, c.nord13},
+      {defines, c.nord9},
+      {errors, c.nord11},
+      {exceptions, c.nord9},
+      {fields, cno, cno, sno},
+      {functions, c.nord8},
+      {includes, c.nord9},
+      {keywords, c.nord9},
+      {labels, c.nord9},
+      {namespaces, c.nord7, cno, b},
+      {nones, c.nord4},
+      {notes, c.nord13},
+      {numbers, c.nord15},
+      {operators, c.nord9},
+      {parameters, c.nord4},
+      {punctuations, c.nord6},
+      {repeats, c.nord9},
+      {strings, c.nord14},
+      {strings_specials, c.nord13},
+      {symbols, c.nord13},
+      {texts, c.nord4},
+      {types, c.nord7},
+      {uris, c.nord15},
+      {variables, c.nord5},
+      {warnings, c.nord13},
    }
 
    local highlights = {}
@@ -471,8 +452,8 @@ function M:syntax()
    -- Apply grouping to each color group
    for _, group in ipairs(groups) do
       highlights = merge({
-         highlights, --
-         highlight_to_groups({group[2], group[3], group[4]})(group[1]) --
+         highlights,
+         highlight_to_groups({group[2], group[3], group[4]})(group[1])
       })
    end
 
@@ -482,24 +463,21 @@ end
 function M:plugins()
    -- lukas-reineke/indent-blankline.nvim
    local indent_blankline = {
-      {'IndentBlanklineChar', c.nord3}, --
-      {'IndentBlanklineSpaceChar', c.nord3}, --
-      {'IndentBlanklineSpaceCharBlankline', c.nord4}, --
-      {'IndentBlanklineContextChar', c.nord1} --
+      {'IndentBlanklineChar', c.nord3},
+      {'IndentBlanklineContextChar', c.nord1},
+      {'IndentBlanklineSpaceChar', c.nord3},
+      {'IndentBlanklineSpaceCharBlankline', c.nord4},
    }
 
-   -- tpope/vim-fugitive
-   local fugitive = {
-      {'gitcommitDiscardedFile', c.nord11}, --
-      {'gitcommitUntrackedFile', c.nord11}, --
-      {'gitcommitSelectedFile', c.nord15} --
+   -- simrat39/symbols-outline.nvim
+   local symbols_outline = {
+      {'FocusedSymbol', c.nord6, c.nord10, ul},
    }
 
    return merge({
-      indent_blankline, --
-      fugitive --
+      indent_blankline,
+      symbols_outline,
    })
-
 end
 
 return M
