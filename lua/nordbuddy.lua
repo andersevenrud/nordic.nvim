@@ -107,7 +107,8 @@ function M:colors()
         M:markdown(), --
         M:diff(), --
         M:telescope(), --
-        M:plugins() --
+        M:plugins(), --
+        M:lspsaga() --
     })
 end
 
@@ -504,6 +505,29 @@ function M:plugins()
         fugitive --
     })
 
+end
+
+function M:lspsaga()
+    return {
+        {'LspSagaDiagnosticBorder', c.nord12},
+        {'LspSagaDiagnosticHeader', c.nord12, cno, b},
+        {'LspSagaDiagnosticTruncateLine', c.nord12},
+        {'LspDiagnosticsFloatingWarn', c.nord12},
+        {'LspDiagnosticsFloatingInfor', c.nord10},
+        {'LspSagaShTruncateLine', c.nord1},
+        {'LspSagaDocTruncateLine', c.nord1},
+        {'LspSagaCodeActionTitle', c.nord12, cno, b},
+        {'LspSagaCodeActionTruncateLine', c.nord1},
+        {'LspSagaCodeActionContent', c.nord14, cno, b},
+        {'LspSagaRenamePromptPrefix', c.nord14},
+        {'LspSagaRenameBorder', c.nord7},
+        {'LspSagaHoverBorder', c.nord9},
+        {'LspSagaSignatureHelpBorder', c.nord14},
+        {'LspSagaLspFinderBorder', c.nord10},
+        {'LspSagaCodeActionBorder', c.nord8},
+        {'LspSagaAutoPreview', c.nord12},
+        {'LspSagaDefPreviewBorder', c.nord8}
+    }
 end
 
 return M
