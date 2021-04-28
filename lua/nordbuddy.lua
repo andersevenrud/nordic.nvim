@@ -115,6 +115,7 @@ function M:standard()
       {"Underline", cno, cno, ul},
       --- Editor---
       {'ColorColumn', cno, c.nord1},
+      {'Conceal', c.nord4, c.nord0},
       {'Cursor', c.nord0, c.nord4},
       {'CursorLine', cno, c.nord1},
       {'Error', c.nord4, c.nord11},
@@ -133,10 +134,10 @@ function M:standard()
       {'RedrawDebugNormal', c.nord0, c.nord4},
       {'RedrawDebugRecompose', c.nord4, c.nord11},
       {'SpecialKey', c.nord3},
-      {'SpellBad', c.nord11, c.nord0, uc},
-      {'SpellCap', c.nord13, c.nord0, uc},
-      {'SpellLocal', c.nord5, c.nord0, uc},
-      {'SpellRare', c.nord6, c.nord0, uc},
+      {'SpellBad', c.nord11, cno, uc},
+      {'SpellCap', c.nord13, cno, uc},
+      {'SpellLocal', c.nord5, cno, uc},
+      {'SpellRare', c.nord6, cno, uc},
       {'VertSplit', c.nord1},
       {'Visual', cno, c.nord2},
       {'VisualNC', cno, c.nord2},
@@ -275,6 +276,10 @@ function M:syntax()
       'TSAnnotation', 'TSAttribute', -- TS
       'luametatableevents', 'luametatablearithmetic', 'luametatableequivalence', -- lua
    }
+   local builtins = {
+      'TSFuncBuiltin', 'TSTypeBuiltin', -- TS,
+      'vimmap', -- vim
+   }
    local comments = {
       'TSComment', -- TS
       'Comment', -- VL
@@ -312,7 +317,7 @@ function M:syntax()
       'Tag', -- VL
    }
    local functions = {
-      'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
+      'TSFunction', 'TSFuncBuiltin', 'TSFuncMacro', 'TSMethod', -- TS
       'Function', -- VL
       'pythonfunction', -- python
       'uncName', 'vimFunction', 'vimUserFunc',-- vim
@@ -323,7 +328,7 @@ function M:syntax()
       'pythonimport', -- python
    }
    local keywords = {
-      'TSKeyword', 'TSKeywordFunction', -- TS
+      'TSConstBuiltin', 'TSKeyword', 'TSKeywordFunction', 'TSVariableBuiltin', -- TS
       'Keyword', 'Statement', -- VL
       'pythonstatement', 'pythonkeyword', 'pythonself', -- python
       'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall', 'luaspecialfunction', -- lua
@@ -371,7 +376,7 @@ function M:syntax()
    local strings = {
       'TSCharacter', 'TSString', -- TS
       'Character', 'String', -- VL
-      'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes', 'pythonbytescontent', -- python
+      'pythonstring', 'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes', 'pythonbytescontent', -- python
    }
    local strings_specials = {
       'TSStringRegex', 'TSStriingEscape', -- TS
@@ -389,7 +394,7 @@ function M:syntax()
       'manTitle', -- man
    }
    local types = {
-      'TSType', -- TS
+      'TSType', 'TSTypeBuiltin', -- TS
       'Type', 'StorageClass', 'Structure', 'Typedef', -- VL
       'pythonclass', -- python
       'vimlet', -- vim
@@ -404,47 +409,42 @@ function M:syntax()
       'vimmapmodkey', 'vimnotation', 'vimfuncvar', 'vimvar', -- vim
       'shDerefSimple', 'shDerefVar', -- sh
    }
-   local builtins = {
-      'TSVariableBuiltin', 'TSTypeBuiltin', 'TSConstBuiltin', 'TSFuncBuiltin', -- TS,
-      'pythonbuiltin', -- python
-      'vimmap', -- vim
-   }
    local warnings = {
       'TSWarning', -- TS
       'Debug', -- VL
    }
    local groups = {
       {attributes, c.nord12},
-      {builtins, cno, cno, b},
       {comments, c.nord3:light(), cno, i},
       {conditionals, c.nord9},
-      {constants, c.nord5},
-      {constructors, c.nord7},
+      {constants, c.nord4},
+      {constructors, c.nord8},
       {dangers, c.nord13},
-      {defines, c.nord9},
+      {defines, c.nord4},
       {errors, c.nord11},
       {exceptions, c.nord9},
-      {fields, cno, cno, sno},
+      -- {fields, cno, cno, b},
       {functions, c.nord8},
       {includes, c.nord9},
       {keywords, c.nord9},
       {labels, c.nord9},
-      {namespaces, c.nord7, cno, b},
+      {namespaces, c.nord6, cno, b},
       {nones, c.nord4},
       {notes, c.nord13},
       {numbers, c.nord15},
       {operators, c.nord9},
-      {parameters, c.nord4},
+      {parameters, c.nord5, cno, i},
       {punctuations, c.nord6},
       {repeats, c.nord9},
       {strings, c.nord14},
       {strings_specials, c.nord13},
       {symbols, c.nord13},
-      {texts, c.nord4},
+      {texts, c.nord14},
       {types, c.nord7},
       {uris, c.nord15},
-      {variables, c.nord5},
+      {variables, c.nord4},
       {warnings, c.nord13},
+      {builtins, cno, cno, b}, -- must be at the end to apply style
    }
 
    local highlights = {}
@@ -461,6 +461,14 @@ function M:syntax()
 end
 
 function M:plugins()
+   -- phaazon/hop.nvim
+   local hop = {
+      {'HopNextKey', c.nord13},
+      {'HopNextKey1', c.nord11},
+      {'HopNextKey2', c.nord12},
+      {'HopUnmatched', c.nord3},
+   }
+
    -- lukas-reineke/indent-blankline.nvim
    local indent_blankline = {
       {'IndentBlanklineChar', c.nord3},
@@ -469,13 +477,27 @@ function M:plugins()
       {'IndentBlanklineSpaceCharBlankline', c.nord4},
    }
 
+   -- vim-pandoc/vim-pandoc-syntax
+   local pandoc = {
+      {'pandocAtxHeader', c.nord7, cno, b},
+      {'pandocAtxHeaderMark', c.nord7, cno, b},
+      {'pandocAtxHeaderStart', c.nord7, cno, b},
+      {'pandocFootnoteID', c.nord7},
+      {'pandocFootnoteIDHead', c.nord7},
+      {'pandocFootnoteIDTail', c.nord7},
+      {'pandocReferenceLabel', c.nord8},
+      {'pandocReferenceURL', c.nord4},
+   }
+
    -- simrat39/symbols-outline.nvim
    local symbols_outline = {
       {'FocusedSymbol', c.nord6, c.nord10, ul},
    }
 
    return merge({
+      hop,
       indent_blankline,
+      pandoc,
       symbols_outline,
    })
 end
