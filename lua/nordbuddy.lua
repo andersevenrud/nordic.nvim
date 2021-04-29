@@ -4,6 +4,7 @@ local M = {}
 
 local b = s.bold
 local i = s.italic
+local st = s.strikethrough
 local ul = s.underline
 local cno = c.none
 local sno = s.none
@@ -28,25 +29,25 @@ end
 function M:setup()
    local nord = {
       -- Polar Night
-      [0] = '#2e3440', -- dark black: bg
-      [1] = '#3b4252', -- black
-      [2] = '#434c5e', -- bright black
-      [3] = '#4c566a', -- gray
+      [0] = '#2e3440',  -- dark black: bg
+      [1] = '#3b4252',  -- black
+      [2] = '#434c5e',  -- bright black
+      [3] = '#4c566a',  -- gray
       -- Snow Storm
-      [4] = '#d8dee9', -- dark white: fg
-      [5] = '#e5e9f0', -- white
-      [6] = '#eceff4', -- bright white
+      [4] = '#d8dee9',  -- dark white: fg
+      [5] = '#e5e9f0',  -- white
+      [6] = '#eceff4',  -- bright white
       -- Frost
-      [7] = '#8fbcbb', -- cyan: classes, types and primitives.
-      [8] = '#88c0d0', -- bright cyan: declarations, calls and execution statements of functions, methods and routines.
-      [9] = '#81a1c1', -- blue: keywords, support characters, operators, tags, units, punctuations
+      [7] = '#8fbcbb',  -- cyan: classes, types and primitives.
+      [8] = '#88c0d0',  -- bright cyan: declarations, calls and execution statements of functions, methods and routines.
+      [9] = '#81a1c1',  -- blue: keywords, support characters, operators, tags, units, punctuations
       [10] = '#5e81ac', -- intense blue: pragmas, comment keywords and pre-processor statements.
       -- Aurora
       [11] = '#bf616a', -- red: deletions and errors
       [12] = '#d08770', -- orange: annotations and decorators
       [13] = '#ebcb8b', -- yellow: modifications, warning and escape characters
       [14] = '#a3be8c', -- green: additions and string
-      [15] = '#b48ead' -- purple: integers and floating point numbers
+      [15] = '#b48ead'  -- purple: integers and floating point numbers
    }
 
    for _k, _v in pairs(nord) do Color.new('nord' .. _k, _v) end
@@ -99,9 +100,6 @@ function M:colors()
    return merge({
       M:standard(),
       M:lsp(),
-      M:telescope(),
-      M:diff(),
-      M:markdown(),
       M:syntax(),
       M:plugins(),
    })
@@ -149,6 +147,11 @@ function M:standard()
       {'healthError', c.nord11, c.nord1},
       {'healthSuccess', c.nord14, c.nord1},
       {'healthWarning', c.nord13, c.nord1},
+      --- Diff ---
+      {'DiffAdd', c.nord14, c.nord1},
+      {'DiffChange', c.nord13, c.nord1},
+      {'DiffDelete', c.nord11, c.nord1},
+      {'DiffText', c.nord11, c.nord1},
       --- Gutter ---
       {'CursorColumn', cno, c.nord1},
       {'CursorLineNr', c.nord4, c.nord1},
@@ -200,38 +203,7 @@ function M:lsp()
    }
 end
 
-function M:telescope()
-   return {
-      {'TelescopeBorder', c.nord3},
-      {'TelescopeMatching', c.nord8, c.nord3},
-      {'TelescopeNormal', c.nord4},
-      {'TelescopePromptPrefix', c.nord4},
-      {'TelescopeSelection', c.nord8, c.nord3, b},
-   }
-end
-
-function M:diff()
-   return {
-      {'DiffAdd', c.nord14, c.nord1},
-      {'DiffChange', c.nord13, c.nord1},
-      {'DiffDelete', c.nord11, c.nord1},
-      {'DiffText', c.nord11, c.nord1},
-      {'GitGutterAdd', c.nord14, c.nord1},
-      {'GitGutterChange', c.nord13, c.nord1},
-      {'GitGutterDelete', c.nord11, c.nord1},
-      {'GitSignsAdd', c.nord14, c.nord0},
-      {'GitSignsChange', c.nord13, c.nord0},
-      {'GitSignsDelete', c.nord11, c.nord0},
-      {'NeogitDiffAddHighlight', c.nord14, c.nord1},
-      {'NeogitDiffContextHighlight', c.nord13, c.nord0},
-      {'NeogitDiffDeleteHighlight', c.nord11, c.nord1},
-      {'NeogitHunkHeader', c.nord3:light(), c.nord0},
-      {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0},
-   }
-end
-
-function M:markdown()
-   local to_groups = highlight_to_groups({c.nord8, cno})
+   --[[ local to_groups = highlight_to_groups({c.nord8, cno})
    local delimiters = to_groups({
       'markdownH1Delimiter',
       'markdownH2Delimiter',
@@ -255,196 +227,204 @@ function M:markdown()
       delimiters,
       headers,
       {
-         {'markdownBlockquote', c.nord7},
-         {'markdownCode', c.nord7},
-         {'markdownCodeDelimiter', c.nord7},
-         {'markdownFootnote', c.nord7},
-         {'markdownFootnoteDefinition', c.nord7},
-         {'markdownId', c.nord7},
-         {'markdownIdDeclaration', c.nord7},
-         {'markdownIdDelimiter', c.nord9},
-         {'markdownLinkDelimiter', c.nord9},
-         {'markdownLinkText', c.nord8},
-         {'markdownLinkTextDelimiter', c.nord9},
-         {'markdownUrl', c.nord4},
+      {'markdownBlockquote', c.nord7},
+      {'markdownCode', c.nord7},
+      {'markdownCodeDelimiter', c.nord7},
+      {'markdownFootnote', c.nord7},
+      {'markdownFootnoteDefinition', c.nord7},
+      {'markdownId', c.nord7},
+      {'markdownIdDeclaration', c.nord7},
+      {'markdownIdDelimiter', c.nord9},
+      {'markdownLinkDelimiter', c.nord9},
+      {'markdownLinkText', c.nord8},
+      {'markdownLinkTextDelimiter', c.nord9},
+      {'markdownUrl', c.nord4},
       }
-   })
-end
+   }) ]]
 
 function M:syntax()
    local attributes = {
-      'TSAnnotation', 'TSAttribute', -- TS
-      'luametatableevents', 'luametatablearithmetic', 'luametatableequivalence', -- lua
-   }
-   local builtins = {
-      'TSFuncBuiltin', 'TSTypeBuiltin', -- TS,
-      'vimmap', -- vim
+      -- TS
+      'TSAnnotation',
+      'TSAttribute',
    }
    local comments = {
-      'TSComment', -- TS
-      'Comment', -- VL
-      'manFooter', -- man
-      'vimCommentTitle', 'vimCommentLine', -- vim
-   }
-   local conditionals = {
-      'TSConditional', -- TS
-      'Conditional', 'PreCondit', -- VL
-   }
-   local constants = {
-      'TSConstant', -- TS
-      'Constant', -- VL
-   }
-   local constructors = {
-      'TSConstructor', -- TS
-   }
-   local dangers = {
-      'TSDanger', -- TS
-   }
-   local defines = {
-      'TSConstMacro', -- TS
-      'Define', 'Macro', -- VL
+      -- TS
+      'TSComment',
+      -- VL
+      'Comment',
+      -- man
+      'manFooter',
    }
    local errors = {
-      'TSError', -- TS
-      'Error', -- VL
-   }
-   local exceptions = {
-      'TSException', -- TS
-      'Exception', -- VL
+      -- TS
+      'TSError',
+      -- VL
+      'Error',
    }
    local fields = {
-      'TSField', 'TSProperty', 'TSTag', -- TS
-      'Tag', -- VL
+      -- TS
+      'TSField',
+      'TSProperty',
+      'TSTag',
+      -- VL
+      'Tag',
    }
    local functions = {
-      'TSFunction', 'TSFuncBuiltin', 'TSFuncMacro', 'TSMethod', -- TS
-      'Function', -- VL
-      'pythonfunction', -- python
-      'uncName', 'vimFunction', 'vimUserFunc',-- vim
-   }
-   local includes = {
-      'TSInclude', -- TS
-      'Include', 'PreProc', -- VL
-      'pythonimport', -- python
+      -- TS
+      'TSConstructor',
+      'TSFuncBuiltin',
+      'TSFuncMacro',
+      'TSFunction',
+      'TSMethod',
+      -- VL
+      'Function',
    }
    local keywords = {
-      'TSConstBuiltin', 'TSKeyword', 'TSKeywordFunction', 'TSVariableBuiltin', -- TS
-      'Keyword', 'Statement', -- VL
-      'pythonstatement', 'pythonkeyword', 'pythonself', -- python
-      'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall', 'luaspecialfunction', -- lua
-      'vimCommand', 'vimnotfunc', -- vim
-   }
-   local labels = {
-      'TSLabel', -- TS
-      'Label', -- VL
-   }
-   local namespaces = {
-      'TSNamespace', -- TS
-      'pythonModule', -- python
-   }
-   local nones = {
-      'TSNone', -- VL
-      'pythonnone', -- python
-   }
-   local notes = {
-      'TSNote', -- TS
-      'Todo', -- VL
+      -- TS
+      'TSConditional',
+      'TSConstBuiltin',
+      'TSInclude',
+      'TSKeyword',
+      'TSKeywordFunction',
+      'TSLabel',
+      'TSOperator',
+      'TSRepeat',
+      'TSVariableBuiltin',
+      -- VL
+      'Conditional',
+      'Include',
+      'Keyword',
+      'Label',
+      'Operator',
+      'PreCondit',
+      'PreProc',
+      'Repeat',
+      'Statement',
    }
    local numbers = {
-      'TSBoolean', 'TSFloat', 'TSNumber', -- TS
-      'Boolean', 'Float', 'Number', -- VL
-   }
-   local operators = {
-      'TSOperator', -- TS
-      'Operator', -- VL
-      'pythonoperator', -- python
+      -- TS
+      'TSBoolean',
+      'TSFloat',
+      'TSNumber',
+      'TSURI',
+      -- VL
+      'Boolean',
+      'Float',
+      'Number',
    }
    local parameters = {
-      'TSParameter', 'TSParameterReference', -- TS
-      'pythonparam', -- python
+      -- TS
+      'TSParameter',
+      'TSParameterReference',
    }
    local punctuations = {
-      'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial', 'TSTagDelimiter', -- TS
-      'Delimiter', -- VL
-      'vimparensep', 'vimsep', 'vimbracket', -- vim
-      'shCmdParenRegion', 'shCmdSubRegion', -- sh
-   }
-   local repeats = {
-      'TSRepeat', -- TS
-      'Repeat', -- VL
+      -- TS
+      'TSPunctBracket',
+      'TSPunctDelimiter',
+      'TSPunctSpecial',
+      'TSTagDelimiter',
+      -- VL
+      'Delimiter',
    }
    local strings = {
-      'TSCharacter', 'TSString', -- TS
-      'Character', 'String', -- VL
-      'pythonstring', 'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes', 'pythonbytescontent', -- python
-   }
-   local strings_specials = {
-      'TSStringRegex', 'TSStriingEscape', -- TS
-      'SpecialChar', -- VL
-      'pythonescape', -- python
+      -- TS
+      'TSCharacter',
+      'TSEmphasis',
+      'TSLiteral',
+      'TSStrike',
+      'TSString',
+      'TSStrong',
+      'TSText',
+      'TSTitle',
+      'TSUnderline',
+      -- VL
+      'Character',
+      'String',
+      'Text',
    }
    local symbols = {
-      'TSSymbol', -- TS
-      'Special', 'SpecialComment', -- VL
-      'pythonsymbol', -- python
-   }
-   local texts = {
-      'TSText', 'TSStrong', 'TSEmphasis', 'TSUnderline', 'TSStrike', 'TSTitle', 'TSLiteral', -- TS
-      'Text', -- VL
-      'manTitle', -- man
+      -- TS
+      'TSNote',
+      'TSStriingEscape',
+      'TSStringRegex',
+      'TSSymbol',
+      -- VL
+      'Special',
+      'SpecialChar',
+      'SpecialComment',
+      'Todo',
    }
    local types = {
-      'TSType', 'TSTypeBuiltin', -- TS
-      'Type', 'StorageClass', 'Structure', 'Typedef', -- VL
-      'pythonclass', -- python
-      'vimlet', -- vim
-   }
-   local uris = {
-      'TSURI', -- TS
+      -- TS
+      'TSException',
+      'TSType',
+      'TSTypeBuiltin',
+      -- VL
+      'Exception',
+      'StorageClass',
+      'Structure',
+      'Type',
+      'Typedef',
    }
    local variables = {
-      'TSVariable', -- TS
-      'Identifier', -- VL
-      'pythonselfarg', -- python
-      'vimmapmodkey', 'vimnotation', 'vimfuncvar', 'vimvar', -- vim
-      'shDerefSimple', 'shDerefVar', -- sh
+      -- TS
+      'TSConstMacro',
+      'TSConstant',
+      'TSNamespace',
+      'TSVariable',
+      -- VL
+      'Constant',
+      'Define',
+      'Identifier',
+      'Macro',
    }
    local warnings = {
-      'TSWarning', -- TS
-      'Debug', -- VL
+      -- TS
+      'TSDanger',
+      'TSWarning',
+      -- VL
+      'Debug',
+   }
+   local styled_bold = {
+      -- TS
+      'TSStrong',
+      'TSTitle',
+   }
+   local styled_italics ={
+      -- TS
+      'TSEmphasis',
+      'TSFuncBuiltin',
+      'TSNamespace',
+      'TSTypeBuiltin',
+   }
+   local styled_strikethrough = {
+      -- TS
+      'TSStrike',
+   }
+   local styled_underline = {
+      -- TS
+      'TSUnderline',
    }
    local groups = {
       {attributes, c.nord12},
       {comments, c.nord3:light(), cno, i},
-      {conditionals, c.nord9},
-      {constants, c.nord4},
-      {constructors, c.nord8},
-      {dangers, c.nord13},
-      {defines, c.nord4},
       {errors, c.nord11},
-      {exceptions, c.nord9},
       -- {fields, cno, cno, b},
       {functions, c.nord8},
-      {includes, c.nord9},
       {keywords, c.nord9},
-      {labels, c.nord9},
-      {namespaces, c.nord6, cno, b},
-      {nones, c.nord4},
-      {notes, c.nord13},
       {numbers, c.nord15},
-      {operators, c.nord9},
-      {parameters, c.nord5, cno, i},
+      {parameters, c.nord5, cno, b},
       {punctuations, c.nord6},
-      {repeats, c.nord9},
       {strings, c.nord14},
-      {strings_specials, c.nord13},
       {symbols, c.nord13},
-      {texts, c.nord14},
       {types, c.nord7},
-      {uris, c.nord15},
       {variables, c.nord4},
       {warnings, c.nord13},
-      {builtins, cno, cno, b}, -- must be at the end to apply style
+      {styled_bold, cno, cno, b},
+      {styled_italics, cno, cno, i},
+      {styled_strikethrough, cno, cno, st},
+      {styled_underline, cno, cno, ul},
    }
 
    local highlights = {}
@@ -461,14 +441,19 @@ function M:syntax()
 end
 
 function M:plugins()
+   -- lewis6991/gitsigns.nvim
+   local gitsigns = {
+      {'GitSignsAdd', c.nord14, c.nord0},
+      {'GitSignsChange', c.nord13, c.nord0},
+      {'GitSignsDelete', c.nord11, c.nord0},
+   }
    -- phaazon/hop.nvim
    local hop = {
-      {'HopNextKey', c.nord13},
-      {'HopNextKey1', c.nord11},
-      {'HopNextKey2', c.nord12},
+      {'HopNextKey', c.nord7},
+      {'HopNextKey1', c.nord9},
+      {'HopNextKey2', c.nord11},
       {'HopUnmatched', c.nord3},
    }
-
    -- lukas-reineke/indent-blankline.nvim
    local indent_blankline = {
       {'IndentBlanklineChar', c.nord3},
@@ -476,7 +461,14 @@ function M:plugins()
       {'IndentBlanklineSpaceChar', c.nord3},
       {'IndentBlanklineSpaceCharBlankline', c.nord4},
    }
-
+   -- TimUntersberger/neogit
+   local neogit = {
+      {'NeogitDiffAddHighlight', c.nord14, c.nord1},
+      {'NeogitDiffContextHighlight', c.nord13, c.nord0},
+      {'NeogitDiffDeleteHighlight', c.nord11, c.nord1},
+      {'NeogitHunkHeader', c.nord3:light(), c.nord0},
+      {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0},
+   }
    -- vim-pandoc/vim-pandoc-syntax
    local pandoc = {
       {'pandocAtxHeader', c.nord7, cno, b},
@@ -488,17 +480,27 @@ function M:plugins()
       {'pandocReferenceLabel', c.nord8},
       {'pandocReferenceURL', c.nord4},
    }
-
    -- simrat39/symbols-outline.nvim
    local symbols_outline = {
       {'FocusedSymbol', c.nord6, c.nord10, ul},
    }
+   -- nvim-telescope/telescope.nvim
+   local telescope = {
+      {'TelescopeBorder', c.nord3},
+      {'TelescopeMatching', c.nord8, c.nord3},
+      {'TelescopeNormal', c.nord4},
+      {'TelescopePromptPrefix', c.nord4},
+      {'TelescopeSelection', c.nord8, c.nord3, b},
+   }
 
    return merge({
+      gitsigns,
       hop,
       indent_blankline,
+      neogit,
       pandoc,
       symbols_outline,
+      telescope,
    })
 end
 
