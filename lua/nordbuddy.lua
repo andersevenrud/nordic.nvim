@@ -99,11 +99,6 @@ function M:use()
     end
 end
 
--- Alias setup() to use()
-function M:setup()
-  M.use()
-end
-
 function M:colors()
     return merge({
         M:standard(), --
