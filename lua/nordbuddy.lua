@@ -81,9 +81,7 @@ function M:use()
         uc = s.undercurl
     end
 
-    if vim.g.nord_italic ~= nil and not vim.g.nord_italic then
-        i = sno
-    end
+    if vim.g.nord_italic ~= nil and not vim.g.nord_italic then i = sno end
 
     M.setup(self)
 
@@ -107,7 +105,11 @@ function M:colors()
         M:markdown(), --
         M:diff(), --
         M:telescope(), --
-        M:plugins(), --
+        M:fugitive(), --
+        M:gitgutter(), --
+        M:neogit(), --
+        M:gitsigns(), --
+        M:indent_blankline(), --
         M:lspsaga() --
     })
 end
@@ -196,33 +198,12 @@ function M:lsp()
     }
 end
 
-function M:telescope()
-    return {
-        {'TelescopeBorder', c.nord3}, --
-        {'TelescopeNormal', c.nord4}, --
-        {'TelescopePromptPrefix', c.nord4}, --
-        {'TelescopeSelection', c.nord8, c.nord3, b}, --
-        {'TelescopeMatching', c.nord8, c.nord3} --
-    }
-end
-
 function M:diff()
     return {
         {'DiffAdd', c.nord14, c.nord1}, --
         {'DiffChange', c.nord13, c.nord1}, --
         {'DiffDelete', c.nord11, c.nord1}, --
-        {'DiffText', c.nord11, c.nord1}, --
-        {'GitGutterAdd', c.nord14, c.nord1}, --
-        {'GitGutterChange', c.nord13, c.nord1}, --
-        {'GitGutterDelete', c.nord11, c.nord1}, --
-        {'GitSignsAdd', c.nord14, c.nord0}, --
-        {'GitSignsChange', c.nord13, c.nord0}, --
-        {'GitSignsDelete', c.nord11, c.nord0}, --
-        {'NeogitDiffAddHighlight', c.nord14, c.nord1}, --
-        {'NeogitDiffDeleteHighlight', c.nord11, c.nord1}, --
-        {'NeogitDiffContextHighlight', c.nord13, c.nord0}, --
-        {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0}, --
-        {'NeogitHunkHeader', c.nord3:light(), c.nord0} --
+        {'DiffText', c.nord11, c.nord1} --
     }
 end
 
@@ -313,7 +294,7 @@ function M:syntax()
         'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
         'Function', -- VL
         'pythonfunction', -- python
-        'uncName', 'vimFunction', 'vimUserFunc'-- vim
+        'vimFunction', 'vimUserFunc' -- vim
     }
     local includes = {
         'TSInclude', -- TS
@@ -484,49 +465,87 @@ function M:syntax()
     return highlights
 end
 
-function M:plugins()
+function M:indent_blankline()
     -- lukas-reineke/indent-blankline.nvim
-    local indent_blankline = {
+    return {
         {'IndentBlanklineChar', c.nord3}, --
         {'IndentBlanklineSpaceChar', c.nord3}, --
         {'IndentBlanklineSpaceCharBlankline', c.nord4}, --
         {'IndentBlanklineContextChar', c.nord1} --
     }
+end
 
+function M:telescope()
+    -- 'nvim-telescope/telescope.nvim'
+    return {
+        {'TelescopeBorder', c.nord3}, --
+        {'TelescopeNormal', c.nord4}, --
+        {'TelescopePromptPrefix', c.nord4}, --
+        {'TelescopeSelection', c.nord8, c.nord3, b}, --
+        {'TelescopeMatching', c.nord8, c.nord3} --
+    }
+end
+
+function M:lspsaga()
+    -- 'glepnir/lspsaga.nvim'
+    return {
+        {'LspSagaDiagnosticBorder', c.nord12}, --
+        {'LspSagaDiagnosticHeader', c.nord12, cno, b}, --
+        {'LspSagaDiagnosticTruncateLine', c.nord12}, --
+        {'LspDiagnosticsFloatingWarn', c.nord12}, --
+        {'LspDiagnosticsFloatingInfor', c.nord10}, --
+        {'LspSagaShTruncateLine', c.nord1}, --
+        {'LspSagaDocTruncateLine', c.nord1}, --
+        {'LspSagaCodeActionTitle', c.nord12, cno, b}, --
+        {'LspSagaCodeActionTruncateLine', c.nord1}, --
+        {'LspSagaCodeActionContent', c.nord14, cno, b}, --
+        {'LspSagaRenamePromptPrefix', c.nord14}, --
+        {'LspSagaRenameBorder', c.nord7}, --
+        {'LspSagaHoverBorder', c.nord9}, --
+        {'LspSagaSignatureHelpBorder', c.nord14}, --
+        {'LspSagaLspFinderBorder', c.nord10}, --
+        {'LspSagaCodeActionBorder', c.nord8}, --
+        {'LspSagaAutoPreview', c.nord12}, --
+        {'LspSagaDefPreviewBorder', c.nord8} --
+    }
+end
+
+function M:fugitive()
     -- tpope/vim-fugitive
-    local fugitive = {
+    return {
         {'gitcommitDiscardedFile', c.nord11}, --
         {'gitcommitUntrackedFile', c.nord11}, --
         {'gitcommitSelectedFile', c.nord15} --
     }
+end
 
-    return merge({
-        indent_blankline, --
-        fugitive --
-    })
+function M:neogit()
+    -- 'TimUntersberger/neogit'
+    return {
+        {'NeogitDiffAddHighlight', c.nord14, c.nord1}, --
+        {'NeogitDiffDeleteHighlight', c.nord11, c.nord1}, --
+        {'NeogitDiffContextHighlight', c.nord13, c.nord0}, --
+        {'NeogitHunkHeaderHighlight', c.nord3:light(), c.nord0}, --
+        {'NeogitHunkHeader', c.nord3:light(), c.nord0} --
+    }
 
 end
 
-function M:lspsaga()
+function M:gitsigns()
+    -- 'lewis6991/gitsigns.nvim'
     return {
-        {'LspSagaDiagnosticBorder', c.nord12},
-        {'LspSagaDiagnosticHeader', c.nord12, cno, b},
-        {'LspSagaDiagnosticTruncateLine', c.nord12},
-        {'LspDiagnosticsFloatingWarn', c.nord12},
-        {'LspDiagnosticsFloatingInfor', c.nord10},
-        {'LspSagaShTruncateLine', c.nord1},
-        {'LspSagaDocTruncateLine', c.nord1},
-        {'LspSagaCodeActionTitle', c.nord12, cno, b},
-        {'LspSagaCodeActionTruncateLine', c.nord1},
-        {'LspSagaCodeActionContent', c.nord14, cno, b},
-        {'LspSagaRenamePromptPrefix', c.nord14},
-        {'LspSagaRenameBorder', c.nord7},
-        {'LspSagaHoverBorder', c.nord9},
-        {'LspSagaSignatureHelpBorder', c.nord14},
-        {'LspSagaLspFinderBorder', c.nord10},
-        {'LspSagaCodeActionBorder', c.nord8},
-        {'LspSagaAutoPreview', c.nord12},
-        {'LspSagaDefPreviewBorder', c.nord8}
+        {'GitSignsAdd', c.nord14, c.nord0}, --
+        {'GitSignsChange', c.nord13, c.nord0}, --
+        {'GitSignsDelete', c.nord11, c.nord0} --
+    }
+end
+
+function M:gitgutter()
+    -- 'airblade/vim-gitgutter'
+    return {
+        {'GitGutterAdd', c.nord14, c.nord1}, --
+        {'GitGutterChange', c.nord13, c.nord1}, --
+        {'GitGutterDelete', c.nord11, c.nord1} --
     }
 end
 
