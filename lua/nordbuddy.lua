@@ -104,13 +104,14 @@ function M:colors()
         M:syntax(), --
         M:markdown(), --
         M:diff(), --
-        M:telescope(), --
         M:fugitive(), --
         M:gitgutter(), --
-        M:neogit(), --
         M:gitsigns(), --
         M:indent_blankline(), --
-        M:lspsaga() --
+        M:lspsaga(), --
+        M:neogit(), --
+        M:telescope(), --
+        M:whichkey(), --
     })
 end
 
@@ -546,6 +547,18 @@ function M:gitgutter()
         {'GitGutterAdd', c.nord14, c.nord1}, --
         {'GitGutterChange', c.nord13, c.nord1}, --
         {'GitGutterDelete', c.nord11, c.nord1} --
+    }
+end
+
+function M:whichkey()
+    -- 'folke/whick-key-nvim'
+    return {
+        {'WhichKey', c.nord8}, --
+        {'WhichKeyGroup', c.nord9}, --
+        {'WhichKeySeparator', c.nord3:light()}, --
+        {'WhichKeyDesc', c.nord4}, --
+        {'WhichKeyFloat', c.none, c.nord0:light(.05)}, --
+        {'WhichKeyValue', c.nord4}, --
     }
 end
 
