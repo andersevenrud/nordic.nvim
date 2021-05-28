@@ -112,6 +112,7 @@ function M:colors()
         M:neogit(), --
         M:telescope(), --
         M:whichkey(), --
+        M:symbolsoutline(), --
     })
 end
 
@@ -559,6 +560,13 @@ function M:whichkey()
         {'WhichKeyDesc', c.nord4}, --
         {'WhichKeyFloat', c.none, c.nord0:light(.05)}, --
         {'WhichKeyValue', c.nord4}, --
+    }
+end
+
+function M:symbolsoutline()
+    -- 'simrat39/symbols-outline.nvim'
+    return {
+        {'FocusedSymbol', c.nord13, cno, b}, --
     }
 end
 
