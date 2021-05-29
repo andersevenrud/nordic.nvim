@@ -1,0 +1,16 @@
+return {
+    'diff',
+    'fugitive',
+    'gitgutter',
+    'gitsigns',
+    'indent_blankline',
+    'lsp',
+    'lspsaga',
+    'markdown',
+    'neogit',
+    'standard',
+    'symbols_outline',
+    'syntax',
+    'telescope',
+    'whichkey',
+}
