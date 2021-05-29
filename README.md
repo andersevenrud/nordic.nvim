@@ -37,15 +37,9 @@ or in `init.lua`
 require('colorbuddy').colorscheme('nordbuddy')
 ```
 
-#### Spell
+### Options
 
-You can use the option `g:nord_spell` to choose how to underline the spell errors.
-Possible options are `underline`, `undercurl`. By default no line is used.
-
-### Warning
-
-This is a work in progress 🚧
-
-#### Known issues
-
-- using `telescope.nvim` and `nvim-treesitter` variable preview, `var` keyword has a wrong highlight.
+|           | Option                  | Default Behavior | Other possible value     |
+|-----------|-------------------------|------------------|--------------------------|
+| underline | g:nord_underline_option | no lines         | 'underline', 'undercurl' |
+| italic    | g:nord_italic           | enabled          | false                    |

@@ -10,9 +10,9 @@ local function customizations()
     local underline = s.none
     local italic = s.italic
 
-    if vim.g.nord_spell == 'underline' then
+    if vim.g.nord_underline_option == 'underline' then
         underline = s.underline
-    elseif vim.g.nord_spell == 'undercurl' then
+    elseif vim.g.nord_underline_option == 'undercurl' then
         underline = s.undercurl
     end
 
