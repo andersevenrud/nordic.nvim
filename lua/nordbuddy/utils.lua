@@ -1,12 +1,12 @@
-local M = {}
+local utils = {}
 
-function M.merge(list)
+function utils.merge(list)
     local acc = {}
     for _, result in ipairs(list) do vim.list_extend(acc, result) end
     return acc
 end
 
-function M.highlight_to_groups(highlight)
+function utils.highlight_to_groups(highlight)
     return function(groups)
         local acc = {}
         for _, name in ipairs(groups) do
@@ -16,4 +16,4 @@ function M.highlight_to_groups(highlight)
     end
 end
 
-return M
+return utils

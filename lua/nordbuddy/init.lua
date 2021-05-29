@@ -1,6 +1,6 @@
 local utils = require('nordbuddy.utils')
 local palette = require('nordbuddy.palette')
-local colors = require('nordbuddy.colors')
+local all_colors = require('nordbuddy.colors')
 local Color, c, Group = require('colorbuddy').setup()
 local s = require('colorbuddy.style').styles
 local vim = vim
@@ -20,16 +20,11 @@ local function customizations()
         italic = s.none
     end
 
-    return {
-        italic = italic,
-        underline = underline
-    }
+    return {italic = italic, underline = underline}
 end
 
 local function initialize()
-    for _k, _v in pairs(palette) do
-        Color.new('nord' .. _k, _v)
-    end
+    for k, v in pairs(palette) do Color.new('nord' .. k, v) end
 
     vim.g.colors_name = 'nordbuddy'
     vim.g.terminal_color_0 = palette[1]
@@ -52,12 +47,9 @@ local function initialize()
     return customizations()
 end
 
-local function load(c, s, cs)
+local function load(...)
     local definitions = {}
-    for _, k in pairs(colors) do
-        local fn = require('nordbuddy.colors.' .. k)
-        table.insert(definitions, fn(c, s, cs))
-    end
+    for _, fn in pairs(all_colors) do table.insert(definitions, fn(...)) end
 
     return utils.merge(definitions)
 end
