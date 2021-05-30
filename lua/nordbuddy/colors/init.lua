@@ -1,10 +1,4 @@
-local function prepare(modules)
-    local prepared_modules = {}
-    for _, v in ipairs(modules) do
-        table.insert(prepared_modules, require('nordbuddy.colors.' .. v))
-    end
-    return prepared_modules
-end
+local utils = require('nordbuddy.utils')
 
 local colors = {
     'diff',
@@ -20,7 +14,8 @@ local colors = {
     'symbols_outline',
     'syntax',
     'telescope',
+    'vimwiki',
     'whichkey'
 }
 
-return prepare(colors)
+return utils:prepare(colors)

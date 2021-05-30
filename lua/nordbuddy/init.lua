@@ -51,7 +51,7 @@ local function load(...)
     local definitions = {}
     for _, fn in pairs(all_colors) do table.insert(definitions, fn(...)) end
 
-    return utils.merge(definitions)
+    return utils:merge(definitions)
 end
 
 function M:use()
