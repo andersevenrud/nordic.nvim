@@ -18,7 +18,7 @@ Plug 'maaslalani/nordbuddy'
 
 with `packer.nvim`
 ``` lua
-use {'maaslalani/nordbuddy', 'tjdevries/colorbuddy.nvim'}
+use {'maaslalani/nordbuddy', requires = {'tjdevries/colorbuddy.nvim'}}
 ```
 
 ### Setup
