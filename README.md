@@ -3,7 +3,7 @@
 A [nord](https://www.nordtheme.com/)-esque colorscheme using [colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim)
 
 Nordbuddy supports highlighting for [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter),
-[Neovim LSP](https://neovim.io/doc/user/lsp.html), [Telescope](https://github.com/nvim-telescope/telescope.nvim/).
+[Neovim LSP](https://neovim.io/doc/user/lsp.html), [Telescope](https://github.com/nvim-telescope/telescope.nvim/),
 and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/colors).
 
 ![Color Preview](https://user-images.githubusercontent.com/42545625/112913430-935a6a80-90c7-11eb-867e-394b1790a14f.png)
