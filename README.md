@@ -8,7 +8,7 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 ![Color Preview](https://user-images.githubusercontent.com/42545625/112913430-935a6a80-90c7-11eb-867e-394b1790a14f.png)
 
-### Install
+## Install
 
 You'll need (at least) Neovim 0.4.0 for `nordbuddy` to work. You'll also need [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim).
 
@@ -23,7 +23,7 @@ with `packer.nvim`
 use {'maaslalani/nordbuddy', requires = {'tjdevries/colorbuddy.nvim'}}
 ```
 
-### Setup
+## Setup
 
 Enable the colorscheme in Vimscript (`init.vim`):
 
@@ -37,7 +37,7 @@ or in Lua (`init.lua`):
 require('colorbuddy').colorscheme('nordbuddy')
 ```
 
-### Options
+## Options
 
 |           | Option                  | Default Behavior | Other possible value     |
 |-----------|-------------------------|------------------|--------------------------|
