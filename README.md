@@ -39,7 +39,8 @@ require('colorbuddy').colorscheme('nordbuddy')
 
 ## Options
 
-|           | Option                  | Default Behavior | Other possible value     |
-|-----------|-------------------------|------------------|--------------------------|
-| underline | g:nord_underline_option | no lines         | 'underline', 'undercurl' |
-| italic    | g:nord_italic           | enabled          | false                    |
+|                 | Option                  | Default Behavior | Other possible value     |
+|---------------- |-------------------------|------------------|--------------------------|
+| underline       | g:nord_underline_option | no lines         | 'underline', 'undercurl' |
+| italic          | g:nord_italic           | enabled          | false                    |
+| italic comments | g:nord_italic_comments  | disabled         | true                     |

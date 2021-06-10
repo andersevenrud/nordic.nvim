@@ -9,6 +9,7 @@ local M = {}
 local function customizations()
     local underline = s.none
     local italic = s.italic
+    local comments = s.none
 
     if vim.g.nord_underline_option == 'underline' then
         underline = s.underline
@@ -20,7 +21,11 @@ local function customizations()
         italic = s.none
     end
 
-    return {italic = italic, underline = underline}
+    if vim.g.nord_italic_comments == true then
+        comments = s.italic
+    end
+
+    return {italic = italic, underline = underline, comments = comments}
 end
 
 local function initialize()
