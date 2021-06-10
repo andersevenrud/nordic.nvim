@@ -37,10 +37,29 @@ or in Lua (`init.lua`):
 require('colorbuddy').colorscheme('nordbuddy')
 ```
 
-## Options
+## Configuration
 
-|                 | Option                  | Default Behavior | Other possible value     |
-|---------------- |-------------------------|------------------|--------------------------|
-| underline       | g:nord_underline_option | no lines         | 'underline', 'undercurl' |
-| italic          | g:nord_italic           | enabled          | false                    |
-| italic comments | g:nord_italic_comments  | disabled         | true                     |
+These are the available configuration options and their defaults:
+
+> *These must be set before loading the colorscheme.*
+
+```lua
+-- Underline style used for spelling
+-- Options: 'none', 'underline', 'undercurl'
+vim.g.nord_underline_option = 'none'
+
+-- Italics for certain keywords such as constructors, functions,
+-- labels and namespaces
+vim.g.nord_italic = true
+
+-- Italic styled comments
+vim.g.nord_italic_comments = false
+```
+
+Vimscript equivalent:
+
+```vim
+let g:nord_underline_option = 'none'
+let g:nord_italic = v:true
+let g:nord_italic_comments = v:false
+```
