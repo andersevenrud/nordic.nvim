@@ -10,7 +10,7 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 ## Install
 
-You'll need (at least) Neovim 0.4.0 for `nordbuddy` to work. You'll also need [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim).
+You'll need (at least) Neovim 0.5.0 for `nordbuddy` to work. You'll also need [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim).
 
 with `Vim-Plug`
 ``` vim
