@@ -25,16 +25,16 @@ use {'maaslalani/nordbuddy', requires = {'tjdevries/colorbuddy.nvim'}}
 
 ## Setup
 
-Enable the colorscheme in Vimscript (`init.vim`):
-
-```vim
-colorscheme nordbuddy
-```
-
-or in Lua (`init.lua`):
+Enable the colorscheme in Lua (`init.lua`):
 
 ```lua
 require('colorbuddy').colorscheme('nordbuddy')
+```
+
+Or in Vimscript (`init.vim`):
+
+```vim
+colorscheme nordbuddy
 ```
 
 ## Configuration
