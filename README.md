@@ -8,19 +8,24 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 ![Color Preview](https://user-images.githubusercontent.com/42545625/112913430-935a6a80-90c7-11eb-867e-394b1790a14f.png)
 
+## Requirements
+
+* Neovim 0.5+
+* [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim)
+
 ## Install
 
-You'll need (at least) Neovim 0.5.0 for `nordbuddy` to work. You'll also need [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim).
+Using `packer.nvim`:
 
-with `Vim-Plug`
+``` lua
+use { 'maaslalani/nordbuddy', requires = { 'tjdevries/colorbuddy.nvim' }}
+```
+
+Or `vim-plug`:
+
 ``` vim
 Plug 'tjdevries/colorbuddy.nvim'
 Plug 'maaslalani/nordbuddy'
-```
-
-with `packer.nvim`
-``` lua
-use {'maaslalani/nordbuddy', requires = {'tjdevries/colorbuddy.nvim'}}
 ```
 
 ## Setup
