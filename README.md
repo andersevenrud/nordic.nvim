@@ -1,6 +1,6 @@
 # Nordbuddy
 
-A [nord](https://www.nordtheme.com/)-esque colorscheme using [colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim)
+A [nord](https://www.nordtheme.com/)-esque colorscheme.
 
 Nordbuddy supports highlighting for [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter),
 [Neovim LSP](https://neovim.io/doc/user/lsp.html), [Telescope](https://github.com/nvim-telescope/telescope.nvim/),
@@ -11,20 +11,18 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 ## Requirements
 
 * Neovim 0.5+
-* [colorbuddy](https://github.com/tjdevries/colorbuddy.nvim)
 
 ## Install
 
 Using `packer.nvim`:
 
 ``` lua
-use { 'maaslalani/nordbuddy', requires = { 'tjdevries/colorbuddy.nvim' }}
+use { 'maaslalani/nordbuddy' }
 ```
 
 Or `vim-plug`:
 
 ``` vim
-Plug 'tjdevries/colorbuddy.nvim'
 Plug 'maaslalani/nordbuddy'
 ```
 
@@ -33,7 +31,7 @@ Plug 'maaslalani/nordbuddy'
 Enable the colorscheme in Lua (`init.lua`):
 
 ```lua
-require('colorbuddy').colorscheme('nordbuddy')
+vim.cmd('colorscheme nordbuddy')
 ```
 
 Or in Vimscript (`init.vim`):

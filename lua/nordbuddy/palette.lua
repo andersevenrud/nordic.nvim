@@ -1,10 +1,11 @@
 return {
     -- Polar Night
     [0] = '#2e3440', -- dark black: bg
+    ['0_light'] = '#3B414D',
     [1] = '#3b4252', -- black
     [2] = '#434c5e', -- bright black
     [3] = '#4c566a', -- gray
-    -- ['3_bright'] = '#616e88'
+    ['3_light'] = '#667084',
 
     -- Snow Storm
     [4] = '#d8dee9', -- dark white: fg

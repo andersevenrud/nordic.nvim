@@ -171,7 +171,7 @@ return function(c, s, cs)
     local groups = {
         {attributes, c.nord9},
         {numbers, c.nord15},
-        {comments, c.nord3:light(), c.none, cs.comments},
+        {comments, c.nord3_light, c.none, cs.comments},
         {constructors, c.nord4, c.none, cs.italic}, -- in C++ variable->constructors() \\ TS docs unclear
         {conditionals, c.nord10, c.none, cs.italic},
         {constants, c.nord4},

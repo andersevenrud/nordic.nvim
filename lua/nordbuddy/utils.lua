@@ -24,4 +24,12 @@ function utils:highlight_to_groups(highlight)
     end
 end
 
+function utils:highlight(n, fg, bg, font)
+    vim.highlight.create(n, {
+        guibg = bg and bg or 'NONE',
+        guifg = fg and fg or 'NONE',
+        gui = font and font or 'NONE',
+    })
+end
+
 return utils
