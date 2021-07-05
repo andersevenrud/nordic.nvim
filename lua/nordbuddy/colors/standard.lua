@@ -38,7 +38,7 @@ return function(c, s, cs)
         --- Gutter ---
         {'CursorColumn', c.none, c.nord1},
         {'CursorLineNr', c.nord4, c.nord1},
-        {'Folded', c.nord3, c.nord1, s.bold},
+        {'Folded', c.nord3, c.nord0},
         {'FoldColumn', c.nord3, c.nord0},
         {'SignColumn', c.nord1, c.nord0},
         -- Navigation ---
