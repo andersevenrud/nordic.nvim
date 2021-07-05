@@ -10,6 +10,7 @@ local colors = {
     'lspsaga',
     'markdown',
     'neogit',
+    'neorg'
     'standard',
     'symbols_outline',
     'syntax',
