@@ -12,57 +12,78 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 * Neovim 0.5+
 
-## Install
+## Usage
 
-Using `packer.nvim`:
+This colorscheme can be install, configure and enable through `packer.nvim`. 
+
+``` lua
+use {
+    'maaslalani/nordbuddy',
+    config = function()
+        require('nordbuddy'):colorscheme(
+        -- This function takes a table as argument.
+        -- If an empty table is passed, these values are implicitly assigned.
+        {
+            -- Underline style used for spelling
+            -- Options: 'none', 'underline', 'undercurl'
+            underline_option = 'none',
+
+            -- Italics for certain keywords such as constructors, functions,
+            -- labels and namespaces
+            italic = true,
+
+            -- Italic styled comments
+            italic_comments = false
+        })
+    end
+}
+```
+
+### Alternatively
+
+#### Install
+
+Install using:
+* `packer.nvim`
 
 ``` lua
 use { 'maaslalani/nordbuddy' }
 ```
 
-Or `vim-plug`:
+* `vim-plug`
 
 ``` vim
 Plug 'maaslalani/nordbuddy'
 ```
 
-## Setup
+#### Setup
 
-Enable the colorscheme in Lua (`init.lua`):
+Configure and enable the colorscheme in `init.lua` with:
 
-```lua
+``` lua
+require('nordbuddy'):colorscheme({
+    underline_option = 'none',
+    italic = true,
+    italic_comments = false
+})
+```
+
+Or do this with global variable:
+
+* In `init.lua`:
+
+``` lua
+vim.g.nord_underline_option = 'none'
+vim.g.nord_italic = true
+vim.g.nord_italic_comments = false
 vim.cmd('colorscheme nordbuddy')
 ```
 
-Or in Vimscript (`init.vim`):
+* In `init.vim`:
 
-```vim
-colorscheme nordbuddy
-```
-
-## Configuration
-
-These are the available configuration options and their defaults:
-
-> *These must be set before loading the colorscheme.*
-
-```lua
--- Underline style used for spelling
--- Options: 'none', 'underline', 'undercurl'
-vim.g.nord_underline_option = 'none'
-
--- Italics for certain keywords such as constructors, functions,
--- labels and namespaces
-vim.g.nord_italic = true
-
--- Italic styled comments
-vim.g.nord_italic_comments = false
-```
-
-Vimscript equivalent:
-
-```vim
+``` vim
 let g:nord_underline_option = 'none'
 let g:nord_italic = v:true
 let g:nord_italic_comments = v:false
+colorscheme nordbuddy
 ```
