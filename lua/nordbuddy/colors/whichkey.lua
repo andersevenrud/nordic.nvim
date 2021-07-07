@@ -5,7 +5,7 @@ return function(c, s, cs)
         {'WhichKeyGroup', c.nord9},
         {'WhichKeySeparator', c.nord3_light},
         {'WhichKeyDesc', c.nord4},
-        {'WhichKeyFloat', c.none, c.nord0_light},
+        {'WhichKeyFloat', c.none, c.nord1},
         {'WhichKeyValue', c.nord4},
     }
 end
