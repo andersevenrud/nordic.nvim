@@ -3,7 +3,7 @@ return function(c, s, cs)
         --- Editor---
         {'ColorColumn', c.none, c.nord1},
         {'Cursor', c.nord0, c.nord4},
-        {'CursorLine', c.none, c.nord1},
+        {'CursorLine', c.none, c.nord0_light},
         {'Error', c.nord4, c.nord11},
         {'iCursor', c.nord0, c.nord4},
         {'LineNr', c.nord3},
@@ -50,18 +50,18 @@ return function(c, s, cs)
         {'MoreMsg', c.nord8},
         {'Question', c.nord4},
         {'StatusLine', c.nord4, c.nord0},
-        {'StatusLineNC', c.nord3, c.nord0},
+        {'StatusLineNC', c.nord3_light, c.nord0},
         {'StatusLineTerm', c.nord4, c.nord0},
-        {'StatusLineTermNC', c.nord3, c.nord0},
+        {'StatusLineTermNC', c.nord3_light, c.nord0},
         {'WarningMsg', c.nord0, c.nord13},
         {'WildMenu', c.nord8, c.nord1},
         --- Search ---
         {'IncSearch', c.nord6, c.nord10, s.underline},
         {'Search', c.nord1, c.nord8},
         --- Tabs ---
-        {'TabLine', c.nord4, c.nord1},
-        {'TabLineFill', c.nord4, c.nord1},
-        {'TabLineSel', c.nord8, c.nord3},
+        {'TabLine', c.nord3_light, c.nord0},
+        {'TabLineFill', c.nord3_light, c.nord0},
+        {'TabLineSel', c.nord6, c.nord0},
         --- Window ---
         {'Title', c.nord4, c.none, s.bold},
         --- Others ---
