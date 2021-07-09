@@ -24,7 +24,8 @@ local function create_custom_styles(s, opts)
     local default_opts = {
         underline_option = 'none',
         italic = true,
-        italic_comments = false
+        italic_comments = false,
+        minimal_mode = false
     }
     for k, v in pairs(default_opts) do
         if opts[k] ~= nil and opts[k] ~= v then default_opts[k] = opts[k] end
@@ -61,7 +62,12 @@ local function initialize(opts)
     local c = create_colors()
     local s = create_styles()
     local cs = create_custom_styles(s, opts)
-    local groups = load_groups(c, s, cs)
+    local groups = load_groups({
+        c = c,
+        s = s,
+        cs = cs,
+        minimal_mode = opts.minimal_mode
+    })
 
     for _, group in ipairs(groups) do utils:highlight(unpack(group)) end
 end

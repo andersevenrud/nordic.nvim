@@ -1,4 +1,5 @@
-return function(c, s, cs)
+return function(opts)
+    local c = opts.c
     -- 'airblade/vim-gitgutter'
     return {
         {'GitGutterAdd', c.nord14, c.nord1},

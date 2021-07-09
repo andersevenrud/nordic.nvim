@@ -1,4 +1,5 @@
-return function(c, s, cs)
+ return function(opts)
+    local c = opts.c
     -- 'vhyrro/neorg'
     return {
         {'Conceal', c.none},

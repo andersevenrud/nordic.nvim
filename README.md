@@ -33,11 +33,15 @@ use {
             italic = true,
 
             -- Italic styled comments
-            italic_comments = false
+            italic_comments = false,
+
+            -- Minimal mode: different choice of colors for Tabs and StatusLine
+            minimal_mode = false
         })
     end
 }
 ```
+
 
 ### Alternatively
 
@@ -64,11 +68,12 @@ Configure and enable the colorscheme in `init.lua` with:
 require('nordbuddy'):colorscheme({
     underline_option = 'none',
     italic = true,
-    italic_comments = false
+    italic_comments = false,
+    minimal_mode = false
 })
 ```
 
-Or do this with global variable:
+Or do this with global variables:
 
 * In `init.lua`:
 
@@ -76,6 +81,7 @@ Or do this with global variable:
 vim.g.nord_underline_option = 'none'
 vim.g.nord_italic = true
 vim.g.nord_italic_comments = false
+vim.g.nord_minimal_mode = false
 vim.cmd('colorscheme nordbuddy')
 ```
 
@@ -85,5 +91,6 @@ vim.cmd('colorscheme nordbuddy')
 let g:nord_underline_option = 'none'
 let g:nord_italic = v:true
 let g:nord_italic_comments = v:false
+let g:nord_minimal_mode = v:false
 colorscheme nordbuddy
 ```

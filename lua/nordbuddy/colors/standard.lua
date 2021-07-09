@@ -1,9 +1,44 @@
-return function(c, s, cs)
-    return {
+local utils = require('nordbuddy.utils')
+
+return function(opts)
+    local c, s, cs = opts.c, opts.s, opts.cs
+    local minimal_mode = opts.minimal_mode
+
+    local options = nil
+    if minimal_mode then
+        options = {
+            --- Editor---
+            {'CursorLine', c.none, c.nord0_light},
+            --- Prompt/Status ---
+            {'StatusLine', c.nord4, c.nord0},
+            {'StatusLineNC', c.nord3_light, c.nord0},
+            {'StatusLineTerm', c.nord4, c.nord0},
+            {'StatusLineTermNC', c.nord3_light, c.nord0},
+            --- Tabs ---
+            {'TabLine', c.nord3_light, c.nord0},
+            {'TabLineFill', c.nord3_light, c.nord0},
+            {'TabLineSel', c.nord6, c.nord0},
+        }
+    else
+        options = {
+            --- Editor---
+            {'CursorLine', c.none, c.nord1},
+            --- Prompt/Status ---
+            {'StatusLine', c.nord8, c.nord3},
+            {'StatusLineNC', c.nord4, c.nord1},
+            {'StatusLineTerm', c.nord8, c.nord3},
+            {'StatusLineTermNC', c.nord4, c.nord1},
+            --- Tabs ---
+            {'TabLine', c.nord4, c.nord1},
+            {'TabLineFill', c.nord4, c.nord1},
+            {'TabLineSel', c.nord8, c.nord3},
+        }
+    end
+
+    local defaults = {
         --- Editor---
         {'ColorColumn', c.none, c.nord1},
         {'Cursor', c.nord0, c.nord4},
-        {'CursorLine', c.none, c.nord1},
         {'Error', c.nord4, c.nord11},
         {'iCursor', c.nord0, c.nord4},
         {'LineNr', c.nord3},
@@ -49,23 +84,20 @@ return function(c, s, cs)
         {'ModeMsg', c.nord4},
         {'MoreMsg', c.nord8},
         {'Question', c.nord4},
-        {'StatusLine', c.nord8, c.nord3},
-        {'StatusLineNC', c.nord4, c.nord1},
-        {'StatusLineTerm', c.nord8, c.nord3},
-        {'StatusLineTermNC', c.nord4, c.nord1},
         {'WarningMsg', c.nord0, c.nord13},
         {'WildMenu', c.nord8, c.nord1},
         --- Search ---
         {'IncSearch', c.nord6, c.nord10, s.underline},
         {'Search', c.nord1, c.nord8},
-        --- Tabs ---
-        {'TabLine', c.nord4, c.nord1},
-        {'TabLineFill', c.nord4, c.nord1},
-        {'TabLineSel', c.nord8, c.nord3},
         --- Window ---
         {'Title', c.nord4, c.none, s.bold},
         --- Others ---
         {'qffilename', c.nord13, c.none, s.none},
         {'Whitespace', c.nord4} -- idk
     }
+
+    return utils:merge({
+        options,
+        defaults
+    })
 end

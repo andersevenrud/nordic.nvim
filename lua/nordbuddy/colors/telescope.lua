@@ -1,4 +1,5 @@
-return function(c, s, cs)
+return function(opts)
+    local c, s = opts.c, opts.s
     -- 'nvim-telescope/telescope.nvim'
     return {
         {'TelescopeBorder', c.nord3},

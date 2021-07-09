@@ -1,6 +1,7 @@
 local utils = require('nordbuddy.utils')
 
-return function(c, s, cs)
+return function(opts)
+    local c, s, cs = opts.c, opts.s, opts.cs
     local attributes = {
         'TSAnnotation', 'TSAttribute', -- TS
         'luametatableevents', 'luametatablearithmetic',

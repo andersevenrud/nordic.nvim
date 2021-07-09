@@ -1,4 +1,5 @@
-return function(c, s, cs)
+return function(opts)
+    local c = opts.c
     -- 'folke/whick-key-nvim'
     return {
         {'WhichKey', c.nord8},
