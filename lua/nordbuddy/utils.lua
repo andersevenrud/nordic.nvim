@@ -10,7 +10,9 @@ end
 
 function utils.merge(list)
     local acc = {}
-    for _, result in ipairs(list) do vim.list_extend(acc, result) end
+    for _, result in ipairs(list) do
+        vim.list_extend(acc, result)
+    end
     return acc
 end
 

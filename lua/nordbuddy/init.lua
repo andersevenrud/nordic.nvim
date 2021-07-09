@@ -6,7 +6,9 @@ local M = {}
 
 local function create_colors()
     local c = {}
-    for k, v in pairs(palette) do c['nord' .. k] = v end
+    for k, v in pairs(palette) do
+        c['nord' .. k] = v
+    end
     return c
 end
 
@@ -16,7 +18,11 @@ local function create_styles()
         'bold', 'underline', 'undercurl', 'strikethrough', 'reverse', 'inverse',
         'italic', 'standout', 'nocombine'
     }
-    for _, v in pairs(names) do s[v] = v end
+
+    for _, v in pairs(names) do
+        s[v] = v
+    end
+
     return s
 end
 
@@ -27,11 +33,16 @@ local function create_custom_styles(s, opts)
         italic_comments = false,
         minimal_mode = false
     }
+
     for k, v in pairs(default_opts) do
-        if opts[k] ~= nil and opts[k] ~= v then default_opts[k] = opts[k] end
+        if opts[k] ~= nil and opts[k] ~= v then
+            default_opts[k] = opts[k]
+        end
 
         local g_opt = vim.g['nord_' .. k]
-        if g_opt ~= nil and g_opt ~= v then default_opts[k] = g_opt end
+        if g_opt ~= nil and g_opt ~= v then
+            default_opts[k] = g_opt
+        end
     end
 
     local underline = s.none
@@ -44,16 +55,22 @@ local function create_custom_styles(s, opts)
         underline = s.undercurl
     end
 
-    if not default_opts.italic then italic = s.none end
+    if not default_opts.italic then
+        italic = s.none
+    end
 
-    if default_opts.italic_comments then comments = s.italic end
+    if default_opts.italic_comments then
+        comments = s.italic
+    end
 
     return {italic = italic, underline = underline, comments = comments}
 end
 
 local function load_groups(...)
     local definitions = {}
-    for _, fn in pairs(all_colors) do table.insert(definitions, fn(...)) end
+    for _, fn in pairs(all_colors) do
+        table.insert(definitions, fn(...))
+    end
 
     return utils.merge(definitions)
 end
@@ -64,7 +81,9 @@ local function initialize(opts)
     local cs = create_custom_styles(s, opts)
     local groups = load_groups(c, s, cs, opts)
 
-    for _, group in ipairs(groups) do utils.highlight(unpack(group)) end
+    for _, group in ipairs(groups) do
+        utils.highlight(unpack(group))
+    end
 end
 
 function M.colorscheme(opts)

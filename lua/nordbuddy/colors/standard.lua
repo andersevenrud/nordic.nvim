@@ -1,7 +1,8 @@
 local utils = require('nordbuddy.utils')
 
 return function(c, s, cs, opts)
-    local options = nil
+    local options
+
     if opts.minimal_mode then
         options = {
             --- Editor---
