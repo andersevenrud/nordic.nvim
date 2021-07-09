@@ -20,7 +20,7 @@ This colorscheme can be install, configure and enable through `packer.nvim`.
 use {
     'maaslalani/nordbuddy',
     config = function()
-        require('nordbuddy'):colorscheme(
+        require('nordbuddy').colorscheme(
         -- This function takes a table as argument.
         -- If an empty table is passed, these values are implicitly assigned.
         {

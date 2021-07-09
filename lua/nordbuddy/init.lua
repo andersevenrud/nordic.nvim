@@ -67,7 +67,7 @@ local function initialize(opts)
     for _, group in ipairs(groups) do utils.highlight(unpack(group)) end
 end
 
-function M:colorscheme(opts)
+function M.colorscheme(opts)
     vim.g.colors_name = 'nordbuddy'
     vim.g.terminal_color_0 = palette[1]
     vim.g.terminal_color_1 = palette[11]
