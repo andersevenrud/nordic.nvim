@@ -1,5 +1,4 @@
-return function(opts)
-    local c = opts.c
+return function(c)
     -- 'vimwiki/vimwiki'
     return {
         {'VimwikiHeader1', c.nord8},

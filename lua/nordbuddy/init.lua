@@ -62,12 +62,7 @@ local function initialize(opts)
     local c = create_colors()
     local s = create_styles()
     local cs = create_custom_styles(s, opts)
-    local groups = load_groups({
-        c = c,
-        s = s,
-        cs = cs,
-        minimal_mode = opts.minimal_mode
-    })
+    local groups = load_groups(c, s, cs, opts)
 
     for _, group in ipairs(groups) do utils:highlight(unpack(group)) end
 end

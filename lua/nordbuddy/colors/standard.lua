@@ -1,11 +1,8 @@
 local utils = require('nordbuddy.utils')
 
-return function(opts)
-    local c, s, cs = opts.c, opts.s, opts.cs
-    local minimal_mode = opts.minimal_mode
-
+return function(c, s, cs, opts)
     local options = nil
-    if minimal_mode then
+    if opts.minimal_mode then
         options = {
             --- Editor---
             {'CursorLine', c.none, c.nord0_light},
