@@ -1,7 +1,6 @@
 local utils = require('nordbuddy.utils')
 
-return function(opts)
-    local c, s, cs = opts.c, opts.s, opts.cs
+return function(c, s, cs)
     local attributes = {
         'TSAnnotation', 'TSAttribute', -- TS
         'luametatableevents', 'luametatablearithmetic',
@@ -209,9 +208,9 @@ return function(opts)
 
     -- Apply grouping to each color group
     for _, group in ipairs(groups) do
-        highlights = utils:merge({
+        highlights = utils.merge({
             highlights,
-            utils:highlight_to_groups({group[2], group[3], group[4]})(group[1])
+            utils.highlight_to_groups({group[2], group[3], group[4]})(group[1])
         })
     end
 

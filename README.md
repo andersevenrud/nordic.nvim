@@ -14,13 +14,13 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 ## Usage
 
-This colorscheme can be install, configure and enable through `packer.nvim`. 
+This colorscheme can be installed, configured and enabled through `packer.nvim`:
 
 ``` lua
 use {
     'maaslalani/nordbuddy',
     config = function()
-        require('nordbuddy'):colorscheme(
+        require('nordbuddy').colorscheme(
         -- This function takes a table as argument.
         -- If an empty table is passed, these values are implicitly assigned.
         {
@@ -65,7 +65,7 @@ Plug 'maaslalani/nordbuddy'
 Configure and enable the colorscheme in `init.lua` with:
 
 ``` lua
-require('nordbuddy'):colorscheme({
+require('nordbuddy').colorscheme({
     underline_option = 'none',
     italic = true,
     italic_comments = false,

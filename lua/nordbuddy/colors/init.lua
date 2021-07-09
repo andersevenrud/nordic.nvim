@@ -19,4 +19,4 @@ local colors = {
     'whichkey'
 }
 
-return utils:prepare(colors)
+return utils.prepare(colors)

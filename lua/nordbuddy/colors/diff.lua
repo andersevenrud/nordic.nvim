@@ -1,5 +1,4 @@
-return function(opts)
-    local c = opts.c
+return function(c)
     return {
         {'DiffAdd', c.nord14, c.nord1},
         {'DiffChange', c.nord13, c.nord1},

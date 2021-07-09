@@ -1,8 +1,7 @@
 local utils = require('nordbuddy.utils')
 
- return function(opts)
-    local c, s = opts.c, opts.s
-    local to_groups = utils:highlight_to_groups({c.nord8, c.none})
+ return function(c, s)
+    local to_groups = utils.highlight_to_groups({c.nord8, c.none})
     local delimiters = to_groups({
         'markdownH1Delimiter',
         'markdownH2Delimiter',
@@ -12,7 +11,7 @@ local utils = require('nordbuddy.utils')
         'markdownH6Delimiter'
     })
 
-    to_groups = utils:highlight_to_groups({c.nord8, c.none, s.bold})
+    to_groups = utils.highlight_to_groups({c.nord8, c.none, s.bold})
     local headers = to_groups({
         'markdownH1',
         'markdownH2',
@@ -22,7 +21,7 @@ local utils = require('nordbuddy.utils')
         'markdownH6'
     })
 
-    return utils:merge({
+    return utils.merge({
         delimiters,
         headers,
         {

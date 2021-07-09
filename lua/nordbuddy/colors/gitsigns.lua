@@ -1,5 +1,4 @@
-return function(opts)
-    local c = opts.c
+return function(c)
     -- 'lewis6991/gitsigns.nvim'
     return {
         {'GitSignsAdd', c.nord14, c.nord0},

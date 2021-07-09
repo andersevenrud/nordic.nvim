@@ -1,5 +1,4 @@
- return function(opts)
-    local c, s = opts.c, opts.s
+ return function(c, s)
     -- 'glepnir/lspsaga.nvim'
     return {
         {'LspSagaDiagnosticBorder', c.nord12},

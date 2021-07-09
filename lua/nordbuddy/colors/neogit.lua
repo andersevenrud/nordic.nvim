@@ -1,5 +1,4 @@
- return function(opts)
-    local c = opts.c
+ return function(c)
     -- 'TimUntersberger/neogit'
     return {
         {'NeogitDiffAddHighlight', c.nord14, c.nord1},

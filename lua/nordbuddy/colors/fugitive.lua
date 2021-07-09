@@ -1,5 +1,4 @@
-return function(opts)
-    local c = opts.c
+return function(c)
     -- tpope/vim-fugitive
     return {
         {'gitcommitDiscardedFile', c.nord11},

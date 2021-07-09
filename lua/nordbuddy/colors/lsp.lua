@@ -1,5 +1,4 @@
- return function(opts)
-    local c = opts.c
+ return function(c)
     return {
         {'LspReferenceText', c.nord4},
         {'LspReferenceRead', c.nord5},

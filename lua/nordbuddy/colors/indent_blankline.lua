@@ -1,5 +1,4 @@
-return function(opts)
-    local c = opts.c
+return function(c)
     -- lukas-reineke/indent-blankline.nvim
     return {
         {'IndentBlanklineChar', c.nord3},
