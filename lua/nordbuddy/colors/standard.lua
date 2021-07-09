@@ -93,7 +93,7 @@ return function(c, s, cs, opts)
         {'Whitespace', c.nord4} -- idk
     }
 
-    return utils:merge({
+    return utils.merge({
         options,
         defaults
     })

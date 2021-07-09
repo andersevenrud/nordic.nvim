@@ -55,7 +55,7 @@ local function load_groups(...)
     local definitions = {}
     for _, fn in pairs(all_colors) do table.insert(definitions, fn(...)) end
 
-    return utils:merge(definitions)
+    return utils.merge(definitions)
 end
 
 local function initialize(opts)
@@ -64,7 +64,7 @@ local function initialize(opts)
     local cs = create_custom_styles(s, opts)
     local groups = load_groups(c, s, cs, opts)
 
-    for _, group in ipairs(groups) do utils:highlight(unpack(group)) end
+    for _, group in ipairs(groups) do utils.highlight(unpack(group)) end
 end
 
 function M:colorscheme(opts)
