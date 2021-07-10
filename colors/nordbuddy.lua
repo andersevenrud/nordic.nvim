@@ -1,2 +1,2 @@
 local nordbuddy = require('nordbuddy')
-nordbuddy:colorscheme({})
+nordbuddy.colorscheme({})
