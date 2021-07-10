@@ -1,5 +1,5 @@
- return function(c)
-    -- 'TimUntersberger/neogit'
+-- 'TimUntersberger/neogit'
+return function(c)
     return {
         {'NeogitDiffAddHighlight', c.nord14, c.nord1},
         {'NeogitDiffDeleteHighlight', c.nord11, c.nord1},

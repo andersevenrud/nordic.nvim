@@ -1,5 +1,5 @@
+-- 'airblade/vim-gitgutter'
 return function(c)
-    -- 'airblade/vim-gitgutter'
     return {
         {'GitGutterAdd', c.nord14, c.nord1},
         {'GitGutterChange', c.nord13, c.nord1},

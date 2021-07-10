@@ -1,5 +1,5 @@
+-- tpope/vim-fugitive
 return function(c)
-    -- tpope/vim-fugitive
     return {
         {'gitcommitDiscardedFile', c.nord11},
         {'gitcommitUntrackedFile', c.nord11},

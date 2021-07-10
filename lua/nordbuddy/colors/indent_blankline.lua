@@ -1,5 +1,5 @@
+-- lukas-reineke/indent-blankline.nvim
 return function(c)
-    -- lukas-reineke/indent-blankline.nvim
     return {
         {'IndentBlanklineChar', c.nord3},
         {'IndentBlanklineSpaceChar', c.nord3},

@@ -1,5 +1,5 @@
+-- 'nvim-telescope/telescope.nvim'
 return function(c, s)
-    -- 'nvim-telescope/telescope.nvim'
     return {
         {'TelescopeBorder', c.nord3},
         {'TelescopeNormal', c.nord4},

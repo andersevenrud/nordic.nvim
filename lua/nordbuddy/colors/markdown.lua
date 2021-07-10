@@ -1,4 +1,4 @@
- return function(c, s)
+return function(c, s)
     return {
         {
             {

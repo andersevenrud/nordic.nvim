@@ -1,5 +1,5 @@
+-- 'phaazon/hop.nvim'
 return function(c)
-    -- 'phaazon/hop.nvim'
     return {
         {'HopNextKey', c.nord7},
         {'HopNextKey1', c.nord8},

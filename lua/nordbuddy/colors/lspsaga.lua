@@ -1,5 +1,5 @@
- return function(c, s)
-    -- 'glepnir/lspsaga.nvim'
+-- 'glepnir/lspsaga.nvim'
+return function(c, s)
     return {
         {'LspSagaDiagnosticBorder', c.nord12},
         {'LspSagaDiagnosticHeader', c.nord12, c.none, s.bold},

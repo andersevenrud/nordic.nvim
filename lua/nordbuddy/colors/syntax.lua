@@ -166,7 +166,8 @@ return function(c, s, cs)
         'Error', -- VL
         'rustCommentLineDocError', 'rustCommentBlockDocError' -- rust
     }
-    local groups = {
+
+    return {
         {attributes, c.nord9},
         {numbers, c.nord15},
         {comments, c.nord3_light, c.none, cs.comments},
@@ -200,6 +201,4 @@ return function(c, s, cs)
         {dangers, c.nord13},
         {errors, c.nord11}
     }
-
-    return groups
 end

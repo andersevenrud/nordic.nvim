@@ -1,5 +1,5 @@
+-- 'folke/whick-key-nvim'
 return function(c)
-    -- 'folke/whick-key-nvim'
     return {
         {'WhichKey', c.nord8},
         {'WhichKeyGroup', c.nord9},
