@@ -5,6 +5,7 @@ local colors = {
     'fugitive',
     'gitgutter',
     'gitsigns',
+    'hop',
     'indent_blankline',
     'lsp',
     'lspsaga',
