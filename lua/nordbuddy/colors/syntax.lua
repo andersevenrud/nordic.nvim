@@ -1,5 +1,3 @@
-local utils = require('nordbuddy.utils')
-
 return function(c, s, cs)
     local attributes = {
         'TSAnnotation', 'TSAttribute', -- TS
@@ -201,18 +199,7 @@ return function(c, s, cs)
         {warnings, c.nord13},
         {dangers, c.nord13},
         {errors, c.nord11}
-
     }
 
-    local highlights = {}
-
-    -- Apply grouping to each color group
-    for _, group in ipairs(groups) do
-        highlights = utils.merge({
-            highlights,
-            utils.highlight_to_groups({group[2], group[3], group[4]})(group[1])
-        })
-    end
-
-    return highlights
+    return groups
 end

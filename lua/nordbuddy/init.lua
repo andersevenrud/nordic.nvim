@@ -1,4 +1,3 @@
-local utils = require('nordbuddy.utils')
 local palette = require('nordbuddy.palette')
 local all_colors = require('nordbuddy.colors')
 local vim = vim
@@ -69,11 +68,51 @@ end
 
 local function load_groups(...)
     local definitions = {}
-    for _, fn in pairs(all_colors) do
-        table.insert(definitions, fn(...))
+
+    local function load_group(result)
+        for _, group in ipairs(result) do
+            -- functions can return a table with nested or regular entries
+            if type(group) == 'function' then
+                load_group(group())
+
+            -- nested entries, i.e. multiple names with same styles
+            -- {{'a', 'b', 'c'}, 'color', 'style'}
+            elseif type(group[1]) == 'table' then
+                load_group(vim.tbl_map(function(highlight)
+                    return { highlight, group[2], group[3], group[4] }
+                end, group[1]))
+
+            -- a regular entry
+            -- {'a', 'color', 'style'}
+            else
+                table.insert(definitions, group)
+            end
+        end
     end
 
-    return utils.merge(definitions)
+    for _, fn in pairs(all_colors) do
+        load_group(fn(...))
+    end
+
+    return definitions
+end
+
+local function apply_groups(list)
+    local function hi(n, fg, bg, font)
+        vim.highlight.create(n, {
+            guibg = bg and bg or 'NONE',
+            guifg = fg and fg or 'NONE',
+            gui = font and font or 'NONE',
+        })
+    end
+
+    for _, group in ipairs(list) do
+        if type(group[1]) == 'table' then
+            apply_groups(group)
+        else
+            hi(unpack(group))
+        end
+    end
 end
 
 local function initialize(config)
@@ -83,9 +122,7 @@ local function initialize(config)
     local cs = create_custom_styles(s, options)
     local groups = load_groups(c, s, cs, options)
 
-    for _, group in ipairs(groups) do
-        utils.highlight(unpack(group))
-    end
+    apply_groups(groups)
 end
 
 function M.colorscheme(config)

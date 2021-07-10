@@ -1,5 +1,3 @@
-local utils = require('nordbuddy.utils')
-
 local colors = {
     'diff',
     'fugitive',
@@ -19,4 +17,6 @@ local colors = {
     'whichkey'
 }
 
-return utils.prepare(colors)
+return vim.tbl_map(function (v)
+    return require('nordbuddy.colors.' .. v)
+end, colors)
