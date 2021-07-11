@@ -1,11 +1,11 @@
 return function(c)
     return {
-        {'LspReferenceText', c.nord4},
-        {'LspReferenceRead', c.nord5},
-        {'LspReferenceWrite', c.nord6},
-        {'LspDiagnosticsDefaultHint', c.nord10},
-        {'LspDiagnosticsDefaultError', c.nord11},
-        {'LspDiagnosticsDefaultWarning', c.nord13},
-        {'LspDiagnosticsDefaultInformation', c.nord8}
+        {'LspReferenceText', c.dark_white},
+        {'LspReferenceRead', c.white},
+        {'LspReferenceWrite', c.bright_white},
+        {'LspDiagnosticsDefaultHint', c.intense_blue},
+        {'LspDiagnosticsDefaultError', c.red},
+        {'LspDiagnosticsDefaultWarning', c.yellow},
+        {'LspDiagnosticsDefaultInformation', c.bright_cyan}
     }
 end

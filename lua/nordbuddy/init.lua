@@ -28,11 +28,6 @@ local function create_options(config)
 end
 
 local function create_arguments(options)
-    local c = {}
-    for k, v in pairs(palette) do
-        c['nord' .. k] = v
-    end
-
     local s = {}
     for _, v in pairs(style_names) do
         s[v] = v
@@ -44,7 +39,7 @@ local function create_arguments(options)
         comments = options.italic_comments and s.italic or s.none
     }
 
-    return {c, s, cs, options}
+    return {palette, s, cs, options}
 end
 
 local function load_groups(arguments)
@@ -91,22 +86,22 @@ end
 
 function M.colorscheme(config)
     vim.g.colors_name = 'nordbuddy'
-    vim.g.terminal_color_0 = palette[1]
-    vim.g.terminal_color_1 = palette[11]
-    vim.g.terminal_color_2 = palette[14]
-    vim.g.terminal_color_3 = palette[13]
-    vim.g.terminal_color_4 = palette[9]
-    vim.g.terminal_color_5 = palette[15]
-    vim.g.terminal_color_6 = palette[8]
-    vim.g.terminal_color_7 = palette[5]
-    vim.g.terminal_color_8 = palette[3]
-    vim.g.terminal_color_9 = palette[11]
-    vim.g.terminal_color_10 = palette[14]
-    vim.g.terminal_color_11 = palette[13]
-    vim.g.terminal_color_12 = palette[9]
-    vim.g.terminal_color_13 = palette[15]
-    vim.g.terminal_color_14 = palette[7]
-    vim.g.terminal_color_15 = palette[6]
+    vim.g.terminal_color_0 = palette.black
+    vim.g.terminal_color_1 = palette.red
+    vim.g.terminal_color_2 = palette.green
+    vim.g.terminal_color_3 = palette.yellow
+    vim.g.terminal_color_4 = palette.blue
+    vim.g.terminal_color_5 = palette.purple
+    vim.g.terminal_color_6 = palette.bright_cyan
+    vim.g.terminal_color_7 = palette.white
+    vim.g.terminal_color_8 = palette.gray
+    vim.g.terminal_color_9 = palette.red
+    vim.g.terminal_color_10 = palette.green
+    vim.g.terminal_color_11 = palette.yellow
+    vim.g.terminal_color_12 = palette.blue
+    vim.g.terminal_color_13 = palette.purple
+    vim.g.terminal_color_14 = palette.cyan
+    vim.g.terminal_color_15 = palette.bright_white
 
     initialize(config)
 end

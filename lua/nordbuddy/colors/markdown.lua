@@ -9,7 +9,7 @@ return function(c, s)
                 'markdownH5Delimiter',
                 'markdownH6Delimiter'
             },
-            c.nord8,
+            c.bright_cyan,
             c.none
         },
         {
@@ -21,21 +21,21 @@ return function(c, s)
                 'markdownH5',
                 'markdownH6'
             },
-            c.nord8,
+            c.bright_cyan,
             c.none,
             s.bold
         },
-        {'markdownCode', c.nord7},
-        {'markdownCodeDelimiter', c.nord7},
-        {'markdownBlockquote', c.nord7},
-        {'markdownFootnote', c.nord7},
-        {'markdownFootnoteDefinition', c.nord7},
-        {'markdownId', c.nord7},
-        {'markdownIdDeclaration', c.nord7},
-        {'markdownIdDelimiter', c.nord9},
-        {'markdownUrl', c.nord4},
-        {'markdownLinkText', c.nord8},
-        {'markdownLinkTextDelimiter', c.nord9},
-        {'markdownLinkDelimiter', c.nord9}
+        {'markdownCode', c.cyan},
+        {'markdownCodeDelimiter', c.cyan},
+        {'markdownBlockquote', c.cyan},
+        {'markdownFootnote', c.cyan},
+        {'markdownFootnoteDefinition', c.cyan},
+        {'markdownId', c.cyan},
+        {'markdownIdDeclaration', c.cyan},
+        {'markdownIdDelimiter', c.blue},
+        {'markdownUrl', c.dark_white},
+        {'markdownLinkText', c.bright_cyan},
+        {'markdownLinkTextDelimiter', c.blue},
+        {'markdownLinkDelimiter', c.blue}
     }
 end

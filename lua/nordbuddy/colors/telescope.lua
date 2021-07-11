@@ -1,10 +1,10 @@
 -- 'nvim-telescope/telescope.nvim'
 return function(c, s)
     return {
-        {'TelescopeBorder', c.nord3},
-        {'TelescopeNormal', c.nord4},
-        {'TelescopePromptPrefix', c.nord4},
-        {'TelescopeSelection', c.nord8, c.nord3, s.bold},
-        {'TelescopeMatching', c.nord8, c.nord3}
+        {'TelescopeBorder', c.gray},
+        {'TelescopeNormal', c.dark_white},
+        {'TelescopePromptPrefix', c.dark_white},
+        {'TelescopeSelection', c.bright_cyan, c.gray, s.bold},
+        {'TelescopeMatching', c.bright_cyan, c.gray}
     }
 end

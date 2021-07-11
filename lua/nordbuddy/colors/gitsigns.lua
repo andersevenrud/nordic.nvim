@@ -1,8 +1,8 @@
 -- 'lewis6991/gitsigns.nvim'
 return function(c)
     return {
-        {'GitSignsAdd', c.nord14, c.nord0},
-        {'GitSignsChange', c.nord13, c.nord0},
-        {'GitSignsDelete', c.nord11, c.nord0}
+        {'GitSignsAdd', c.green, c.dark_black},
+        {'GitSignsChange', c.yellow, c.dark_black},
+        {'GitSignsDelete', c.red, c.dark_black}
     }
 end
