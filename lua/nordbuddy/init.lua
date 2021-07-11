@@ -42,46 +42,37 @@ local function create_arguments(options)
     return {palette, s, cs, options}
 end
 
-local function load_groups(arguments)
-    local function load_group(list, result)
+local function initialize(config)
+    local options = create_options(config)
+    local arguments = create_arguments(options)
+
+    local function load_group(list)
         for _, group in ipairs(list) do
             -- functions can return a table with nested or regular entries
             if type(group) == 'function' then
-                load_group(group(unpack(arguments)), result)
+                load_group(group(unpack(arguments)))
 
             -- nested entries, i.e. multiple names with same styles
             -- {{'a', 'b', 'c'}, 'color', 'style'}
             elseif type(group[1]) == 'table' then
                 load_group(vim.tbl_map(function(highlight)
                     return { highlight, group[2], group[3], group[4] }
-                end, group[1]), result)
+                end, group[1]))
 
             -- a regular entry
             -- {'a', 'color', 'style'}
             else
-                table.insert(result, group)
+                local n, fg, bg, font = unpack(group)
+                vim.highlight.create(n, {
+                    guibg = bg or 'NONE',
+                    guifg = fg or 'NONE',
+                    gui = font or 'NONE',
+                })
             end
         end
-
-        return result
     end
 
-    return load_group(all_colors, {})
-end
-
-local function initialize(config)
-    local options = create_options(config)
-    local arguments = create_arguments(options)
-    local groups = load_groups(arguments)
-
-    for _, group in ipairs(groups) do
-        local n, fg, bg, font = unpack(group)
-        vim.highlight.create(n, {
-            guibg = bg and bg or 'NONE',
-            guifg = fg and fg or 'NONE',
-            gui = font and font or 'NONE',
-        })
-    end
+    load_group(all_colors)
 end
 
 function M.colorscheme(config)
