@@ -1,8 +1,8 @@
+-- 'airblade/vim-gitgutter'
 return function(c)
-    -- 'airblade/vim-gitgutter'
     return {
-        {'GitGutterAdd', c.nord14, c.nord1},
-        {'GitGutterChange', c.nord13, c.nord1},
-        {'GitGutterDelete', c.nord11, c.nord1}
+        {'GitGutterAdd', c.green, c.black},
+        {'GitGutterChange', c.yellow, c.black},
+        {'GitGutterDelete', c.red, c.black}
     }
 end

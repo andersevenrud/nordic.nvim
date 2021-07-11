@@ -1,10 +1,10 @@
- return function(c)
-    -- 'TimUntersberger/neogit'
+-- 'TimUntersberger/neogit'
+return function(c)
     return {
-        {'NeogitDiffAddHighlight', c.nord14, c.nord1},
-        {'NeogitDiffDeleteHighlight', c.nord11, c.nord1},
-        {'NeogitDiffContextHighlight', c.nord13, c.nord0},
-        {'NeogitHunkHeaderHighlight', c.nord3_light, c.nord0},
-        {'NeogitHunkHeader', c.nord3_light, c.nord0}
+        {'NeogitDiffAddHighlight', c.green, c.black},
+        {'NeogitDiffDeleteHighlight', c.red, c.black},
+        {'NeogitDiffContextHighlight', c.yellow, c.dark_black},
+        {'NeogitHunkHeaderHighlight', c.grayish, c.dark_black},
+        {'NeogitHunkHeader', c.grayish, c.dark_black}
     }
 end

@@ -1,8 +1,8 @@
+-- 'vimwiki/vimwiki'
 return function(c)
-    -- 'vimwiki/vimwiki'
     return {
-        {'VimwikiHeader1', c.nord8},
-        {'VimwikiHeader2', c.nord9},
-        {'VimwikiHeader3', c.nord15},
+        {'VimwikiHeader1', c.bright_cyan},
+        {'VimwikiHeader2', c.blue},
+        {'VimwikiHeader3', c.purple},
     }
 end

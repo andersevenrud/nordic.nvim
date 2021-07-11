@@ -166,40 +166,39 @@ return function(c, s, cs)
         'Error', -- VL
         'rustCommentLineDocError', 'rustCommentBlockDocError' -- rust
     }
-    local groups = {
-        {attributes, c.nord9},
-        {numbers, c.nord15},
-        {comments, c.nord3_light, c.none, cs.comments},
-        {constructors, c.nord4, c.none, cs.italic}, -- in C++ variable->constructors() \\ TS docs unclear
-        {conditionals, c.nord10, c.none, cs.italic},
-        {constants, c.nord4},
-        {defines, c.nord10},
-        {exceptions, c.nord9},
-        {fields, c.nord9, c.none},
-        {functions, c.nord4, c.none, cs.italic},
-        {includes, c.nord10},
-        {keywords, c.nord9, c.none, s.none},
-        {labels, c.nord10, c.none, cs.italic},
-        {namespaces, c.nord4, c.none, cs.italic},
-        {nones, c.nord4},
-        {operators, c.nord9},
-        {parameters, c.nord4, c.none, cs.italic},
-        {properties, c.nord9},
-        {punctuations, c.nord9},
-        {repeats, c.nord9, c.none, cs.italic},
-        {strings, c.nord14},
-        {strings_specials, c.nord13},
-        {symbols, c.nord13},
-        {texts, c.nord4},
-        {uris, c.nord15},
-        {types, c.nord7},
-        {variables, c.nord4},
-        {builtins, c.nord9, c.none, cs.italic},
-        {notes, c.nord12},
-        {warnings, c.nord13},
-        {dangers, c.nord13},
-        {errors, c.nord11}
-    }
 
-    return groups
+    return {
+        {attributes, c.blue},
+        {numbers, c.purple},
+        {comments, c.grayish, c.none, cs.comments},
+        {constructors, c.dark_white, c.none, cs.italic}, -- in C++ variable->constructors() \\ TS docs unclear
+        {conditionals, c.intense_blue, c.none, cs.italic},
+        {constants, c.dark_white},
+        {defines, c.intense_blue},
+        {exceptions, c.blue},
+        {fields, c.blue, c.none},
+        {functions, c.dark_white, c.none, cs.italic},
+        {includes, c.intense_blue},
+        {keywords, c.blue, c.none, s.none},
+        {labels, c.intense_blue, c.none, cs.italic},
+        {namespaces, c.dark_white, c.none, cs.italic},
+        {nones, c.dark_white},
+        {operators, c.blue},
+        {parameters, c.dark_white, c.none, cs.italic},
+        {properties, c.blue},
+        {punctuations, c.blue},
+        {repeats, c.blue, c.none, cs.italic},
+        {strings, c.green},
+        {strings_specials, c.yellow},
+        {symbols, c.yellow},
+        {texts, c.dark_white},
+        {uris, c.purple},
+        {types, c.cyan},
+        {variables, c.dark_white},
+        {builtins, c.blue, c.none, cs.italic},
+        {notes, c.orange},
+        {warnings, c.yellow},
+        {dangers, c.yellow},
+        {errors, c.red}
+    }
 end

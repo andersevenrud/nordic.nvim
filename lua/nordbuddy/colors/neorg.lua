@@ -1,5 +1,5 @@
- return function(c)
-    -- 'vhyrro/neorg'
+-- 'vhyrro/neorg'
+return function(c)
     return {
         {'Conceal', c.none},
     }
