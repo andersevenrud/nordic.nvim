@@ -23,7 +23,6 @@ return function(c, s, cs, opts)
         {'VertSplit', c.black},
         {'VisualNC', c.none, c.bright_black},
         {'NormalNC', c.dark_white, c.none},
-        {'NormalFloat', c.white, c.black},
         {'RedrawDebugNormal', c.dark_black, c.dark_white},
         {'RedrawDebugClear', c.dark_white, c.yellow},
         {'RedrawDebugComposed', c.dark_white, c.green},
@@ -64,6 +63,8 @@ return function(c, s, cs, opts)
                 return {
                     --- Editor---
                     {'CursorLine', c.none, c.darkish_black},
+                    {'NormalFloat', c.white, c.none},
+                    {'FloatBorder', c.grayish, c.none},
                     --- Prompt/Status ---
                     {'StatusLine', c.dark_white, c.dark_black},
                     {'StatusLineNC', c.grayish, c.dark_black},
@@ -78,6 +79,7 @@ return function(c, s, cs, opts)
 
             return {
                 --- Editor---
+                {'NormalFloat', c.white, c.black},
                 {'CursorLine', c.none, c.black},
                 --- Prompt/Status ---
                 {'StatusLine', c.bright_cyan, c.gray},
