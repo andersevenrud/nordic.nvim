@@ -56,7 +56,7 @@ return function(c, s, cs, opts)
         {'Title', c.dark_white, c.none, s.bold},
         --- Others ---
         {'qffilename', c.yellow, c.none, s.none},
-        {'Whitespace', c.dark_white}, -- idk
+        {'Whitespace', c.bright_black}, -- listchars nbsp, space, tab, trail
 
         function()
             if opts.minimal_mode then
