@@ -33,6 +33,7 @@ local function create_arguments(options)
         s[v] = v
     end
 
+    -- User configured styles
     local cs = {
         underline = options.underline_option and s[options.underline_option] or s.none,
         italic = (options.italic == true or options.italic == nil) and s.italic or s.none,
@@ -48,19 +49,20 @@ local function initialize(config)
 
     local function load_group(list)
         for _, group in ipairs(list) do
-            -- functions can return a table with nested or regular entries
+            -- functions can return a table with nested-, regular- or function
+            -- color groups (recursive)
             if type(group) == 'function' then
                 load_group(group(unpack(arguments)))
 
-            -- nested entries, i.e. multiple names with same styles
-            -- {{'a', 'b', 'c'}, 'color', 'style'}
+            -- nested color groups, i.e. multiple names with same styles:
+            --  {{'a', 'b', 'c'}, 'bg', 'fg', 'font'}
             elseif type(group[1]) == 'table' then
                 load_group(vim.tbl_map(function(highlight)
                     return { highlight, group[2], group[3], group[4] }
                 end, group[1]))
 
-            -- a regular entry
-            -- {'a', 'color', 'style'}
+            -- a regular color group:
+            --  {'a', 'bg', 'fg', 'font'}
             else
                 local n, fg, bg, font = unpack(group)
                 vim.highlight.create(n, {
