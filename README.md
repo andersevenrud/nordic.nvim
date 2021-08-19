@@ -14,16 +14,21 @@ and [much more](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/
 
 ## Usage
 
-This colorscheme can be installed, configured and enabled through `packer.nvim`:
+Nordbuddy can be installed using any package manager and configuration language
+of choice.
+
+### With packer.nvim
+
+[`packer.nvim`](https://github.com/wbthomason/packer.nvim) provides an easy way
+to install, enable and configure this colorscheme:
 
 ``` lua
 use {
     'maaslalani/nordbuddy',
     config = function()
-        require('nordbuddy').colorscheme(
-        -- This function takes a table as argument.
-        -- If an empty table is passed, these values are implicitly assigned.
-        {
+        -- The table used in this example contains the default settings.
+        -- Modify or remove these to your liking:
+        require('nordbuddy').colorscheme({
             -- Underline style used for spelling
             -- Options: 'none', 'underline', 'undercurl'
             underline_option = 'none',
@@ -42,27 +47,17 @@ use {
 }
 ```
 
+### Alternatives
 
-### Alternatively
+For example [`vim-plug`](https://github.com/junegunn/vim-plug):
 
-#### Install
-
-Install using:
-* `packer.nvim`
-
-``` lua
-use { 'maaslalani/nordbuddy' }
-```
-
-* `vim-plug`
-
-``` vim
+```vim
 Plug 'maaslalani/nordbuddy'
 ```
 
-#### Setup
+#### Using Lua
 
-Configure and enable the colorscheme in `init.lua` with:
+Via the nordbuddy module:
 
 ``` lua
 require('nordbuddy').colorscheme({
@@ -73,9 +68,7 @@ require('nordbuddy').colorscheme({
 })
 ```
 
-Or do this with global variables:
-
-* In `init.lua`:
+or via vim globals:
 
 ``` lua
 vim.g.nord_underline_option = 'none'
@@ -85,7 +78,7 @@ vim.g.nord_minimal_mode = false
 vim.cmd('colorscheme nordbuddy')
 ```
 
-* In `init.vim`:
+#### Using Vimscript
 
 ``` vim
 let g:nord_underline_option = 'none'
