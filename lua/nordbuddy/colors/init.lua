@@ -1,4 +1,5 @@
 local colors = {
+    'cmp'
     'diff',
     'fugitive',
     'gitgutter',
