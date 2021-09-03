@@ -90,5 +90,5 @@ colorscheme nordbuddy
 
 ## Notes
 
-Some plugin highlights are configured manually with Lua tables. This colorscheme comes with some
-[pre-made configurations](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/configs) that contains setup instructions.
+Certain plugin highlights are configured manually with Lua tables. This colorscheme comes with some
+[pre-made configurations](https://github.com/maaslalani/nordbuddy/tree/main/lua/nordbuddy/configs) and instructions.
