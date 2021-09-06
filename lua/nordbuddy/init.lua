@@ -16,15 +16,15 @@ local style_names = {
 }
 
 local function create_options(config)
-    local user_opts = {}
+    local module_opts = {}
     local global_opts = {}
 
     for k in pairs(default_opts) do
-        user_opts[k] = config[k]
+        module_opts[k] = config[k]
         global_opts[k] = vim.g['nord_' ..  k]
     end
 
-    return vim.tbl_extend('force', default_opts, global_opts, user_opts)
+    return vim.tbl_extend('force', default_opts, global_opts, module_opts)
 end
 
 local function create_arguments(options)
