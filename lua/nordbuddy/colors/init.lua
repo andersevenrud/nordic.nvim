@@ -16,7 +16,8 @@ local colors = {
     'syntax',
     'telescope',
     'vimwiki',
-    'whichkey'
+    'whichkey',
+    'nvim_tree',
 }
 
 return vim.tbl_map(function (v)
