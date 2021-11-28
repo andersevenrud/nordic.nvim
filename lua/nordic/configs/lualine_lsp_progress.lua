@@ -1,4 +1,4 @@
-local palette = require('nordbuddy.palette')
+local palette = require('nordic.palette')
 
 -- arkav/lualine-lsp-progress
 -- usage:
@@ -8,7 +8,7 @@ local palette = require('nordbuddy.palette')
 --             lualine_c = {
 --                 ...,
 --                 { 'lsp_progress',
---                     colors = require('nordbuddy.configs.lualine_lsp_progress')
+--                     colors = require('nordic.configs.lualine_lsp_progress')
 --                 }
 --             }
 --         }

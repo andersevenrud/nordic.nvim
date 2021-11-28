@@ -1,5 +1,5 @@
-local palette = require('nordbuddy.palette')
-local all_colors = require('nordbuddy.colors')
+local palette = require('nordic.palette')
+local all_colors = require('nordic.colors')
 local vim = vim
 local M = {}
 
@@ -77,7 +77,7 @@ local function initialize(config)
 end
 
 function M.colorscheme(config)
-    vim.g.colors_name = 'nordbuddy'
+    vim.g.colors_name = 'nordic'
     vim.g.terminal_color_0 = palette.black
     vim.g.terminal_color_1 = palette.red
     vim.g.terminal_color_2 = palette.green

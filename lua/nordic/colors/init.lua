@@ -21,5 +21,5 @@ local colors = {
 }
 
 return vim.tbl_map(function (v)
-    return require('nordbuddy.colors.' .. v)
+    return require('nordic.colors.' .. v)
 end, colors)
