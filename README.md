@@ -4,7 +4,7 @@ A [nord](https://www.nordtheme.com/)-esque colorscheme.
 
 nordic.nvim supports highlighting for [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter),
 [Neovim LSP](https://neovim.io/doc/user/lsp.html), [Telescope](https://github.com/nvim-telescope/telescope.nvim/),
-and [much more](https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic.nvim/colors).
+and [much more](https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic/colors).
 
 ![Color Preview](https://user-images.githubusercontent.com/42545625/112913430-935a6a80-90c7-11eb-867e-394b1790a14f.png)
 
@@ -91,4 +91,4 @@ colorscheme nordic
 ## Notes
 
 Certain plugin highlights are configured manually with Lua tables. This colorscheme comes with some
-[pre-made configurations](https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic.nvim/configs) and instructions.
+[pre-made configurations](https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic/configs) and instructions.
