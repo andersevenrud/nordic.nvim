@@ -8,7 +8,7 @@ return function(c)
     {'CmpItemAbbrMatchFuzzy', c.bright_cyan, c.none},
     {'CmpItemKind', c.grayish, c.none},
     {'CmpItemMenu', c.none, c.black},
-    {'CmpItemKindDefault', c.yellow, c.none},
+    {'CmpItemKindDefault', c.dark_white, c.none},
     {'CmpItemAbbrMatch', c.blue, c.none},
     {'CmpItemAbbrMatchFuzzy', c.blue, c.none},
     {'CmpItemKindFunction', c.purple, c.none},
