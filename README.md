@@ -28,7 +28,7 @@ use {
     config = function()
         -- The table used in this example contains the default settings.
         -- Modify or remove these to your liking:
-        require('nordic.nvim').colorscheme({
+        require('nordic').colorscheme({
             -- Underline style used for spelling
             -- Options: 'none', 'underline', 'undercurl'
             underline_option = 'none',
