@@ -1,6 +1,7 @@
 -- 'kyazdani42/nvim-tree.lua'
-return function(c, s)
+return function(c, s, cs)
     return {
+        {'NvimTreeNormal', c.none, cs.bg('nvim-tree') },
         {'NvimTreeSymlink', c.purple, c.none, s.bold },
         {'NvimTreeFolderIcon', c.blue, c.none, s.bold },
         {'NvimTreeRootFolder', c.purple, c.none, s.none },

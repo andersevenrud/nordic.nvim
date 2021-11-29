@@ -7,12 +7,26 @@ local default_opts = {
     underline_option = 'none',
     italic = true,
     italic_comments = false,
-    minimal_mode = false
+    minimal_mode = false,
+    alternate_backgrounds = false
 }
 
 local style_names = {
     'bold', 'underline', 'italic', 'undercurl', 'strikethrough',
     'reverse', 'inverse', 'standout', 'nocombine'
+}
+
+local alternate_buffers_supported = {
+    'terminal',
+    'qf',
+    'vista_kind',
+    'packer',
+}
+
+local alternate_highlights_supported = {
+    'nvim-tree',
+    'telescope',
+    'whichkey',
 }
 
 local function create_options(config)
@@ -27,7 +41,28 @@ local function create_options(config)
     return vim.tbl_extend('force', default_opts, global_opts, module_opts)
 end
 
-local function create_arguments(options)
+local function create_alternatives(options)
+    local buffers = {}
+    local extensions = {}
+
+    local function filter(check)
+        return vim.tbl_filter(function(value)
+            return vim.tbl_contains(check, value)
+        end, options.alternate_backgrounds)
+    end
+
+    if options.alternate_backgrounds == true then
+        buffers = alternate_buffers_supported
+        extensions = alternate_highlights_supported
+    elseif type(options.alternate_backgrounds) == 'table' then
+        buffers = filter(alternate_buffers_supported)
+        extensions = filter(alternate_highlights_supported)
+    end
+
+    return {buffers = buffers, extensions = extensions}
+end
+
+local function create_arguments(options, alternatives)
     local s = {}
     for _, v in pairs(style_names) do
         s[v] = v
@@ -37,7 +72,11 @@ local function create_arguments(options)
     local cs = {
         underline = options.underline_option and s[options.underline_option] or s.none,
         italic = (options.italic == true or options.italic == nil) and s.italic or s.none,
-        comments = options.italic_comments and s.italic or s.none
+        comments = options.italic_comments and s.italic or s.none,
+        bg = function(name)
+            local found = vim.tbl_contains(alternatives.extensions, name)
+            return found and palette.dark_black_alt or palette.dark_black
+        end
     }
 
     return {palette, s, cs, options}
@@ -45,7 +84,8 @@ end
 
 local function initialize(config)
     local options = create_options(config)
-    local arguments = create_arguments(options)
+    local alternatives = create_alternatives(options)
+    local arguments = create_arguments(options, alternatives)
 
     local function load_group(list)
         for _, group in ipairs(list) do
@@ -73,7 +113,29 @@ local function initialize(config)
         end
     end
 
+    local function load_autocommands()
+        vim.cmd([[augroup nordic]])
+        vim.cmd([[  autocmd!]])
+        vim.cmd([[  autocmd ColorScheme * lua require('nordic').destroy()]])
+        for _, name in ipairs(alternatives.buffers) do
+            if name == 'terminal' then
+                vim.cmd([[  autocmd TermOpen * setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]])
+            else
+                vim.cmd([[  autocmd FileType ]] .. name .. [[ setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]])
+            end
+        end
+        vim.cmd([[augroup end]])
+    end
+
     load_group(all_colors)
+    load_autocommands()
+end
+
+function M.destroy()
+    if vim.g.colors_name ~= "nordic" then
+        vim.cmd([[autocmd! nordic]])
+        vim.cmd([[augroup! nordic]])
+    end
 end
 
 function M.colorscheme(config)

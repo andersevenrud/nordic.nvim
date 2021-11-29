@@ -9,6 +9,7 @@ return function(c, s, cs, opts)
         {'MatchParen', c.bright_cyan, c.gray},
         {'NonText', c.bright_black},
         {'Normal', c.dark_white, c.dark_black},
+        {'NormalAlt', c.dark_white, c.dark_black_alt},
         {'PMenu', c.dark_white, c.bright_black},
         {'PmenuSbar', c.dark_white, c.bright_black},
         {'PMenuSel', c.bright_cyan, c.gray, s.bold},
@@ -39,6 +40,7 @@ return function(c, s, cs, opts)
         {'Folded', c.gray, c.dark_black},
         {'FoldColumn', c.gray, c.dark_black},
         {'SignColumn', c.black, c.dark_black},
+        {'SignColumnAlt', c.black, c.dark_black_alt},
         -- Navigation ---
         {'Directory', c.bright_cyan},
         --- Prompt/Status ---

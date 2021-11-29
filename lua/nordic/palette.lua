@@ -8,6 +8,7 @@ return {
     -- Custom
     darkish_black = '#3B414D',
     grayish = '#667084',
+    dark_black_alt = '#2B303B',
 
     -- Snow Storm
     dark_white = '#d8dee9',
