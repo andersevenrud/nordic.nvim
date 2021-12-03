@@ -47,6 +47,13 @@ use {
             -- Options: true, false, or a table of explicit names
             -- Supported: terminal, qf, vista_kind, packer, nvim-tree, telescope, whichkey
             alternate_backgrounds = false,
+
+            -- Callback function to define custom color groups
+            -- Arguments are: colors, styles, custom styles
+            -- See color files for examples
+            custom_colors = function(c, s, cs)
+              return {}
+            end
         })
     end
 }

@@ -20,6 +20,8 @@ local colors = {
     'nvim_tree',
 }
 
-return vim.tbl_map(function (v)
-    return require('nordic.colors.' .. v)
-end, colors)
+return function()
+    return vim.tbl_map(function (v)
+        return require('nordic.colors.' .. v)
+    end, colors)
+end

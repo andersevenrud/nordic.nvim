@@ -1,5 +1,5 @@
 local palette = require('nordic.palette')
-local all_colors = require('nordic.colors')
+local load_colors = require('nordic.colors')
 local vim = vim
 local M = {}
 
@@ -8,7 +8,10 @@ local default_opts = {
     italic = true,
     italic_comments = false,
     minimal_mode = false,
-    alternate_backgrounds = false
+    alternate_backgrounds = false,
+    custom_colors = function()
+        return {}
+    end
 }
 
 local style_names = {
@@ -86,23 +89,26 @@ local function initialize(config)
     local options = create_options(config)
     local alternatives = create_alternatives(options)
     local arguments = create_arguments(options, alternatives)
+    local groups = load_colors()
+    if type(options.custom_colors) == 'function' then
+        table.insert(groups, options.custom_colors)
+    end
 
     local function load_group(list)
         for _, group in ipairs(list) do
-            -- functions can return a table with nested-, regular- or function
-            -- color groups (recursive)
+            -- functions can return a table with nested-, regular- or function color groups (recursive)
             if type(group) == 'function' then
                 load_group(group(unpack(arguments)))
 
             -- nested color groups, i.e. multiple names with same styles:
-            --  {{'a', 'b', 'c'}, 'bg', 'fg', 'font'}
+            --  {{'NAME1', 'NAME2', 'NAME3'}, 'fg', 'bg', 'gui'}
             elseif type(group[1]) == 'table' then
                 load_group(vim.tbl_map(function(highlight)
                     return { highlight, group[2], group[3], group[4] }
                 end, group[1]))
 
             -- a regular color group:
-            --  {'a', 'bg', 'fg', 'font'}
+            --  {'NAME', 'fg', 'bg', 'gui'}
             else
                 vim.highlight.create(group[1], {
                     guifg = group[2] or 'NONE',
@@ -113,6 +119,7 @@ local function initialize(config)
         end
     end
 
+    -- From https://github.com/folke/tokyonight.nvim
     local function load_autocommands()
         vim.cmd([[augroup nordic]])
         vim.cmd([[  autocmd!]])
@@ -127,7 +134,7 @@ local function initialize(config)
         vim.cmd([[augroup end]])
     end
 
-    load_group(all_colors)
+    load_group(groups)
     load_autocommands()
 end
 
