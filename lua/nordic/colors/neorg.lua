@@ -1,6 +1,6 @@
 -- 'vhyrro/neorg'
 return function(c)
     return {
-        {'Conceal', c.none},
+        { 'Conceal', c.none },
     }
 end
