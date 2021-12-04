@@ -21,7 +21,7 @@ local colors = {
 }
 
 return function()
-    return vim.tbl_map(function (v)
+    return vim.tbl_map(function(v)
         return require('nordic.colors.' .. v)
     end, colors)
 end

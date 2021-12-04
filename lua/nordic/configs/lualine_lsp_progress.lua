@@ -15,9 +15,9 @@ local palette = require('nordic.palette')
 --     }
 
 return {
-  percentage = palette.white,
-  title = palette.white,
-  message = palette.white,
-  spinner = palette.white,
-  lsp_client_name = palette.bright_cyan,
+    percentage = palette.white,
+    title = palette.white,
+    message = palette.white,
+    spinner = palette.white,
+    lsp_client_name = palette.bright_cyan,
 }

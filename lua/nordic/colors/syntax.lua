@@ -1,204 +1,306 @@
 return function(c, s, cs)
     local attributes = {
-        'TSAnnotation', 'TSAttribute', -- TS
-        'luametatableevents', 'luametatablearithmetic',
-        'luametatableequivalence' -- lua
+        -- TS
+        'TSAnnotation',
+        'TSAttribute',
+        -- lua
+        'luametatableevents',
+        'luametatablearithmetic',
+        'luametatableequivalence',
     }
     local numbers = {
-        'TSBoolean', 'TSFloat', 'TSNumber', -- TS
-        'Boolean', 'Float', 'Number' -- VL
+        -- TS
+        'TSBoolean',
+        'TSFloat',
+        'TSNumber',
+
+        'Boolean',
+        'Float',
+        'Number', -- VL
     }
     local comments = {
         'TSComment', -- TS
         'Comment', -- VL
         'manFooter', -- man
-        'rustCommentLine', 'rustCommentBlock', -- rust
-        'vimCommentTitle', 'vimCommentLine' -- vim
+        -- rust
+        'rustCommentLine',
+        'rustCommentBlock',
+        -- vim
+        'vimCommentTitle',
+        'vimCommentLine',
     }
     local constructors = {
-        'TSConstructor' -- TS
+        'TSConstructor', -- TS
     }
     local conditionals = {
         'TSConditional', -- TS
-        'Conditional', 'PreCondit', -- VL
-        'cPreCondit', 'cPreConditMatch' -- C/C++
+        -- VL
+        'Conditional',
+        'PreCondit',
+        -- C/C++
+        'cPreCondit',
+        'cPreConditMatch',
     }
     local constants = {
         'TSConstant', -- TS
         'Constant', -- VL
-        'cConstant', 'cppConstant' -- C/C++
+        -- C/C++
+        'cConstant',
+        'cppConstant',
     }
     local defines = {
         'TSConstMacro', -- TS
-        'Define', 'Macro' -- VL
+        'Define',
+        'Macro', -- VL
     }
     local exceptions = {
         'TSException', -- TS
-        'Exception' -- VL
+        'Exception', -- VL
     }
     local fields = {
-        'TSField', 'TSProperty', 'TSTag', -- TS
-        'Tag' -- VL
+        'TSField',
+        'TSProperty',
+        'TSTag', -- TS
+        'Tag', -- VL
     }
     local functions = {
-        'TSFunction', 'TSFuncMacro', 'TSMethod', -- TS
+        -- TS
+        'TSFunction',
+        'TSFuncMacro',
+        'TSMethod',
         'Function', -- VL
         'pythonfunction', -- python
-        'vimFunction', 'vimUserFunc' -- vim
+        'vimFunction',
+        'vimUserFunc', -- vim
     }
     local includes = {
         'TSInclude', -- TS
-        'Include', 'PreProc', -- VL
+        'Include',
+        'PreProc', -- VL
         'cInclude', -- C/C++
         'pythonimport', -- python
-        'rustExternCrate' -- rust
+        'rustExternCrate', -- rust
     }
     local keywords = {
-        'TSKeyword', 'TSKeywordFunction', -- TS
-        'Keyword', 'Statement', -- VL
-        'cStatement', 'cppStatement', 'cppModifier', 'cppAccess', -- C/C++
-        'pythonstatement', 'pythonkeyword', -- python
+        -- TS
+        'TSKeyword',
+        'TSKeywordFunction',
+        -- VL
+        'Keyword',
+        'Statement',
+        -- C/C++
+        'cStatement',
+        'cppStatement',
+        'cppModifier',
+        'cppAccess',
+        -- python
+        'pythonstatement',
+        'pythonkeyword',
         'rustDeriveTrait', -- rust
-        'luastatement', 'luakeyword', 'luamykeyword', 'luafunctioncall',
-        'luaspecialfunction', -- lua
-        'vimCommand', 'vimnotfunc' -- vim
+        -- lua
+        'luastatement',
+        'luakeyword',
+        'luamykeyword',
+        'luafunctioncall',
+        'luaspecialfunction',
+        -- vim
+        'vimCommand',
+        'vimnotfunc',
     }
     local labels = {
         'TSLabel', -- TS
-        'Label' -- VL
+        'Label', -- VL
     }
     local namespaces = {
         'TSNamespace', -- TS
-        'pythonModule' -- python
+        'pythonModule', -- python
     }
     local nones = {
         'TSNone', -- VL
-        'pythonnone' -- python
+        'pythonnone', -- python
     }
     local operators = {
         'TSOperator', -- TS
         'Operator', -- VL
-        'cOperator', 'cppOperator', -- C/C++
-        'pythonoperator' -- python
+        -- C/C++
+        'cOperator',
+        'cppOperator',
+        'pythonoperator', -- python
     }
     local parameters = {
-        'TSParameter', 'TSParameterReference', -- TS
-        'pythonparam' -- python
+        'TSParameter',
+        'TSParameterReference', -- TS
+        'pythonparam', -- python
     }
     local properties = {
-        'TSProperty' -- TS
+        'TSProperty', -- TS
     }
     local punctuations = {
-        'TSPunctDelimiter', 'TSPunctBracket', 'TSPunctSpecial',
-        'TSTagDelimiter', -- TS
-        'Delimiter', -- VL
-        'vimparensep', 'vimsep', 'vimbracket', -- vim
-        'shCmdParenRegion', 'shCmdSubRegion' -- sh
+        -- TS
+        'TSPunctDelimiter',
+        'TSPunctBracket',
+        'TSPunctSpecial',
+        'TSTagDelimiter',
+        -- VL
+        'Delimiter',
+        -- vim
+        'vimparensep',
+        'vimsep',
+        'vimbracket',
+        -- sh
+        'shCmdParenRegion',
+        'shCmdSubRegion',
     }
     local repeats = {
         'TSRepeat', -- TS
-        'Repeat' -- VL
+        'Repeat', -- VL
     }
     local strings = {
-        'TSCharacter', 'TSString', -- TS
-        'Character', 'String', -- VL
-        'cString', 'cCppString', -- C/C++
-        'pythonstringdelimiter', 'pythonbytes', 'pythonrawbytes',
-        'pythonbytescontent' -- python
+        -- TS
+        'TSCharacter',
+        'TSString',
+        -- VL
+        'Character',
+        'String',
+        -- C/C++
+        'cString',
+        'cCppString',
+        -- python
+        'pythonstringdelimiter',
+        'pythonbytes',
+        'pythonrawbytes',
+        'pythonbytescontent',
     }
     local strings_specials = {
-        'TSStringRegex', 'TSStriingEscape', -- TS
+        -- TS
+        'TSStringRegex',
+        'TSStriingEscape',
         'SpecialChar', -- VL
         'cSpecialCharacter', -- C/C++
-        'pythonescape' -- python
+        'pythonescape', -- python
     }
     local symbols = {
         'TSSymbol', -- TS
-        'Special', 'SpecialComment', -- VL
+        -- VL
+        'Special',
+        'SpecialComment',
         'cSpecial', -- C/C++
         'pythonsymbol', -- python
-        'rustCommentLineDoc', 'rustCommentBlockDoc' -- rust
+        -- rust
+        'rustCommentLineDoc',
+        'rustCommentBlockDoc',
     }
     local texts = {
-        'TSText', 'TSStrong', 'TSEmphais', 'TSUnderline', 'TSStrike', 'TSTitle',
-        'TSLiteral', -- TS
+        -- TS
+        'TSText',
+        'TSStrong',
+        'TSEmphais',
+        'TSUnderline',
+        'TSStrike',
+        'TSTitle',
+        'TSLiteral',
         'Text', -- VL
-        'manTitle' -- man
+        'manTitle', -- man
     }
     local uris = {
-        'TSURI' -- TS
+        'TSURI', -- TS
     }
     local types = {
-        'TSType', 'TSTypeBuildin', -- TS
-        'Type', 'StorageClass', 'Structure', 'Typedef', -- VL
-        'cType', 'cStorageClass', 'cStructure', 'cppType', 'cppStorageClass',
-        'cppStructure', -- C/C++
-        'pythonclass', -- python
-        'vimlet' -- vim
+        -- TS
+        'TSType',
+        'TSTypeBuildin',
+        -- VL
+        'Type',
+        'StorageClass',
+        'Structure',
+        'Typedef',
+        -- C/C++
+        'cType',
+        'cStorageClass',
+        'cStructure',
+        'cppType',
+        'cppStorageClass',
+        'cppStructure',
+        -- python
+        'pythonclass',
+        'vimlet', -- vim
     }
     local variables = {
         'TSVariable', -- TS
         'Identifier', -- VL
         'pythonselfarg', -- python
         'rustIdentifier', -- rust
-        'vimmapmodkey', 'vimnotation', 'vimfuncvar', 'vimvar', -- vim
-        'shDerefSimple', 'shDerefVar' -- sh
+        -- vim
+        'vimmapmodkey',
+        'vimnotation',
+        'vimfuncvar',
+        'vimvar',
+        -- sh
+        'shDerefSimple',
+        'shDerefVar',
     }
     local builtins = { -- such as self. in python
-        'TSConstBuiltin', 'TSFuncBuiltin', 'TSVariableBuiltin', -- TS
-        'pythonbuiltin', 'pythonself', -- python
-        'vimmap' -- vim
+        -- TS
+        'TSConstBuiltin',
+        'TSFuncBuiltin',
+        'TSVariableBuiltin',
+        -- python
+        'pythonbuiltin',
+        'pythonself',
+        'vimmap', -- vim
     }
     local notes = {
         'TSNote', -- TS
         'Todo', -- VL
-        'cTODO' -- C/C++
+        'cTODO', -- C/C++
     }
     local warnings = {
         'TSWarning', -- TS
-        'Debug' -- VL
+        'Debug', -- VL
     }
     local dangers = {
-        'TSDanger' -- TS
+        'TSDanger', -- TS
     }
     local errors = {
         'TSError', -- TS
         'Error', -- VL
-        'rustCommentLineDocError', 'rustCommentBlockDocError' -- rust
+        -- rust
+        'rustCommentLineDocError',
+        'rustCommentBlockDocError',
     }
 
     return {
-        {attributes, c.blue},
-        {numbers, c.purple},
-        {comments, c.grayish, c.none, cs.comments},
-        {constructors, c.dark_white, c.none, cs.italic}, -- in C++ variable->constructors() \\ TS docs unclear
-        {conditionals, c.intense_blue, c.none, cs.italic},
-        {constants, c.dark_white},
-        {defines, c.intense_blue},
-        {exceptions, c.blue},
-        {fields, c.blue, c.none},
-        {functions, c.dark_white, c.none, cs.italic},
-        {includes, c.intense_blue},
-        {keywords, c.blue, c.none, s.none},
-        {labels, c.intense_blue, c.none, cs.italic},
-        {namespaces, c.dark_white, c.none, cs.italic},
-        {nones, c.dark_white},
-        {operators, c.blue},
-        {parameters, c.dark_white, c.none, cs.italic},
-        {properties, c.blue},
-        {punctuations, c.blue},
-        {repeats, c.blue, c.none, cs.italic},
-        {strings, c.green},
-        {strings_specials, c.yellow},
-        {symbols, c.yellow},
-        {texts, c.dark_white},
-        {uris, c.purple},
-        {types, c.cyan},
-        {variables, c.dark_white},
-        {builtins, c.blue, c.none, cs.italic},
-        {notes, c.orange},
-        {warnings, c.yellow},
-        {dangers, c.yellow},
-        {errors, c.red}
+        { attributes, c.blue },
+        { numbers, c.purple },
+        { comments, c.grayish, c.none, cs.comments },
+        { constructors, c.dark_white, c.none, cs.italic }, -- in C++ variable->constructors() \\ TS docs unclear
+        { conditionals, c.intense_blue, c.none, cs.italic },
+        { constants, c.dark_white },
+        { defines, c.intense_blue },
+        { exceptions, c.blue },
+        { fields, c.blue, c.none },
+        { functions, c.dark_white, c.none, cs.italic },
+        { includes, c.intense_blue },
+        { keywords, c.blue, c.none, s.none },
+        { labels, c.intense_blue, c.none, cs.italic },
+        { namespaces, c.dark_white, c.none, cs.italic },
+        { nones, c.dark_white },
+        { operators, c.blue },
+        { parameters, c.dark_white, c.none, cs.italic },
+        { properties, c.blue },
+        { punctuations, c.blue },
+        { repeats, c.blue, c.none, cs.italic },
+        { strings, c.green },
+        { strings_specials, c.yellow },
+        { symbols, c.yellow },
+        { texts, c.dark_white },
+        { uris, c.purple },
+        { types, c.cyan },
+        { variables, c.dark_white },
+        { builtins, c.blue, c.none, cs.italic },
+        { notes, c.orange },
+        { warnings, c.yellow },
+        { dangers, c.yellow },
+        { errors, c.red },
     }
 end

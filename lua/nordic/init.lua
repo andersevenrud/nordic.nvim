@@ -11,12 +11,19 @@ local default_opts = {
     alternate_backgrounds = false,
     custom_colors = function()
         return {}
-    end
+    end,
 }
 
 local style_names = {
-    'bold', 'underline', 'italic', 'undercurl', 'strikethrough',
-    'reverse', 'inverse', 'standout', 'nocombine'
+    'bold',
+    'underline',
+    'italic',
+    'undercurl',
+    'strikethrough',
+    'reverse',
+    'inverse',
+    'standout',
+    'nocombine',
 }
 
 local alternate_buffers_supported = {
@@ -38,7 +45,7 @@ local function create_options(config)
 
     for k in pairs(default_opts) do
         module_opts[k] = config[k]
-        global_opts[k] = vim.g['nord_' ..  k]
+        global_opts[k] = vim.g['nord_' .. k]
     end
 
     return vim.tbl_extend('force', default_opts, global_opts, module_opts)
@@ -62,7 +69,7 @@ local function create_alternatives(options)
         extensions = filter(alternate_highlights_supported)
     end
 
-    return {buffers = buffers, extensions = extensions}
+    return { buffers = buffers, extensions = extensions }
 end
 
 local function create_arguments(options, alternatives)
@@ -79,10 +86,10 @@ local function create_arguments(options, alternatives)
         bg = function(name)
             local found = vim.tbl_contains(alternatives.extensions, name)
             return found and palette.dark_black_alt or palette.dark_black
-        end
+        end,
     }
 
-    return {palette, s, cs, options}
+    return { palette, s, cs, options }
 end
 
 local function initialize(config)
@@ -96,20 +103,18 @@ local function initialize(config)
 
     local function load_group(list)
         for _, group in ipairs(list) do
-            -- functions can return a table with nested-, regular- or function color groups (recursive)
             if type(group) == 'function' then
+                -- functions can return a table with nested-, regular- or function color groups (recursive)
                 load_group(group(unpack(arguments)))
-
-            -- nested color groups, i.e. multiple names with same styles:
-            --  {{'NAME1', 'NAME2', 'NAME3'}, 'fg', 'bg', 'gui'}
             elseif type(group[1]) == 'table' then
+                -- nested color groups, i.e. multiple names with same styles:
+                --  {{'NAME1', 'NAME2', 'NAME3'}, 'fg', 'bg', 'gui'}
                 load_group(vim.tbl_map(function(highlight)
                     return { highlight, group[2], group[3], group[4] }
                 end, group[1]))
-
-            -- a regular color group:
-            --  {'NAME', 'fg', 'bg', 'gui'}
             else
+                -- a regular color group:
+                --  {'NAME', 'fg', 'bg', 'gui'}
                 vim.highlight.create(group[1], {
                     guifg = group[2] or 'NONE',
                     guibg = group[3] or 'NONE',
@@ -128,7 +133,11 @@ local function initialize(config)
             if name == 'terminal' then
                 vim.cmd([[  autocmd TermOpen * setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]])
             else
-                vim.cmd([[  autocmd FileType ]] .. name .. [[ setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]])
+                vim.cmd(
+                    [[  autocmd FileType ]]
+                        .. name
+                        .. [[ setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]]
+                )
             end
         end
         vim.cmd([[augroup end]])
@@ -139,7 +148,7 @@ local function initialize(config)
 end
 
 function M.destroy()
-    if vim.g.colors_name ~= "nordic" then
+    if vim.g.colors_name ~= 'nordic' then
         vim.cmd([[autocmd! nordic]])
         vim.cmd([[augroup! nordic]])
     end

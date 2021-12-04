@@ -26,5 +26,5 @@ return {
     orange = '#d08770', -- annotations and decorators
     yellow = '#ebcb8b', -- modifications, warning and escape characters
     green = '#a3be8c', -- additions and string
-    purple = '#b48ead' -- integers and floating point numbers
+    purple = '#b48ead', -- integers and floating point numbers
 }
