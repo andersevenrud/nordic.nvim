@@ -121,18 +121,16 @@ local function initialize(config)
 
     -- Thanks https://github.com/folke/tokyonight.nvim
     local function load_autocommands()
+        local setlocal = [[setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]]
+
         vim.cmd([[augroup nordic]])
         vim.cmd([[  autocmd!]])
         vim.cmd([[  autocmd ColorScheme * lua require('nordic').destroy()]])
         for _, name in ipairs(alternatives.buffers) do
             if name == 'terminal' then
-                vim.cmd([[  autocmd TermOpen * setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]])
+                vim.cmd([[  autocmd TermOpen * ]] .. setlocal)
             else
-                vim.cmd(
-                    [[  autocmd FileType ]]
-                        .. name
-                        .. [[ setlocal winhighlight=Normal:NormalAlt,SignColumn:SignColumnAlt]]
-                )
+                vim.cmd([[  autocmd FileType ]] .. name .. setlocal)
             end
         end
         vim.cmd([[augroup end]])
