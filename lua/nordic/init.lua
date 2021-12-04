@@ -119,7 +119,7 @@ local function initialize(config)
         end
     end
 
-    -- From https://github.com/folke/tokyonight.nvim
+    -- Thanks https://github.com/folke/tokyonight.nvim
     local function load_autocommands()
         vim.cmd([[augroup nordic]])
         vim.cmd([[  autocmd!]])

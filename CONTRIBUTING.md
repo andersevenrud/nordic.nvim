@@ -6,7 +6,7 @@ of how to contribute.
 ## Code style
 
 This project uses [stylua](https://github.com/JohnnyMorganz/StyLua) and [luacheck](https://github.com/mpeterv/luacheck)
-to check the code for potential errors and code style issues.
+to check the code for potential errors and styling issues.
 
 It is adviced to install these utilities and check your code before submission. Most modern IDEs and editors have some
 way of alerting you with diagnostics using the provided configurations.

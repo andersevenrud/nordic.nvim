@@ -27,7 +27,7 @@ use {
     'andersevenrud/nordic.nvim',
     config = function()
         -- The table used in this example contains the default settings.
-        -- Modify or remove these to your liking:
+        -- Modify or remove these to your liking (this also applies to alternatives below):
         require('nordic').colorscheme({
             -- Underline style used for spelling
             -- Options: 'none', 'underline', 'undercurl'
@@ -49,7 +49,6 @@ use {
             alternate_backgrounds = false,
 
             -- Callback function to define custom color groups
-            -- Arguments are: colors, styles, custom styles
             -- See 'lua/nordic/colors/example.lua' for example defitions
             custom_colors = function(c, s, cs)
               return {}

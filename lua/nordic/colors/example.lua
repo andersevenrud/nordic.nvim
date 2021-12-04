@@ -12,7 +12,7 @@ return function(c, s, cs)
         { 'HightlightName2', c.none, c.green },
         { 'HightlightName3', c.white },
 
-        -- Multiple hightlight groups with (same as above except table for names)
+        -- Multiple hightlight groups (same as above except table for names)
         {
             { 'HighlightName4', 'HighlightName5' },
             c.red,
@@ -21,7 +21,7 @@ return function(c, s, cs)
         },
 
         -- Or a function that can return any of these combinations
-        function()
+        function(--[[c, s, cs]])
             return {
                 {
                     'HightlightName6',
