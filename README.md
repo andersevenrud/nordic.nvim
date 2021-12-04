@@ -50,7 +50,7 @@ use {
 
             -- Callback function to define custom color groups
             -- Arguments are: colors, styles, custom styles
-            -- See color files for examples
+            -- See 'lua/nordic/colors/example.lua' for example defitions
             custom_colors = function(c, s, cs)
               return {}
             end
