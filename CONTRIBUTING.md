@@ -1,6 +1,6 @@
 # Contribution Guide
 
-Pull requests are very welcome and this guide will walk thorugh some of the basics
+Pull requests are very welcome and this guide will walk through some of the basics
 on how to contribute.
 
 ## Code style
@@ -15,9 +15,9 @@ way of alerting you with diagnostics using the provided configurations.
 
 In the `lua/nordic/colors/` directory:
 
-1. Create a new file for your colors, i.e. `project_name.lua` with the following template (see `example.lua` for example definitions):
+1. Create a new file for your definitions, i.e. `project_name.lua` with the following template (see `example.lua` for example definitions):
 ```lua
--- 'repo-username/repo-name'
+-- 'repo-username/project-name'
 return function(c, s, cs)
     return {}
 end
@@ -31,8 +31,7 @@ local colors = {
 }
 ```
 
-You should now have a working color definition ready for submission. Commit the changes with the message
-`Add support for repo-name` into your fork and open a pull-request.
+Commit the changes with the message `Add support for project-name` into your fork and open a pull-request.
 
 ### Alternate background colors
 
@@ -42,4 +41,4 @@ on certain UI elements like special buffers and popups, etc.
 The `lua/nordic/init.lua` file contains two tables to define where this should apply:
 
 * `alternate_buffers_supported`: A buffer filename
-* `alternate_highlights_supported`: A plugin name used in color definitions via `cs.bg('plugin_name')`
+* `alternate_highlights_supported`: A plugin name used in color definitions via `cs.bg('project_name')`
