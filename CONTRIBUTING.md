@@ -1,7 +1,7 @@
 # Contribution Guide
 
 Pull requests are very welcome and this guide will walk thorugh some of the basics
-of how to contribute.
+on how to contribute.
 
 ## Code style
 
@@ -31,7 +31,8 @@ local colors = {
 }
 ```
 
-You should now have a working color definition ready for submission.
+You should now have a working color definition ready for submission. Commit the changes with the message
+`Add support for repo-name` into your fork and open a pull-request.
 
 ### Alternate background colors
 
