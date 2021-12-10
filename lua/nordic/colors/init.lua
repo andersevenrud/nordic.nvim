@@ -6,6 +6,7 @@ local colors = {
     'gitsigns',
     'hop',
     'indent_blankline',
+    'lightspeed',
     'lsp',
     'lspsaga',
     'markdown',
