@@ -168,7 +168,7 @@ function M.colorscheme(config)
     vim.g.terminal_color_14 = palette.cyan
     vim.g.terminal_color_15 = palette.bright_white
 
-    initialize(config)
+    initialize(config or {})
 end
 
 return M
