@@ -191,14 +191,7 @@ return function(c, s, cs)
         'rustCommentBlockDoc',
     }
     local texts = {
-        -- TS
-        'TSText',
-        'TSStrong',
-        'TSEmphais',
-        'TSUnderline',
-        'TSStrike',
-        'TSTitle',
-        'TSLiteral',
+        'TSText', -- TS
         'Text', -- VL
         'manTitle', -- man
     }
@@ -302,5 +295,13 @@ return function(c, s, cs)
         { warnings, c.yellow },
         { dangers, c.yellow },
         { errors, c.red },
+
+        { 'TSTitle', c.bright_cyan },
+        { 'TSStrong', c.dark_white, c.none, s.bold },
+        { { 'TSEmphasis', 'TSTextReference' }, c.dark_white, c.none, s.italic },
+        { 'TSUnderline', c.dark_white, c.none, s.underline },
+        { 'TSStrike', c.dark_white, c.none, s.strikethrough },
+        { 'TSLiteral', c.cyan },
+        { 'TSStringEscape', c.grayish },
     }
 end
