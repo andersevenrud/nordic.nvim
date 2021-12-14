@@ -22,7 +22,7 @@ of choice.
 [`packer.nvim`](https://github.com/wbthomason/packer.nvim) provides an easy way
 to install, enable and configure this colorscheme:
 
-``` lua
+```lua
 use {
     'andersevenrud/nordic.nvim',
     config = function()
