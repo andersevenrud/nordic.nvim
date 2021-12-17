@@ -20,6 +20,7 @@ local colors = {
     'vimwiki',
     'whichkey',
     'nvim_tree',
+    'packer',
 }
 
 return function()
