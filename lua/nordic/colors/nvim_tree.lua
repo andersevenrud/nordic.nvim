@@ -11,6 +11,7 @@ return function(c, s, cs)
         { 'NvimTreeOpenedFile', c.green, c.none, s.bold },
         { 'NvimTreeGitDirty', c.red, c.none, s.none },
         { 'NvimTreeGitDeleted', c.red, c.none, s.none },
+        { 'NvimTreeGitNew', c.green, c.none, s.none },
         { 'NvimTreeStaged', c.green, c.none, s.none },
         { 'NvimTreeMerge', c.orange, c.none, s.none },
         { 'NvimTreeRenamed', c.purple, c.none, s.none },
