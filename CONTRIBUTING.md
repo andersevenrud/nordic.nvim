@@ -11,6 +11,10 @@ to check the code for potential errors and styling issues.
 It is adviced to install these utilities and check your code before submission. Most modern IDEs and editors have some
 way of alerting you with diagnostics using the provided configurations.
 
+## Commit messages
+
+This project uses the [conventional commits](https://conventionalcommits.org/) specification for git commit messages.
+
 ## Adding color definitions
 
 In the `lua/nordic/colors/` directory:
@@ -31,7 +35,7 @@ local colors = {
 }
 ```
 
-Commit the changes with the message `Add support for project-name` into your fork and open a pull-request.
+Commit the changes with the message `feat: support project-name` into your fork and open a pull-request.
 
 ### Alternate background colors
 
