@@ -1,0 +1,123 @@
+**nordic.txt**
+**nordic.nvim**
+
+================================================================================
+CONTENTS                                                         *nordic-contents*
+
+1. Introduction...........................................................|nordic|
+2. Requirements..............................................|nordic-requirements|
+3. Usage............................................................|nordic-usage|
+    3.1. With packer.nvim..........................................|nordic-packer|
+    3.2. Alternatives........................................|nordic-alternatives|
+        3.2.1. Using Lua.................................|nordic-alternatives-lua|
+        3.2.2. Using Vimscript.....................|nordic-alternatives-vimscript|
+4. Notes............................................................|nordic-notes|
+
+
+================================================================================
+INTRODUCTION                                                              *nordic*
+
+A nord-esque colorscheme.
+
+nordic.nvim supports highlighting for Treesitter, Neovim LSP, Telescope, and much more.
+
+================================================================================
+REQUIREMENTS                                                 *nordic-requirements*
+
+*   Neovim 0.5+
+
+================================================================================
+USAGE                                                               *nordic-usage*
+
+nordic.nvim can be installed using any package manager and configuration language
+of choice.
+
+WITH PACKER.NVIM                                                   *nordic-packer*
+
+`packer.nvim` provides an easy way to install, enable and configure this colorscheme:
+>
+    use {
+        'andersevenrud/nordic.nvim',
+        config = function()
+            -- The table used in this example contains the default settings.
+            -- Modify or remove these to your liking (this also applies to alternatives below):
+            require('nordic').colorscheme({
+                -- Underline style used for spelling
+                -- Options: 'none', 'underline', 'undercurl'
+                underline_option = 'none',
+
+                -- Italics for certain keywords such as constructors, functions,
+                -- labels and namespaces
+                italic = true,
+
+                -- Italic styled comments
+                italic_comments = false,
+
+                -- Minimal mode: different choice of colors for Tabs and StatusLine
+                minimal_mode = false,
+
+                -- Darker backgrounds for certain sidebars, popups, etc.
+                -- Options: true, false, or a table of explicit names
+                -- Supported: terminal, qf, vista_kind, packer, nvim-tree, telescope, whichkey
+                alternate_backgrounds = false,
+
+                -- Callback function to define custom color groups
+                -- See 'lua/nordic/colors/example.lua' for example defitions
+                custom_colors = function(c, s, cs)
+                  return {}
+                end
+            })
+        end
+    }
+<
+
+ALTERNATIVES                                                 *nordic-alternatives*
+
+For example `vim-plug`:
+>
+    Plug 'andersevenrud/nordic.nvim'
+<
+
+USING LUA                                                *nordic-alternatives-lua*
+
+Via the nordic.nvim module:
+>
+    require('nordic').colorscheme({
+        underline_option = 'none',
+        italic = true,
+        italic_comments = false,
+        minimal_mode = false,
+        alternate_backgrounds = false
+    })
+<
+
+or via vim globals:
+>
+    vim.g.nord_underline_option = 'none'
+    vim.g.nord_italic = true
+    vim.g.nord_italic_comments = false
+    vim.g.nord_minimal_mode = false
+    vim.g.nord_alternate_backgrounds = false
+    vim.cmd('colorscheme nordic')
+<
+
+USING VIMSCRIPT                                     *nordic-alternatives-vimscript*
+>
+    let g:nord_underline_option = 'none'
+    let g:nord_italic = v:true
+    let g:nord_italic_comments = v:false
+    let g:nord_minimal_mode = v:false
+    let g:nord_alternate_backgrounds = v:false
+    colorscheme nordic
+<
+
+================================================================================
+NOTES                                                               *nordic-notes*
+
+Certain plugin highlights are configured manually with Lua tables. This colorscheme comes with some
+pre-made configurations (https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic/configs) and instructions.
+
+
+================================================================================
+
+vim:tw=78:ts=8:ft=help:norl:
