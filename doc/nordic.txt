@@ -1,5 +1,8 @@
-**nordic.txt**
-**nordic.nvim**
+*nordic*
+
+A nord-esque colorscheme.
+
+nordic.nvim supports highlighting for Treesitter, Neovim LSP, Telescope, and much more.
 
 ================================================================================
 CONTENTS                                                         *nordic-contents*
@@ -12,14 +15,6 @@ CONTENTS                                                         *nordic-content
         3.2.1. Using Lua.................................|nordic-alternatives-lua|
         3.2.2. Using Vimscript.....................|nordic-alternatives-vimscript|
 4. Notes............................................................|nordic-notes|
-
-
-================================================================================
-INTRODUCTION                                                              *nordic*
-
-A nord-esque colorscheme.
-
-nordic.nvim supports highlighting for Treesitter, Neovim LSP, Telescope, and much more.
 
 ================================================================================
 REQUIREMENTS                                                 *nordic-requirements*
@@ -114,9 +109,8 @@ USING VIMSCRIPT                                     *nordic-alternatives-vimscri
 ================================================================================
 NOTES                                                               *nordic-notes*
 
-Certain plugin highlights are configured manually with Lua tables. This colorscheme comes with some
-pre-made configurations (https://github.com/andersevenrud/nordic.nvim/tree/main/lua/nordic/configs) and instructions.
-
+Certain plugin highlights are configured manually with Lua tables. This colorscheme
+comes with some pre-made configurations (lua/nordic/configs) and instructions.
 
 ================================================================================
 
