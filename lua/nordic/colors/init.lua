@@ -22,6 +22,7 @@ local colors = {
     'whichkey',
     'nvim_tree',
     'packer',
+    'fidget',
 }
 
 return function()
