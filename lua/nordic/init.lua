@@ -114,6 +114,7 @@ local function initialize(config)
                     guifg = group[2] or 'NONE',
                     guibg = group[3] or 'NONE',
                     gui = group[4] or 'NONE',
+                    guisp = group[5] or 'NONE',
                 })
             end
         end
