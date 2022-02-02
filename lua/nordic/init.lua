@@ -151,6 +151,7 @@ function M.destroy()
 end
 
 function M.colorscheme(config)
+    vim.o.termguicolors = true
     vim.g.colors_name = 'nordic'
     vim.g.terminal_color_0 = palette.black
     vim.g.terminal_color_1 = palette.red
