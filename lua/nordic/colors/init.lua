@@ -23,6 +23,7 @@ local colors = {
     'nvim_tree',
     'packer',
     'fidget',
+    'winshift',
 }
 
 return function()
