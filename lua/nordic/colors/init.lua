@@ -24,6 +24,7 @@ local colors = {
     'packer',
     'fidget',
     'winshift',
+    'minimap',
 }
 
 return function()
