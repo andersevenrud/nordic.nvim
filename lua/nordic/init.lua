@@ -24,6 +24,9 @@ local style_names = {
     'inverse',
     'standout',
     'nocombine',
+    'underdash',
+    'underdot',
+    'underlineline',
 }
 
 local alternate_buffers_supported = {
