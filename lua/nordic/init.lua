@@ -82,9 +82,9 @@ local function create_arguments(options, alternatives)
     end
 
     local cs = {
-        underline = options.underline_option and s[options.underline_option] or s.none,
-        italic = (options.italic == true or options.italic == nil) and s.italic or s.none,
-        comments = options.italic_comments and s.italic or s.none,
+        underline = options.underline_option,
+        italic = (options.italic == true or options.italic == nil) or false,
+        comments = options.italic_comments,
         bg = function(name)
             local found = vim.tbl_contains(alternatives.extensions, name)
             return found and palette.dark_black_alt or palette.dark_black
@@ -105,20 +105,21 @@ local function initialize(config)
     end
 
     local function load_group(list)
-        for _, group in ipairs(list) do
-            if type(group) == 'function' then
-                load_group(group(unpack(arguments)))
-            elseif type(group[1]) == 'table' then
+        print('loading group', vim.inspect(list))
+        for group, definition in ipairs(list) do
+            print(group, definition)
+            if type(definition) == 'function' then
+                print('got function')
+                load_group(definition(unpack(arguments)))
+            elseif type(definition) == 'table' then
+                print('got table')
+                vim.api.nvim_set_hl(0, group, definition)
                 load_group(vim.tbl_map(function(highlight)
-                    return { highlight, group[2], group[3], group[4] }
-                end, group[1]))
+                    return { highlight, definition[2], definition[3], definition[4] }
+                end, definition[1]))
             else
-                vim.highlight.create(group[1], {
-                    guifg = group[2] or 'NONE',
-                    guibg = group[3] or 'NONE',
-                    gui = group[4] or 'NONE',
-                    guisp = group[5] or 'NONE',
-                })
+                print('got else')
+                vim.api.nvim_set_hl(0, group, definition)
             end
         end
     end
