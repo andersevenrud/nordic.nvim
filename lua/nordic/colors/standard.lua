@@ -66,7 +66,8 @@ return function(c, s, cs, opts)
                     --- Editor---
                     { 'CursorLine', c.none, c.darkish_black },
                     { 'NormalFloat', c.white, c.none },
-                    { 'FloatBorder', c.grayish, c.none },
+                    { 'FloatBorder', c.grayish, c.dark_black },
+                    { 'FloatTitle', c.grayish, c.dark_black },
                     --- Prompt/Status ---
                     { 'StatusLine', c.dark_white, c.dark_black },
                     { 'StatusLineNC', c.grayish, c.dark_black },
@@ -83,6 +84,8 @@ return function(c, s, cs, opts)
                 --- Editor---
                 { 'NormalFloat', c.white, c.black },
                 { 'CursorLine', c.none, c.black },
+                { 'FloatBorder', c.black, c.dark_black },
+                { 'FloatTitle', c.grayish, c.dark_black },
                 --- Prompt/Status ---
                 { 'StatusLine', c.bright_cyan, c.gray },
                 { 'StatusLineNC', c.dark_white, c.black },
