@@ -113,12 +113,27 @@ local function initialize(config)
                     return { highlight, group[2], group[3], group[4] }
                 end, group[1]))
             else
-                vim.highlight.create(group[1], {
-                    guifg = group[2] or 'NONE',
-                    guibg = group[3] or 'NONE',
-                    gui = group[4] or 'NONE',
-                    guisp = group[5] or 'NONE',
-                })
+                -- TODO: Support multiple options here.
+                if type(vim.api.nvim_set_hl) == 'function' then
+                    local def = {
+                        fg = group[2] or 'NONE',
+                        bg = group[3] or 'NONE',
+                        sp = group[5] or 'NONE',
+                    }
+
+                    if group[4] then
+                        def[group[4]] = true
+                    end
+
+                    vim.api.nvim_set_hl(0, group[1], def)
+                else
+                    vim.highlight.create(group[1], {
+                        guifg = group[2] or 'NONE',
+                        guibg = group[3] or 'NONE',
+                        gui = group[4] or 'NONE',
+                        guisp = group[5] or 'NONE',
+                    })
+                end
             end
         end
     end
