@@ -25,6 +25,7 @@ local colors = {
     'fidget',
     'winshift',
     'minimap',
+    'aerial',
 }
 
 return function()
