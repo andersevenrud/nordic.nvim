@@ -174,7 +174,7 @@ return function(c, s, cs)
     local strings_specials = {
         -- TS
         'TSStringRegex',
-        'TSStriingEscape',
+        'TSStringEscape',
         'SpecialChar', -- VL
         'cSpecialCharacter', -- C/C++
         'pythonescape', -- python
