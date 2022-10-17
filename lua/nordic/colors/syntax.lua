@@ -1,8 +1,15 @@
+-- New tree-sitter syntax highlighting uses @ queries directly.
+-- See: https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1279974776
+-- Remove old TS* highlight groups when Neovim 0.9 is released?
+--
 return function(c, s, cs)
     local attributes = {
         -- TS
         'TSAnnotation',
         'TSAttribute',
+        -- TS Query
+        '@annotation',
+        '@attribute',
         -- lua
         'luametatableevents',
         'luametatablearithmetic',
@@ -13,13 +20,18 @@ return function(c, s, cs)
         'TSBoolean',
         'TSFloat',
         'TSNumber',
-
+        -- TS Query
+        '@boolean',
+        '@float',
+        '@number',
+        -- VL
         'Boolean',
         'Float',
-        'Number', -- VL
+        'Number',
     }
     local comments = {
         'TSComment', -- TS
+        '@comment', -- TS Query
         'Comment', -- VL
         'manFooter', -- man
         -- rust
@@ -31,9 +43,11 @@ return function(c, s, cs)
     }
     local constructors = {
         'TSConstructor', -- TS
+        '@constructor', -- TS Query
     }
     local conditionals = {
         'TSConditional', -- TS
+        '@conditional', -- TS Query
         -- VL
         'Conditional',
         'PreCondit',
@@ -43,6 +57,7 @@ return function(c, s, cs)
     }
     local constants = {
         'TSConstant', -- TS
+        '@constant', -- TS Query
         'Constant', -- VL
         -- C/C++
         'cConstant',
@@ -50,17 +65,24 @@ return function(c, s, cs)
     }
     local defines = {
         'TSConstMacro', -- TS
+        '@constant.macro', -- TS Query
         'Define',
         'Macro', -- VL
     }
     local exceptions = {
         'TSException', -- TS
+        '@exception', -- TS Query
         'Exception', -- VL
     }
     local fields = {
+        -- TS
         'TSField',
         'TSProperty',
-        'TSTag', -- TS
+        'TSTag',
+        -- TS Query
+        '@field',
+        '@property',
+        '@tag',
         'Tag', -- VL
     }
     local functions = {
@@ -68,6 +90,10 @@ return function(c, s, cs)
         'TSFunction',
         'TSFuncMacro',
         'TSMethod',
+        -- TS Query
+        '@function',
+        '@function.macro',
+        '@method',
         'Function', -- VL
         'pythonfunction', -- python
         'vimFunction',
@@ -75,6 +101,7 @@ return function(c, s, cs)
     }
     local includes = {
         'TSInclude', -- TS
+        '@include', -- TS Query
         'Include',
         'PreProc', -- VL
         'cInclude', -- C/C++
@@ -85,6 +112,9 @@ return function(c, s, cs)
         -- TS
         'TSKeyword',
         'TSKeywordFunction',
+        -- TS Query
+        '@keyword',
+        '@keyword.function',
         -- VL
         'Keyword',
         'Statement',
@@ -109,18 +139,22 @@ return function(c, s, cs)
     }
     local labels = {
         'TSLabel', -- TS
+        '@label', -- TS Query
         'Label', -- VL
     }
     local namespaces = {
         'TSNamespace', -- TS
+        '@namespace', -- TS Query
         'pythonModule', -- python
     }
     local nones = {
-        'TSNone', -- VL
+        'TSNone', -- TS
+        '@none', -- TS Query
         'pythonnone', -- python
     }
     local operators = {
         'TSOperator', -- TS
+        '@operator', -- TS Query
         'Operator', -- VL
         -- C/C++
         'cOperator',
@@ -128,12 +162,17 @@ return function(c, s, cs)
         'pythonoperator', -- python
     }
     local parameters = {
+        -- TS
         'TSParameter',
-        'TSParameterReference', -- TS
+        'TSParameterReference',
+        -- TS Query
+        '@parameter',
+        '@parameter.reference',
         'pythonparam', -- python
     }
     local properties = {
         'TSProperty', -- TS
+        '@property', -- TS Query
     }
     local punctuations = {
         -- TS
@@ -141,6 +180,11 @@ return function(c, s, cs)
         'TSPunctBracket',
         'TSPunctSpecial',
         'TSTagDelimiter',
+        -- TS Query
+        '@punctuation.delimiter',
+        '@punctuation.bracket',
+        '@punctuation.special',
+        '@tag.delimiter',
         -- VL
         'Delimiter',
         -- vim
@@ -153,12 +197,16 @@ return function(c, s, cs)
     }
     local repeats = {
         'TSRepeat', -- TS
+        '@repeat', -- TS Query
         'Repeat', -- VL
     }
     local strings = {
         -- TS
         'TSCharacter',
         'TSString',
+        -- TS Query
+        '@character',
+        '@string',
         -- VL
         'Character',
         'String',
@@ -175,12 +223,18 @@ return function(c, s, cs)
         -- TS
         'TSStringRegex',
         'TSStringEscape',
+        -- TS Query
+        '@character.special',
+        '@string.regex',
+        '@string.escape',
+        '@string.special',
         'SpecialChar', -- VL
         'cSpecialCharacter', -- C/C++
         'pythonescape', -- python
     }
     local symbols = {
         'TSSymbol', -- TS
+        '@symbol', -- TS Query
         -- VL
         'Special',
         'SpecialComment',
@@ -192,16 +246,23 @@ return function(c, s, cs)
     }
     local texts = {
         'TSText', -- TS
+        '@text', -- TS Query
         'Text', -- VL
         'manTitle', -- man
     }
     local uris = {
         'TSURI', -- TS
+        '@text.uri', -- TS Query
     }
     local types = {
         -- TS
         'TSType',
-        'TSTypeBuildin',
+        'TSTypeBuiltin',
+        -- TS Query
+        '@type',
+        '@type.builtin',
+        '@type.definition',
+        '@type.qualifier',
         -- VL
         'Type',
         'StorageClass',
@@ -220,6 +281,7 @@ return function(c, s, cs)
     }
     local variables = {
         'TSVariable', -- TS
+        '@variable', -- TS Query
         'Identifier', -- VL
         'pythonselfarg', -- python
         'rustIdentifier', -- rust
@@ -237,6 +299,10 @@ return function(c, s, cs)
         'TSConstBuiltin',
         'TSFuncBuiltin',
         'TSVariableBuiltin',
+        -- TS Query
+        '@constant.builtin',
+        '@function.builtin',
+        '@variable.builtin',
         -- python
         'pythonbuiltin',
         'pythonself',
@@ -244,18 +310,24 @@ return function(c, s, cs)
     }
     local notes = {
         'TSNote', -- TS
+        -- TS Query
+        '@text.note',
+        '@text.todo',
         'Todo', -- VL
         'cTODO', -- C/C++
     }
     local warnings = {
         'TSWarning', -- TS
+        '@text.warning', -- TS Query
         'Debug', -- VL
     }
     local dangers = {
         'TSDanger', -- TS
+        '@text.danger', -- TS Query
     }
     local errors = {
         'TSError', -- TS
+        '@error', -- TS Query
         'Error', -- VL
         -- rust
         'rustCommentLineDocError',
@@ -296,6 +368,7 @@ return function(c, s, cs)
         { dangers, c.yellow },
         { errors, c.red },
 
+        -- Old TS Highlight Groups
         { 'TSTitle', c.bright_cyan },
         { 'TSStrong', c.dark_white, c.none, s.bold },
         { { 'TSEmphasis', 'TSTextReference' }, c.dark_white, c.none, s.italic },
@@ -303,5 +376,14 @@ return function(c, s, cs)
         { 'TSStrike', c.dark_white, c.none, s.strikethrough },
         { 'TSLiteral', c.cyan },
         { 'TSStringEscape', c.grayish },
+
+        -- New TS Queries
+        { '@text.title', c.bright_cyan },
+        { '@text.strong', c.dark_white, c.none, s.bold },
+        { { '@text.emphasis', '@text.reference' }, c.dark_white, c.none, s.italic },
+        { '@text.underline', c.dark_white, c.none, s.underline },
+        { '@text.strike', c.dark_white, c.none, s.strikethrough },
+        { '@text.literal', c.cyan },
+        { '@string.escape', c.grayish },
     }
 end
