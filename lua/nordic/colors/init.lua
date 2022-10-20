@@ -27,6 +27,7 @@ local colors = {
     'minimap',
     'aerial',
     'nvim_ts_rainbow',
+    'dashboard_nvim',
 }
 
 return function()
