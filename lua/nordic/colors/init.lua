@@ -29,6 +29,7 @@ local colors = {
     'nvim_ts_rainbow',
     'dashboard_nvim',
     'noice',
+    'notify',
 }
 
 return function()
