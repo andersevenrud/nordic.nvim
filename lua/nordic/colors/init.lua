@@ -28,6 +28,7 @@ local colors = {
     'aerial',
     'nvim_ts_rainbow',
     'dashboard_nvim',
+    'noice',
 }
 
 return function()
