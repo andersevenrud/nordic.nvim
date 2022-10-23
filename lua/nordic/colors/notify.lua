@@ -5,6 +5,6 @@ return function(c, s, cs)
         { { 'NotifyWARNBorder', 'NotifyWARNIcon', 'NotifyWARNTitle' }, c.orange },
         { { 'NotifyINFOBorder', 'NotifyINFOIcon', 'NotifyINFOTitle' }, c.green },
         { { 'NotifyDEBUGBorder', 'NotifyDEBUGIcon', 'NotifyDEBUGTitle' }, c.blue },
-        { { 'NotifyTRACEBorder', 'NotifyTRACEIcon', 'NotifyTRACETitle ' }, c.purple },
+        { { 'NotifyTRACEBorder', 'NotifyTRACEIcon', 'NotifyTRACETitle' }, c.purple },
     }
 end
