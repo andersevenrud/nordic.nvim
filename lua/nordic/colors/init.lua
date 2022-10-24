@@ -30,6 +30,7 @@ local colors = {
     'dashboard_nvim',
     'noice',
     'notify',
+    'navic',
 }
 
 return function()
