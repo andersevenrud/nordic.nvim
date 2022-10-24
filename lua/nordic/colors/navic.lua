@@ -1,0 +1,33 @@
+-- 'SmiteshP/nvim-navic'
+return function(c, s, cs)
+    return {
+        { 'NavicIconsFile', c.blue, c.gray },
+        { 'NavicIconsModule', c.blue, c.gray },
+        { 'NavicIconsNamespace', c.yellow, c.gray },
+        { 'NavicIconsPackage', c.orange, c.gray },
+        { 'NavicIconsClass', c.yellow, c.gray },
+        { 'NavicIconsMethod', c.purple, c.gray },
+        { 'NavicIconsProperty', c.blue, c.gray },
+        { 'NavicIconsField', c.blue, c.gray },
+        { 'NavicIconsConstructor', c.yellow, c.gray },
+        { 'NavicIconsEnum', c.yellow, c.gray },
+        { 'NavicIconsInterface', c.yellow, c.gray },
+        { 'NavicIconsFunction', c.purple, c.gray },
+        { 'NavicIconsVariable', c.blue, c.gray },
+        { 'NavicIconsConstant', c.orange, c.gray },
+        { 'NavicIconsString', c.green, c.gray },
+        { 'NavicIconsNumber', c.orange, c.gray },
+        { 'NavicIconsBoolean', c.orange, c.gray },
+        { 'NavicIconsArray', c.yellow, c.gray },
+        { 'NavicIconsObject', c.orange, c.gray },
+        { 'NavicIconsKey', c.purple, c.gray },
+        { 'NavicIconsNull', c.red, c.gray },
+        { 'NavicIconsEnumMember', c.cyan, c.gray },
+        { 'NavicIconsStruct', c.yellow, c.gray },
+        { 'NavicIconsEvent', c.purple, c.gray },
+        { 'NavicIconsOperator', c.purple, c.gray },
+        { 'NavicIconsTypeParameter', c.yellow, c.gray },
+        { 'NavicText', c.white, c.gray },
+        { 'NavicSeparator', c.cyan, c.gray },
+    }
+end
