@@ -1,6 +1,5 @@
 -- 'stevearc/aerial.nvim'
 return function(c, s, cs)
-
     return {
         -- These are in sync (roughly) with the colors in navic.lua
         { 'AerialArrayIcon', c.yellow },
