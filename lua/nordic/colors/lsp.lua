@@ -1,8 +1,8 @@
 return function(c, s)
     return {
-        { 'LspReferenceText', c.dark_white },
-        { 'LspReferenceRead', c.white },
-        { 'LspReferenceWrite', c.bright_white },
+        { 'LspReferenceText', c.none, c.gray },
+        { 'LspReferenceRead', c.none, c.gray },
+        { 'LspReferenceWrite', c.none, c.gray },
         { 'LspDiagnosticsDefaultHint', c.intense_blue },
         { 'LspDiagnosticsDefaultError', c.red },
         { 'LspDiagnosticsDefaultWarning', c.yellow },
