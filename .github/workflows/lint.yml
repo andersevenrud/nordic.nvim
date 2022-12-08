@@ -5,8 +5,14 @@ on:
       - main
   pull_request:
 jobs:
-  lint:
-    name: Lint and style check
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v4
+  stylua:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +22,12 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --check .
+  luacheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: Jayrgo/luacheck-action@v1
         with:
           files: '.'
-      - uses: wagoid/commitlint-github-action@v4
