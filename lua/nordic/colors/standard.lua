@@ -28,6 +28,8 @@ return function(c, s, cs, opts)
         { 'RedrawDebugClear', c.dark_white, c.yellow },
         { 'RedrawDebugComposed', c.dark_white, c.green },
         { 'RedrawDebugRecompose', c.dark_white, c.red },
+        { 'WinBar', c.dark_white, c.black },
+        { 'WinBarNC', c.grayish, c.dark_black },
         --- Neovim ---
         { 'healthError', c.red, c.black },
         { 'healthSuccess', c.green, c.black },
