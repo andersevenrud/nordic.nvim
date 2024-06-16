@@ -385,5 +385,6 @@ return function(c, s, cs)
         { '@text.strike', c.dark_white, c.none, s.strikethrough },
         { '@text.literal', c.cyan },
         { '@string.escape', c.grayish },
+        { '@tag.builtin', c.cyan },
     }
 end
